@@ -1,5 +1,7 @@
 import React from 'react';
-import { MainWrapper } from './styledHome';
+import { MainWrapper, ImgContainer, HomeImg, PositionContainer } from './styledHome';
+import Soup1 from '../Images/Soup1.jpg';
+import Position from '../Position/position'
 
 class Home extends React.Component {
 
@@ -9,8 +11,17 @@ class Home extends React.Component {
     return (
 
       <MainWrapper>
+         
 
-          
+        <ImgContainer>
+        <HomeImg src={Soup1} />
+        </ImgContainer>
+
+        <PositionContainer>
+        <Position/>
+        </PositionContainer>
+
+
 
       </MainWrapper>
 

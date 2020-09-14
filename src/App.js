@@ -1,26 +1,45 @@
 import React from 'react';
 import { createGlobalStyle } from 'styled-components';
 import Routes from './Route/routes';
+import styled from 'styled-components';
+
+const StyledDiv = styled.div`
+height:100%;
+width:100%;
+
+`
 
 const GlobalStyle = createGlobalStyle`
   html {
     font-size: 62.5%;
     width:100%;
     height:100%;
+
   }
 
-  body {
+  body{
+    width:100%;
+    height:100%;
+    padding:0;
     margin:0;
     font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   }
+
+  #root{
+    height:100%;
+  }
+
+ 
+
+ 
 `
 
 const App = () => {
   return (
-    <div>
+    <StyledDiv>
       <GlobalStyle />
       <Routes/>
-   </div>
+   </StyledDiv>
   );
 
 }
