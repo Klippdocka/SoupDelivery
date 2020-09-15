@@ -3,6 +3,7 @@ import { MainWrapper, ImgContainer, HomeImg, PositionContainer } from './styledH
 import Soup1 from '../Images/Soup1.jpg';
 import Position from '../Position/position'
 import Navbar from '../../components/Navbar/navbar';
+import Drawer from '../../components/Drawer/drawer';
 
 class Home extends React.Component {
 
@@ -24,7 +25,7 @@ class Home extends React.Component {
       <MainWrapper>
 
         <Navbar isMenuOpen={this.state.isMenuOpen} handler={this.handler.bind(this)} />
-
+        <Drawer isMenuOpen={this.state.isMenuOpen}/>
         <ImgContainer>
           <HomeImg src={Soup1} />
         </ImgContainer>

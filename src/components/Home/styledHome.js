@@ -49,6 +49,7 @@ justify-content:center;
 height:5rem;
 width:100%;
 margin-top:55rem;
+z-index:5;
 
 
 @media screen and (max-width: ${theme.screenSize.xsmall}){

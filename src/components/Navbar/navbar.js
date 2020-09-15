@@ -8,6 +8,7 @@ import TimeIcon from '../../components/Icone/time';
 
 const HamburgerWrapper = styled.div`
 margin-left:1.5rem;
+z-index:10;
 
 `;
 
@@ -62,7 +63,6 @@ class Navbar extends React.Component {
         
         <TimeIconeWrapper><TimeIcon/>
             <StyledP>15-20 min</StyledP>
-            <StyledP>{this.props.isMenuOpen.toString()}</StyledP>
           </TimeIconeWrapper>
            
         <SoupIconWrapper>
