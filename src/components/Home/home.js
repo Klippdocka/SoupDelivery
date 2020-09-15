@@ -2,32 +2,44 @@ import React from 'react';
 import { MainWrapper, ImgContainer, HomeImg, PositionContainer } from './styledHome';
 import Soup1 from '../Images/Soup1.jpg';
 import Position from '../Position/position'
+import Navbar from '../../components/Navbar/navbar';
 
 class Home extends React.Component {
 
-    render() {
+  constructor(props) {
+    super(props);
+    this.state = { isMenuOpen: false };
+  }
 
-    
+  handler() {
+    this.setState(state => ({
+      isMenuOpen: !state.isMenuOpen
+    }));
+  }
+
+  render() {
+
     return (
 
       <MainWrapper>
-         
+
+        <Navbar isMenuOpen={this.state.isMenuOpen} handler={this.handler.bind(this)} />
 
         <ImgContainer>
-        <HomeImg src={Soup1} />
+          <HomeImg src={Soup1} />
         </ImgContainer>
 
         <PositionContainer>
-        <Position/>
+          <Position />
         </PositionContainer>
 
 
 
       </MainWrapper>
 
-        )
+    )
 
-    }
+  }
 }
 
 

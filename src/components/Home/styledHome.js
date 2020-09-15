@@ -6,8 +6,10 @@ const MainWrapper = styled.div`
 width:100%;
 height:100%;
 display:flex;
-justify-content:center;
 flex-direction:column;
+align-items:center;
+
+
 `;
 
 
@@ -25,8 +27,8 @@ const HomeImg = styled.img`
 width:100%; 
 height:100%;
 object-fit:cover;
-z-index:-1;
-position:absolute;
+z-index:-7;
+position:relative;
 
 
 
@@ -42,10 +44,20 @@ height:100%;
 
 const PositionContainer = styled.div`
 display:flex;
+position:absolute;
 justify-content:center;
-align-items:center;
+height:5rem;
 width:100%;
-height:30rem;
+margin-top:55rem;
+
+
+@media screen and (max-width: ${theme.screenSize.xsmall}){
+margin-top:65rem;
+
+ 
+
+}
+
 `;
 
 

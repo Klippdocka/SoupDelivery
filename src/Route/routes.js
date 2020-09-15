@@ -12,7 +12,9 @@ const Routes = () => {
              <Switch>
 
                 <Route exact path="/">
+                   
                      <Home/>
+                    
                 </Route>
 
              </Switch>

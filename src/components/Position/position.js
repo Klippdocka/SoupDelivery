@@ -6,12 +6,14 @@ import theme from '../../theme';
 
 const MainWrapper = styled.div`
 display:flex;
+justify-content:center;
 align-items:center;
 width:55%;
 height:6rem;
 background-color:white;
 opacity:0.8;
 border-radius:2.5rem;
+
 
 
 @media screen and (max-width: ${theme.screenSize.small}){
@@ -81,8 +83,8 @@ class Position extends React.Component {
         <AddressContainer>
            
 
-            <InputAddress value={this.state.inputValue}
-            placeholder="Ange din adress"></InputAddress>
+            <InputAddress
+            placeholder="Ange din adress" type="text" ></InputAddress>
         
         </AddressContainer>
 
