@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import PlacePin from '../Icone/placePin';
 import { withRouter } from 'react-router-dom';
 import theme from '../../theme';
+import PlacesAutocomplete, { geocodeByAddress, gecocodeByPlaceI, getLatLng } from 'react-places-autocomplete';
 
 const MainWrapper = styled.div`
 display:flex;
@@ -56,20 +57,14 @@ border:none;
 `;
 
 
-class Position extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state= {
-            inputValue: ""
-        };
+const Position= (props) => {
+    
+    const [address, setAddress] = useState("");
 
-    }
+    const handleSelect = async (value) => {};
 
     
 
-
-
-    render() {
 
     return (
 
@@ -82,17 +77,35 @@ class Position extends React.Component {
 
         <AddressContainer>
            
+            <PlacesAutocomplete value={address} onChange={setAddress} onSelect={handleSelect}>{({ getInputProps, suggestions, getSuggestionItemProps, loading }) =>(
+            <div>
+                    <InputAddress {...getInputProps({ placeholder: "Ange din adress" })}/>
 
-            <InputAddress
-            placeholder="Ange din adress" type="text" ></InputAddress>
+                     <div>
+                     {loading ? <div>...loading</div> : null }
+
+                        {suggestions.map((suggestions) => {
+                            return <div>{suggestions.descriptions}</div>
+
+                        })}
+
+                     </div>   
+                </div>
+                
+                )}
+
+            </PlacesAutocomplete>
+        
         
         </AddressContainer>
 
       </MainWrapper>
 
-        )
-    }
-}
+        );
+    
+};
+
+
 
 
 export default  withRouter(Position);
