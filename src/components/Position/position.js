@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import PlacePin from '../Icone/placePin';
 import { withRouter } from 'react-router-dom';
 import theme from '../../theme';
+import { Link } from 'react-router-dom';
 import PlacesAutocomplete, { geocodeByAddress, gecocodeByPlaceI, getLatLng } from 'react-places-autocomplete';
-
+import {useLocalState} from '../Hooks/UseLocalState';
 const MainWrapper = styled.div`
 display:flex;
 justify-content:center;
@@ -53,12 +54,15 @@ align-items:center;
 
 const InputAddress = styled.input`
 width:90%;
+height:5rem;
 font-size:2rem;
 border-radius:2.5rem;
 border:none;
+
 align-items:center;
 justify-content:center;
-margin-top:0.7rem;
+
+cursor: pointer;
 
 
 &::placeholder{
@@ -68,6 +72,7 @@ margin-top:0.7rem;
 @media screen and (max-width: ${theme.screenSize.small}){
    height:4rem;
    width:80%;
+   margin-top:0.4rem;
 }
 
 `;
@@ -75,6 +80,7 @@ margin-top:0.7rem;
 const DropDownStyle = styled.div`
 width:auto;
 opacity:1;
+
 
 @media screen and (max-width: ${theme.screenSize.small}){
    width:80%;
@@ -85,22 +91,55 @@ opacity:1;
 
 const InputWrapper = styled.div`
 
-    margin-top:0.4rem;
+  
+    cursor: pointer;
    
     
     
 `;
 
-const Position = (props) => {
+
+
+const ButtomContainer = styled.div`
+flex:1;
+margin-right:0.5rem;
+height:5rem;
+background-color:green;
+border-radius:2rem;
+@media screen and (max-width: ${theme.screenSize.small}){
+ height:4rem;
+ cursor: pointer;
+}
+`;
+
+
+const SelectButtom = styled.div`
+background-color:#245a1f;
+height:100%;
+width:100%;
+border-radius:2rem;
+display:flex;
+justify-content:center;
+align-items:center;
+cursor: pointer;
+
+
+
+
+`;
+  
+
+const Position = () => {
+
     
-    const [address, setAddress] = useState("");
+    const [address, setAddress] = useLocalState('address');
 
     const handleSelect = async (value) => {
-       console.log(value)
+       setAddress(value);
+
 
     };
 
-    
 
 
     return (
@@ -124,7 +163,7 @@ const Position = (props) => {
                     <InputAddress {...getInputProps({ placeholder: "Ange din adress" })} />
 
                      <div>
-                     {loading ? <div>...loading</div> : null }
+                     {loading ? <div>...Laddar</div> : null }
 
                         {suggestions.map(suggestion => {
                             const style = {
@@ -152,6 +191,13 @@ const Position = (props) => {
         
         
         </AddressContainer>
+
+        <ButtomContainer>
+           <Link to="/SoupMeny"> <SelectButtom onClick={() => setAddress}/></Link>
+                
+          
+
+        </ButtomContainer>
 
       </MainWrapper>
 

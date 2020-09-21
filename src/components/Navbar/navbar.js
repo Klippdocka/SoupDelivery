@@ -4,16 +4,19 @@ import styled from 'styled-components';
 import SoupIcon from '../../components/Icone/soupIcon';
 import TimeIcone from '../../components/Icone/time';
 import TimeIcon from '../../components/Icone/time';
+import { UseLocalState } from '../Hooks/UseLocalState';
 
 
 const HamburgerWrapper = styled.div`
 margin-left:1.5rem;
 z-index:10;
+cursor: pointer;
 
 `;
 
 const SoupIconWrapper = styled.div`
 margin-right:1.5rem;
+cursor: pointer;
 
 `;
 
@@ -39,7 +42,10 @@ color:#242425;
 margin-left:0.5rem;
 `;
 
+
+
 class Navbar extends React.Component {
+
 
     constructor(props) {
         super(props);
@@ -51,7 +57,13 @@ class Navbar extends React.Component {
         this.props.handler()
     }
 
+
+    
+
     render() {
+
+ 
+
         return(
             <NavbarWrapper>
 
@@ -62,8 +74,8 @@ class Navbar extends React.Component {
 
         
         <TimeIconeWrapper><TimeIcon/>
-            <StyledP>15-20 min</StyledP>
-          </TimeIconeWrapper>
+     <StyledP>{}</StyledP>
+      </TimeIconeWrapper>
            
         <SoupIconWrapper>
                  <SoupIcon/>

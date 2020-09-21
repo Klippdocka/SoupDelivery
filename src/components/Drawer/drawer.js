@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 
 
-
 const DrawerWrapper = styled.div`
 position:absolute;
 justify-content:center;
@@ -14,6 +13,7 @@ height:100%;
 top:0rem;
 left:0rem;
 background-color:white;
+cursor: pointer;
 
 transition:all 2.6s ease;
 display: ${props => props.menuOpen ? 'block' : 'none'};
@@ -56,7 +56,7 @@ class Drawer extends React.Component {
     render() {
         return(
 
-        
+         
           <DrawerWrapper menuOpen={this.props.isMenuOpen} >
 
             <DrawerContent>
@@ -86,6 +86,7 @@ class Drawer extends React.Component {
             
            
           </DrawerWrapper>
+          
           
 
         
