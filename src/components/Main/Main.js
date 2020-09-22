@@ -104,7 +104,6 @@ const Main = (props) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const openHandler = () => {
-        console.log(isMenuOpen);
         if (!isMenuOpen) {
             setIsMenuOpen(true)
 
@@ -114,7 +113,6 @@ const Main = (props) => {
 
         }
     }
-
 
 
     return (

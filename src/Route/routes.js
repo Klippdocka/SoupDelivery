@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Home from '../components/Home/home';
-import SoupMeny from '../components/SoupMeny/SoupMeny';
+import SoupMenu from '../components/SoupMenu/SoupMenu';
 import Main from '../components/Main/Main'
 
 
@@ -18,9 +18,9 @@ const Routes = () => {
                     
                 </Route>
 
-                <Route exact path="/SoupMeny">
+                <Route exact path="/SoupMenu">
                     <Main>
-                    <SoupMeny/>
+                    <SoupMenu/>
                     </Main>
 
 

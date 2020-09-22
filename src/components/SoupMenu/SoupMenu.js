@@ -3,7 +3,11 @@ import styled, { isStyledComponent } from 'styled-components';
 import {useLocalState} from '../Hooks/UseLocalState';
 import theme from '../../theme';
 import {MainWrapper} from '../Home/styledHome';
-
+import Soup from '../Soup/Soup';
+import Soup4 from '../Images/Soup4.jpg';
+import Soup5 from '../Images/Soup5.jpg';
+import Soup3 from '../Images/Soup3.jpg';
+import Soup6 from '../Images/Soup6.jpg';
 
 
 const NavbarContainer = styled.div`
@@ -30,25 +34,17 @@ const StyledP = styled.p`
 
 
 const SoupMainContainer = styled.div`
-display:flex;
+flex-direction:start;
 flex-direction:column;
 justify-content:center;
-align-items:center;
 width:100%;
-height:100%;
-background-color:grey;
-padding-top:1rem;
+
 
 `;
 
-const SoupContainer = styled.div`
-display:flex;
-width:90%;
-height:90%;
-background-color:green;
-`;
 
-const SoupMeny = () => {
+
+const SoupMenu = (props) => {
 
     const [address, setAddress] = useLocalState('address');
 
@@ -66,9 +62,14 @@ return(
 
 
 <SoupMainContainer>
-<SoupContainer>
 
-</SoupContainer>
+<Soup img={Soup6} title={"Roasted tomato & Quinoa"} text={"Tomatsoppa med quinoa, vitlök och lök toppas med färsk basilika och krispiga krutonger"}/>
+<Soup img={Soup4} title={"Sweet potato & coconut"} text={"Sötpotatis, kokosmjölk, jordnötssmör toppas med jordnötter, koriander och chilili flakes"}/>
+<Soup img={Soup5}/>
+<Soup img={Soup4}/>
+<Soup img={Soup4}/>
+<Soup img={Soup4}/>
+
 </SoupMainContainer>
 
 
@@ -79,4 +80,4 @@ return(
 
 }
 
-export default SoupMeny;
+export default SoupMenu;

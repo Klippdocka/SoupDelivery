@@ -112,7 +112,7 @@ const Position = () => {
 
     const handleSelect = async (value) => {
           setAddress(value);
-          history.push('/SoupMeny');
+          history.push('/SoupMenu');
 
 
     };
