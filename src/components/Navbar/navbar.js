@@ -21,13 +21,16 @@ cursor: pointer;
 `;
 
 const NavbarWrapper = styled.div`
-position:absolute;
+position:fixed;
 display:flex;
+top:0rem;
 align-items:center;
 justify-content:space-between;
 width:100%;
 height:6rem;
-background:rgba(255,255,255,0.9);
+background:rgba(255,255,255,0.98);
+z-index:10;
+box-shadow: 2px 3px 1px 0px rgba(0,0,0,0.06);
 `;
 
 const TimeIconeWrapper = styled.div`

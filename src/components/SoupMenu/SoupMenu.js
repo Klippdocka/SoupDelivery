@@ -19,9 +19,12 @@ width:100%;
 `;
 
 const StyledP = styled.p`
-    font-size:2rem;
-    z-index:8;
+    margin-top:7.5rem;
+    font-size:1.6rem;
+    z-index:10;
     color:#242425;
+    position:fixed;
+    
 
 
 @media screen and (max-width: ${theme.screenSize.small}){

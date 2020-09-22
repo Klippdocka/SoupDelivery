@@ -7,13 +7,16 @@ display:flex;
 flex-direction:column;
 align-items: center;
 width:90%;
-height:60rem;
+height:55rem;
 max-width:60rem;
 background-image: url(${props => props.image});
 background-repeat: no-repeat;
 background-size: cover;
 margin-top:2rem;
-box-shadow: 11px 13px 10px -12px rgba(0,0,0,0.75);
+box-shadow: 2px 2px 10px 5px rgba(0,0,0,0.11);
+border-radius:1rem;
+
+
 `;
 
 const SoupMainContainer = styled.div`
@@ -35,7 +38,10 @@ height:4rem;
 background-color:#9ab54a;
 color:white;
 font-size:1.6rem;
-box-shadow: -13px -13px 5px -11px rgba(0,0,0,0.18);
+box-shadow: 1px -2px 1px 0px rgba(0,0,0,0.15);
+border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+
 
 
 
@@ -50,7 +56,7 @@ flex-direction:column;
 justify-content:start;
 align-items:start;
 width:100%;
-background-color:rgba(255,255,255,0.6);
+background-color:white;
 
 
 `;
@@ -78,13 +84,13 @@ color:#2f3030;
 const ContentContainer = styled.div`
     margin-top: auto;
     width: 50rem;
-    box-shadow: 11px 13px 10px -12px rgba(0,0,0,0.75);
-    margin-bottom:2rem;
+   
+    
     
 
 
 @media screen and (max-width: ${theme.screenSize.small}){
-    width:90%;
+    width:100%;
 }
 `
 

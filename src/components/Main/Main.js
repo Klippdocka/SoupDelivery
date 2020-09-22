@@ -94,6 +94,7 @@ background-color:#dedede;
 `;
 
 const MainContainer = styled.div`
+
  width:100%;
  height:100%;`;
 

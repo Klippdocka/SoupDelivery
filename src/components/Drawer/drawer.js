@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 
 const DrawerWrapper = styled.div`
-position:absolute;
+position:fixed;
 justify-content:center;
 flex-direction:column;
 z-index:8;
