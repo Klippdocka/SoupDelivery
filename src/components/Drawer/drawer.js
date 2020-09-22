@@ -51,13 +51,12 @@ height:0.1rem;
 background-color:#dedede;
 `;
 
-class Drawer extends React.Component {
+const Drawer = (props) => {
 
-    render() {
         return(
 
          
-          <DrawerWrapper menuOpen={this.props.isMenuOpen} >
+          <DrawerWrapper menuOpen={props.menuOpen}>
 
             <DrawerContent>
             <StyledA href="/">
@@ -93,6 +92,6 @@ class Drawer extends React.Component {
         )
     }
 
-}
+
 
 export default Drawer;

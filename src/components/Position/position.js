@@ -6,6 +6,11 @@ import theme from '../../theme';
 import { Link } from 'react-router-dom';
 import PlacesAutocomplete, { geocodeByAddress, gecocodeByPlaceI, getLatLng } from 'react-places-autocomplete';
 import {useLocalState} from '../Hooks/UseLocalState';
+import { useHistory } from "react-router-dom";
+
+
+
+
 const MainWrapper = styled.div`
 display:flex;
 justify-content:center;
@@ -80,6 +85,8 @@ cursor: pointer;
 const DropDownStyle = styled.div`
 width:auto;
 opacity:1;
+width:40rem;
+font-size:2rem;
 
 
 @media screen and (max-width: ${theme.screenSize.small}){
@@ -89,53 +96,23 @@ opacity:1;
 `;
 
 
-const InputWrapper = styled.div`
-
-  
-    cursor: pointer;
-   
-    
-    
+const InputWrapper = styled.div` 
+    cursor: pointer; 
 `;
 
 
 
-const ButtomContainer = styled.div`
-flex:1;
-margin-right:0.5rem;
-height:5rem;
-background-color:green;
-border-radius:2rem;
-@media screen and (max-width: ${theme.screenSize.small}){
- height:4rem;
- cursor: pointer;
-}
-`;
-
-
-const SelectButtom = styled.div`
-background-color:#245a1f;
-height:100%;
-width:100%;
-border-radius:2rem;
-display:flex;
-justify-content:center;
-align-items:center;
-cursor: pointer;
-
-
-
-
-`;
   
 
 const Position = () => {
 
+    let history = useHistory();
     
     const [address, setAddress] = useLocalState('address');
 
     const handleSelect = async (value) => {
-       setAddress(value);
+          setAddress(value);
+          history.push('/SoupMeny');
 
 
     };
@@ -191,13 +168,6 @@ const Position = () => {
         
         
         </AddressContainer>
-
-        <ButtomContainer>
-           <Link to="/SoupMeny"> <SelectButtom onClick={() => setAddress}/></Link>
-                
-          
-
-        </ButtomContainer>
 
       </MainWrapper>
 
