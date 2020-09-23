@@ -40,7 +40,7 @@ color:white;
 font-size:1.6rem;
 box-shadow: 1px -2px 1px 0px rgba(0,0,0,0.15);
 border-bottom-left-radius: 1rem;
-    border-bottom-right-radius: 1rem;
+border-bottom-right-radius: 1rem;
 
 
 
@@ -64,19 +64,19 @@ background-color:white;
 
 const Title = styled.h1`
 color:#2f3030;
-padding-top:2rem;
+padding-top:1.5rem;
 margin-block-start: 0em;
-    margin-block-end: 0em;
-    margin-left:2rem;
+margin-block-end: 0em;
+margin-left:3rem;
 `;
 
 const SoupDescription = styled.p`
 width:20rem;
-margin-left:2rem;
+margin-left:3rem;
 margin-block-start: 0em;
-    margin-block-end: 0em;
-    padding-top:1rem;
-    padding-bottom:2rem;
+margin-block-end: 0em;
+padding-top:1rem;
+padding-bottom:1.5rem;
     
 color:#2f3030;
 `;
@@ -85,14 +85,22 @@ const ContentContainer = styled.div`
     margin-top: auto;
     width: 50rem;
    
-    
-    
-
 
 @media screen and (max-width: ${theme.screenSize.small}){
     width:100%;
 }
 `
+
+const PriceContainer = styled.h2`
+margin-top:0rem;
+margin-left:3rem;
+margin-bottom:2rem;
+color:#2f3030;
+`;
+
+
+const AllergyIcone = styled.div`
+`;
 
 const Soup = (props) => {
 
@@ -105,6 +113,8 @@ const Soup = (props) => {
                     <TitleContainer>
                         <Title>{props.title}</Title>
                             <SoupDescription>{props.text}</SoupDescription>
+                                <PriceContainer>{props.price}</PriceContainer>
+                        <AllergyIcone>{props.allergyIcone}</AllergyIcone>
                     </TitleContainer>
 
                     <BtnAdd>Lägg till</BtnAdd>

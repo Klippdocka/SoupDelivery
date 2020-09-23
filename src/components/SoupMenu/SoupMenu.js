@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled, { isStyledComponent } from 'styled-components';
 import {useLocalState} from '../Hooks/UseLocalState';
 import theme from '../../theme';
@@ -8,8 +8,8 @@ import Soup4 from '../Images/Soup4.jpg';
 import Soup5 from '../Images/Soup5.jpg';
 import Soup3 from '../Images/Soup3.jpg';
 import Soup6 from '../Images/Soup6.jpg';
-
-
+import LaktosIcone from '../Icone/LaktosIcone';
+import Items from '../../components/SoupService/SoupService'
 const NavbarContainer = styled.div`
 display:flex;
 justify-content:center;
@@ -52,6 +52,7 @@ const SoupMenu = (props) => {
     const [address, setAddress] = useLocalState('address');
 
 
+
 return(
 
 
@@ -66,12 +67,9 @@ return(
 
 <SoupMainContainer>
 
-<Soup img={Soup6} title={"Roasted tomato & Quinoa"} text={"Tomatsoppa med quinoa, vitlök och lök toppas med färsk basilika och krispiga krutonger"}/>
-<Soup img={Soup4} title={"Sweet potato & coconut"} text={"Sötpotatis, kokosmjölk, jordnötssmör toppas med jordnötter, koriander och chilili flakes"}/>
-<Soup img={Soup5}/>
-<Soup img={Soup4}/>
-<Soup img={Soup4}/>
-<Soup img={Soup4}/>
+    {Items.map(Item => {
+        return (<Soup img={Item.image} title={Item.title} text={Item.description} price={Item.price + " kr"} />)
+    })}
 
 </SoupMainContainer>
 
