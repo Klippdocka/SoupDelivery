@@ -11,7 +11,7 @@ import LaktosIcone from '../Icone/LaktosIcone';
 
 
 const Items = [
-    {
+    {   
         image: Soup6,
         title: "Roasted tomato & Quinoa",
         description: "Tomatsoppa med quinoa, vitlök och lök toppas med färsk basilika och krispiga krutonger",

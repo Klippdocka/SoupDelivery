@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import theme from '../../theme';
 import { Link } from 'react-router-dom';
 import PlacesAutocomplete, { geocodeByAddress, gecocodeByPlaceI, getLatLng } from 'react-places-autocomplete';
-import {useLocalState} from '../Hooks/UseLocalState';
+import { useLocalState } from '../Hooks/UseLocalState';
 import { useHistory } from "react-router-dom";
 
 
@@ -102,80 +102,91 @@ const InputWrapper = styled.div`
 
 
 
-  
+
 
 const Position = () => {
 
     let history = useHistory();
-    
+
+
     const [address, setAddress] = useLocalState('address');
 
     const handleSelect = async (value) => {
-          setAddress(value);
-          history.push('/SoupMenu');
 
+        let splitted = value.split(",")
+        
+        let result;
 
+        if (splitted.length > 0) {
+            result = splitted[0]
+        } else { 
+            result = value
+        }
+
+        setAddress(result);
+        history.push('/SoupMenu');
     };
-
-
 
     return (
 
-      <MainWrapper>
-         
-        <PlacePinContainer>
-             <PlacePin/>
-         </PlacePinContainer>
+        <MainWrapper>
+
+            <PlacePinContainer>
+                <PlacePin />
+            </PlacePinContainer>
 
 
-        <AddressContainer>
-           
-            <PlacesAutocomplete 
-            value={address} 
-            onChange={setAddress} 
-            onSelect={handleSelect}>
+            <AddressContainer>
 
-            {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-            <InputWrapper>
-                    <InputAddress {...getInputProps({ placeholder: "Ange din adress" })} />
+                <PlacesAutocomplete
+                    value={address}
+                    onChange={setAddress}
+                    onSelect={handleSelect}>
 
-                     <div>
-                     {loading ? <div>...Laddar</div> : null }
 
-                        {suggestions.map(suggestion => {
-                            const style = {
-                                backgroundColor: suggestion.active ? "#41b6e6" : "#fff"
-                            };
-                            
+                    {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
 
-                          
-                            return (
-                            <DropDownStyle  {...getSuggestionItemProps(suggestion, { style })}>
-                                {suggestion.description}
+                        <InputWrapper>
+                            <InputAddress {...getInputProps({ placeholder: "Ange din adress" })} />
 
-                           
-                                </DropDownStyle>
-                                );
+                            <div>
+                                {loading ? <div>...Laddar</div> : null}
 
-                        })}
+                                {suggestions.map(suggestion => {
+                                    const style = {
+                                        backgroundColor: suggestion.active ? "#41b6e6" : "#fff"
+                                    };
 
-                     </div>   
-                </InputWrapper>
-                
-                )}
 
-            </PlacesAutocomplete>
-        
-        
-        </AddressContainer>
 
-      </MainWrapper>
+                                    return (
+                                        <DropDownStyle  {...getSuggestionItemProps(suggestion, { style })}>
+                                            {suggestion.description}
 
-        );
-    
+
+                                        </DropDownStyle>
+                                    );
+
+                                })}
+
+                            </div>
+                        </InputWrapper>
+
+
+                    )}
+
+                </PlacesAutocomplete>
+
+
+            </AddressContainer>
+
+        </MainWrapper>
+
+    );
+
 };
 
 
 
 
-export default  withRouter(Position);
+export default withRouter(Position);

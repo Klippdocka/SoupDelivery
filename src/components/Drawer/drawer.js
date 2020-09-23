@@ -7,15 +7,15 @@ const DrawerWrapper = styled.div`
 position:fixed;
 justify-content:center;
 flex-direction:column;
-z-index:8;
-width:25rem;
+z-index:9;
+width:26rem;
 height:100%;
 top:0rem;
 left:0rem;
 background-color:white;
 cursor: pointer;
 
-transition:all 2.6s ease;
+transition:all 4s ease;
 display: ${props => props.menuOpen ? 'block' : 'none'};
 `;
 
@@ -26,7 +26,7 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 text-align:start;
-margin-top:10rem;
+margin-top:7rem;
 -webkit-justify-content: start;
 -webkit-align-items: start;
 

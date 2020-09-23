@@ -4,12 +4,9 @@ import {useLocalState} from '../Hooks/UseLocalState';
 import theme from '../../theme';
 import {MainWrapper} from '../Home/styledHome';
 import Soup from '../Soup/Soup';
-import Soup4 from '../Images/Soup4.jpg';
-import Soup5 from '../Images/Soup5.jpg';
-import Soup3 from '../Images/Soup3.jpg';
-import Soup6 from '../Images/Soup6.jpg';
-import LaktosIcone from '../Icone/LaktosIcone';
 import Items from '../../components/SoupService/SoupService'
+
+
 const NavbarContainer = styled.div`
 display:flex;
 justify-content:center;
@@ -37,6 +34,7 @@ const StyledP = styled.p`
 
 
 const SoupMainContainer = styled.div`
+
 flex-direction:start;
 flex-direction:column;
 justify-content:center;
@@ -67,8 +65,8 @@ return(
 
 <SoupMainContainer>
 
-    {Items.map(Item => {
-        return (<Soup img={Item.image} title={Item.title} text={Item.description} price={Item.price + " kr"} />)
+    {Items.map((element, index) => {
+        return (<Soup key={index} img={element.image} title={element.title} text={element.description} price={element.price + " kr"} />)
     })}
 
 </SoupMainContainer>

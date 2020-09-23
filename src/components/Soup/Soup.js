@@ -1,6 +1,17 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import theme from '../../theme';
+import { useHistory } from "react-router-dom";
+import AddSoup from '../../components/AddSoup/AddSoup';
+
+
+const MainWrapper = styled.div`
+display: flex;
+justify-content:center;
+align-items:center;
+width:100%;
+height:100%;
+`;
 
 const MenuSoupContainer = styled.div`
 display:flex;
@@ -12,9 +23,10 @@ max-width:60rem;
 background-image: url(${props => props.image});
 background-repeat: no-repeat;
 background-size: cover;
-margin-top:2rem;
 box-shadow: 2px 2px 10px 5px rgba(0,0,0,0.11);
 border-radius:1rem;
+margin-top:2rem;
+margin-bottom:4rem;
 
 
 `;
@@ -24,7 +36,7 @@ display:flex;
 flex-direction:column;
 align-items: center;
 width:100%;
-position: relative;
+
 `;
 
 
@@ -83,7 +95,7 @@ color:#2f3030;
 
 const ContentContainer = styled.div`
     margin-top: auto;
-    width: 50rem;
+    width: 100%;
    
 
 @media screen and (max-width: ${theme.screenSize.small}){
@@ -102,11 +114,35 @@ color:#2f3030;
 const AllergyIcone = styled.div`
 `;
 
+
+
 const Soup = (props) => {
+
+
+    const [modalState, setModalState] = useState(false);
+
+  
+    const openHandler = () => {
+        if (!modalState) {
+            setModalState(true)
+
+        } else {
+            setModalState(false)
+
+
+        }
+        console.log(modalState);
+    }
 
     return (
 
+     
         <SoupMainContainer>
+
+                   
+                
+                <AddSoup modalOpen = {modalState} />
+                        
             <MenuSoupContainer image={props.img}>
 
                 <ContentContainer>
@@ -117,11 +153,13 @@ const Soup = (props) => {
                         <AllergyIcone>{props.allergyIcone}</AllergyIcone>
                     </TitleContainer>
 
-                    <BtnAdd>Lägg till</BtnAdd>
-
+                    <BtnAdd onClick={openHandler}>Lägg till</BtnAdd>
                 </ContentContainer>
-
+               
             </MenuSoupContainer>
+
+           
+
         </SoupMainContainer>
 
 

@@ -9,7 +9,7 @@ import { UseLocalState } from '../Hooks/UseLocalState';
 
 const HamburgerWrapper = styled.div`
 margin-left:1.5rem;
-z-index:10;
+z-index:20;
 cursor: pointer;
 
 `;

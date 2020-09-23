@@ -4,7 +4,6 @@ import Home from '../components/Home/home';
 import SoupMenu from '../components/SoupMenu/SoupMenu';
 import Main from '../components/Main/Main'
 
-
 const Routes = () => {
     return(
         <BrowserRouter>
@@ -26,9 +25,13 @@ const Routes = () => {
 
                 </Route>
 
-                <Route exact path="/Main">
+                <Route exact path="/">
 
-                    <Main/>
+                    <Main>
+                        <Home>
+                            
+                        </Home>
+                    </Main>
 
 
                     </Route>
