@@ -119,19 +119,12 @@ const AllergyIcone = styled.div`
 const Soup = (props) => {
 
 
-    const [modalState, setModalState] = useState(false);
-
+    const [openModalItem, setOpenModalItem] = useState(null);
+    
   
-    const openHandler = () => {
-        if (!modalState) {
-            setModalState(true)
-
-        } else {
-            setModalState(false)
-
-
-        }
-        console.log(modalState);
+    const openHandler = (item) => {
+        setOpenModalItem(item)     
+        console.log('clicked');   
     }
 
     return (
@@ -140,20 +133,20 @@ const Soup = (props) => {
         <SoupMainContainer>
 
                    
+                {openModalItem != null ? <AddSoup toggle={() => openHandler(null)} openItem={openModalItem} /> : null}
                 
-                <AddSoup modalOpen = {modalState} />
                         
-            <MenuSoupContainer image={props.img}>
+            <MenuSoupContainer image={props.item.image}>
 
                 <ContentContainer>
                     <TitleContainer>
-                        <Title>{props.title}</Title>
-                            <SoupDescription>{props.text}</SoupDescription>
-                                <PriceContainer>{props.price}</PriceContainer>
-                        <AllergyIcone>{props.allergyIcone}</AllergyIcone>
+                        <Title>{props.item.title}</Title>
+                            <SoupDescription>{props.item.description}</SoupDescription>
+                                <PriceContainer>{props.item.price} kr</PriceContainer>
+                        <AllergyIcone>{props.item.allergyIcone}</AllergyIcone>
                     </TitleContainer>
 
-                    <BtnAdd onClick={openHandler}>Lägg till</BtnAdd>
+                    <BtnAdd onClick={() => openHandler(props.item)}>Lägg till</BtnAdd>
                 </ContentContainer>
                
             </MenuSoupContainer>

@@ -11,14 +11,15 @@ import LaktosIcone from '../Icone/LaktosIcone';
 
 
 const Items = [
-    {   
+
+    {   id:1,
         image: Soup6,
         title: "Roasted tomato & Quinoa",
         description: "Tomatsoppa med quinoa, vitlök och lök toppas med färsk basilika och krispiga krutonger",
         price: 79,
         allergy: "Laktosfri"
     },
-    {
+    {   id:2,
         image: Soup4,
         title: "Sweet potato & coconut",
         description: "Sötpotatis, kokosnötmjölk, jordnötssmör toppas med jordnötter, koriander och chili flakes",
@@ -26,7 +27,7 @@ const Items = [
         allergy:LaktosIcone
     },
 
-    {
+    {   id:3,
         image: Soup5,
         title: "Green goddess soup",
         description: "Grönkål, spenat, ärtor, broccoli, potatis, vitlök toppat med pumpakärnor och havregrädde.",
@@ -34,7 +35,7 @@ const Items = [
         allergy: "Laktosfri"
     },
 
-    {
+    {   id:4,
         image: Soup2,
         title: "Green goddess soup",
         description: "Grönkål, spenat, ärtor, broccoli, potatis, vitlök toppat med pumpakärnor och havregrädde.",

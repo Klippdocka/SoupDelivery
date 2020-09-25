@@ -66,7 +66,7 @@ return(
 <SoupMainContainer>
 
     {Items.map((element, index) => {
-        return (<Soup key={index} img={element.image} title={element.title} text={element.description} price={element.price + " kr"} />)
+        return (<Soup key={index} item={element} />)
     })}
 
 </SoupMainContainer>
