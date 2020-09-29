@@ -2,7 +2,8 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Home from '../components/Home/home';
 import SoupMenu from '../components/SoupMenu/SoupMenu';
-import Main from '../components/Main/Main'
+import Main from '../components/Main/Main';
+import Form from '../components/Checkbox/Checkbox';
 
 const Routes = () => {
     return(
@@ -25,13 +26,11 @@ const Routes = () => {
 
                 </Route>
 
-                <Route exact path="/">
+                <Route exact path="/Form">
 
-                    <Main>
-                        <Home>
-                            
-                        </Home>
-                    </Main>
+                 
+                       <Form/>
+                    
 
 
                     </Route>

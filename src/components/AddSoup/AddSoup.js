@@ -117,7 +117,7 @@ width:100%;
 
 
 const OptionsItems = styled.div`
-background-color:black;
+background-color:#ffffff;
 width:100%;
 height:10rem;
 `;
@@ -126,27 +126,53 @@ const TitleGrey = styled.div`
 display:flex;
 justify-content:flex-start;
 align-items:center;
-color:#656565;
-height:5rem;
+background-color:#f5f5f5;
+height:4.5rem;
 width:100%;
 `;
 const StyledH3 = styled.h3`
-
+margin-left:3rem;
 color:#656565;
-height:5rem;
 width:100%;
 margin-block-start: 0em;
 margin-block-end: 0em;
 
 `;
 
+const StyledInputContainer = styled.div`
+display:flex;
+justify-content:flex-start;
+flex-direction:column;
+text-align:row;
+margin-left:1.8rem;
+`
 
 
+
+const InputContainer = styled.div`
+flex-direction:row;
+margin-top:1rem;
+`;
 
 const AddSoup = (props) => {
 
-   
 
+    const [checkbox, setCheckbox] = useState ({
+        isAgree : false, 
+        value : ""
+    })
+
+
+    const handleChange = (event) => {
+        const target = event.target
+        const name = target.name
+        const value = target.value
+        setCheckbox({
+            ...checkbox,
+            [name] : value
+        })
+        
+    }
 
 return(
 
@@ -167,13 +193,54 @@ return(
 <TitleContainer><Title>{props.openItem.title}</Title>
 <Price>{props.openItem.price} Kr</Price></TitleContainer>
 
-
     <TitleGrey><StyledH3>Välj tillbehör (obligatoriskt)</StyledH3></TitleGrey>
 
    <Options>
        <OptionsItems>
+       
+            <StyledInputContainer>
 
+                <InputContainer>
+                <input type="checkbox" name="value" value="Surdegsbröd" onChange={handleChange} checked={checkbox.value =="Surdegsbröd"}/>
+                <lable> SurdegsBröd </lable>
+                </InputContainer>
+
+              <InputContainer>  <input type="checkbox" name="value" value="Mörkt bröd" onChange={handleChange} checked={checkbox.value =="Mörkt bröd"}/>
+                <lable> Mörkt bröd </lable>
+                </InputContainer>
+
+                <InputContainer>
+                <input type="checkbox" name="value" value="Foccacia" onChange={handleChange} checked={checkbox.value =="Foccacia"}/>
+                <lable> Focaccia </lable>
+                </InputContainer>
+
+                </StyledInputContainer>
+        
        </OptionsItems>
+   </Options>
+
+   <TitleGrey><StyledH3>Välj dryck</StyledH3></TitleGrey>
+
+   <Options>
+       <OptionsItems>
+       <StyledInputContainer>
+
+        <InputContainer>
+            <input type="checkbox" name="value" value="San Pellegrino" onChange={handleChange} checked={checkbox.value =="San Pellegrino"}/>
+            <lable> San Pellegrino </lable>
+            </InputContainer>
+
+            <InputContainer>  <input type="checkbox" name="value" value="CitronVatten" onChange={handleChange} checked={checkbox.value =="CitronVatten"}/>
+            <lable> CitronVatten </lable> 
+            </InputContainer>
+
+            <InputContainer>
+            <input type="checkbox" name="value" value="Cola zero" onChange={handleChange} checked={checkbox.value =="Cola zero"}/>
+            <lable> Cola zero </lable> 
+            </InputContainer>
+
+            </StyledInputContainer>
+                </OptionsItems>
    </Options>
 
 
