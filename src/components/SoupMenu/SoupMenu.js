@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import styled, { isStyledComponent } from 'styled-components';
 import {useLocalState} from '../Hooks/UseLocalState';
 import theme from '../../theme';
 import {MainWrapper} from '../Home/styledHome';
 import Soup from '../Soup/Soup';
-import Items from '../../components/SoupService/SoupService'
+import { Items } from '../../components/SoupService/SoupService'
 
 
 const NavbarContainer = styled.div`
@@ -55,6 +55,7 @@ return(
 
 
 <MainWrapper>
+
 
 <NavbarContainer>       
 <StyledP>{address}</StyledP>

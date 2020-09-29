@@ -45,6 +45,47 @@ const Items = [
 ]
 
 
+const accesssories = [
 
-export default Items;
+    {
+        id:1,
+        title: "Surdegsbröd",
+        price: 0
+
+    },
+    {
+        id:2,
+        title: "Mörkt bröd",
+        price: 0
+    },
+
+    {
+        id:3,
+        title: "Focaccia",
+        price: 0
+    },
+
+]
+
+const drinks = [
+    {
+        id:1,
+        title:"San pellegrino",
+        price: 25
+    },
+    {
+        id:2,
+        title:"Citronvatten",
+        price: 10
+    },
+    {
+        id:1,
+        title:"Cola zero",
+        price: 25
+    },
+]
+
+
+
+export {Items, accesssories, drinks };
 
