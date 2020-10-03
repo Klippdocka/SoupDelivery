@@ -2,19 +2,21 @@ import React from 'react';
 import HamburgerIcone from '../Icone/hamburgerIcone';
 import styled from 'styled-components';
 import SoupIcon from '../../components/Icone/soupIcon';
-import TimeIcone from '../../components/Icone/time';
-import TimeIcon from '../../components/Icone/time';
-import { UseLocalState } from '../Hooks/UseLocalState';
-
+import CloseIcone  from '../Icone/CloseIcone';
+import { useHistory } from "react-router-dom";
 
 const HamburgerWrapper = styled.div`
 margin-left:1.5rem;
-z-index:20;
+position:absolute;
 cursor: pointer;
+
+
+
 
 `;
 
 const SoupIconWrapper = styled.div`
+display:${props => props.showCart ? 'block' : 'none'};
 margin-right:1.5rem;
 cursor: pointer;
 
@@ -28,9 +30,10 @@ align-items:center;
 justify-content:space-between;
 width:100%;
 height:6rem;
-background:rgba(255,255,255,0.98);
-z-index:10;
-box-shadow: 2px 3px 1px 0px rgba(0,0,0,0.06);
+
+background:${props => props.showCart ? 'rgba(255,255,255,0.98);' : 'none'};
+box-shadow:${props => props.showCart ? '2px 3px 1px 0px rgba(0,0,0,0.06)' : 'none'}; 
+ 
 `;
 
 const TimeIconeWrapper = styled.div`
@@ -40,6 +43,7 @@ align-items:center;
 `;
 
 const StyledP = styled.p`
+position:fixed;
 font-size:1.5rem;
 color:#242425;
 margin-left:0.5rem;
@@ -49,8 +53,16 @@ margin-left:0.5rem;
 
 const Navbar = (props) => {
 
+  let history = useHistory();
+
+const HandleChange = () => {
+
+  history.push('/ShoppingCart')
+
+}
+
         return(
-            <NavbarWrapper>
+            <NavbarWrapper showCart={props.showCart}>
 
         <HamburgerWrapper onClick={props.click}>
         
@@ -60,11 +72,10 @@ const Navbar = (props) => {
         
       <TimeIconeWrapper>
       
-      { /* <TimeIcon/> */ }
      <StyledP>{}</StyledP>
       </TimeIconeWrapper>
            
-        <SoupIconWrapper>
+        <SoupIconWrapper onClick={HandleChange} showCart={props.showCart}>
                  <SoupIcon/>
          </SoupIconWrapper>
 

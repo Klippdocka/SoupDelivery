@@ -1,23 +1,33 @@
-import React, { useState, Component } from 'react';
+import React, { useState, useContext, Component } from 'react';
 import styled from 'styled-components';
 import theme from '../../theme';
 import CloseIcone from '../../components/Icone/CloseIcone';
 import { accesssories, drinks } from '../../components/SoupService/SoupService';
-import Soup from '../../components/Soup/Soup';
+
 import AddIcone from '../../components/Icone/AddIcone';
 import RemoveIcone from '../../components/Icone/RemoveIcone';
 import { useHistory } from "react-router-dom";
 
+import { SoupsContext } from '../../App.js'
+
+import {
+    soupReducer,
+    initialState,
+    addAction,
+    markAction,
+    deleteAction
+  } from "../../soup";
+
+
 const ModalContainer = styled.div`
 position:fixed;
-display:flex;
+z-index:1;
 height:100%;
 width:100%;
-justify-content:center;
-align-items:center;
+top:0rem;
+left:0rem;
 background:rgba(79,79,79,0.4);
-overflow-y:hidden;
-z-index:10;
+overflow:hidden;
 display: ${props => props.modalOpen ? 'block' : 'none'};
 
 `;
@@ -25,10 +35,6 @@ display: ${props => props.modalOpen ? 'block' : 'none'};
 
 
 const AddSoupCard = styled.div`
-
-position:relative;
-top:0rem;
-left:0rem;
 display:flex;
 justify-content:center;
 align-items:center;
@@ -36,9 +42,9 @@ flex-direction:column;
 height:70rem;
 width:40rem;
 background-color:#ffffff;
-margin-top:6rem;
-margin-left:45rem;
-z-index:10;
+
+
+overflow-y:hidden;
 
 
 
@@ -46,12 +52,19 @@ z-index:10;
 
 
 @media screen and (max-width: ${theme.screenSize.small}){
-  margin-left:1.7rem;
+  
    width:34rem;
 }
 
 `;
 
+const AddSoupWrapper = styled.div`
+display:flex;
+justify-content:center;
+align-items:center;
+width:100%;
+height:100%;
+`;
 
 
 const CloseIconeContainer = styled.div`
@@ -232,8 +245,9 @@ flex-direction:row;
 
 const AddSoup = (props) => {
 
-  let history = useHistory();
-
+ 
+  const [soup, setSoup] = useState("");
+  const dispatch = useContext(SoupsContext);
     const [count, setCount] = useState(1);
 
 
@@ -251,7 +265,19 @@ const AddSoup = (props) => {
             ...checkbox,
             [name]: value
         })
-
+        // för varje givet event (dvs nån har kryssat i eller ur en drink lr tillb)
+        // kolla vilket ID event.target 
+        // är detta ett ikryssat event? isf sätt value inuti tillbehör till true.
+        // annars, sätt value till false
+        let newAccessories = {[target.id]: target.checked}
+        setSoup({id: props.soup.id, accessories: [{ ...newAccessories }], drinks: []})
+        
+    }
+    const handleSubmit = (event) => {
+        //event.preventDefault();
+        dispatch(addAction(soup));
+        setSoup("");
+        props.toggle();
     }
 
 
@@ -279,6 +305,7 @@ const AddSoup = (props) => {
 
         <ModalContainer modalOpen={props.openItem != null}>
             
+            <AddSoupWrapper>
             <AddSoupCard>
 
                 <ImgContainer image={props.openItem.image}>
@@ -351,10 +378,11 @@ const AddSoup = (props) => {
                         <TotalSoup>{count}</TotalSoup>
                         <IconeDiv onClick={() => setCount(count + 1)}><AddIcone /></IconeDiv>
                     </AddSoupContainer>
-                   <AddSoupButton onClick={props.toggle}>Lägg till i varukorg</AddSoupButton>
+                   <AddSoupButton onClick={() => handleSubmit()}>Lägg till i varukorg</AddSoupButton>
                 </StyledDiv>
 
             </AddSoupCard>
+            </AddSoupWrapper>
 
         </ModalContainer>
 

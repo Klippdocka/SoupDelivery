@@ -3,23 +3,27 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Home from '../components/Home/home';
 import SoupMenu from '../components/SoupMenu/SoupMenu';
 import Main from '../components/Main/Main';
-import Form from '../components/Checkbox/Checkbox';
+//import Form from '../components/Checkbox/Checkbox';
+import CheckOutProgressMain from '../components/CheckOutProgress/CheckOutProgressMain';
+import CheckOutProgressBasket from '../components/CheckOutProgress/CheckOutProgressBasket';
+import CheckOutMain from '../components/CheckOutProgress/CheckOutMain';
 
-const Routes = () => {
+const Routes = (props) => {
     return(
         <BrowserRouter>
 
              <Switch>
 
                 <Route exact path="/">
-                   <Main>
+                   <Main showCart={false}>
                      <Home/>
                      </Main>
+                    
                     
                 </Route>
 
                 <Route exact path="/SoupMenu">
-                    <Main>
+                    <Main showCart={true} >
                     <SoupMenu/>
                     </Main>
 
@@ -28,8 +32,10 @@ const Routes = () => {
 
                 <Route exact path="/ShoppingCart">
 
-                 
-                       <Form/>
+                 <CheckOutMain>
+                <CheckOutProgressBasket/>
+                </CheckOutMain>
+                
                     
 
 

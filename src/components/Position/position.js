@@ -3,8 +3,7 @@ import styled from 'styled-components';
 import PlacePin from '../Icone/placePin';
 import { withRouter } from 'react-router-dom';
 import theme from '../../theme';
-import { Link } from 'react-router-dom';
-import PlacesAutocomplete, { geocodeByAddress, gecocodeByPlaceI, getLatLng } from 'react-places-autocomplete';
+import PlacesAutocomplete from 'react-places-autocomplete';
 import { useLocalState } from '../Hooks/UseLocalState';
 import { useHistory } from "react-router-dom";
 

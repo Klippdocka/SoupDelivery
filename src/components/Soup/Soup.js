@@ -41,7 +41,7 @@ width:100%;
 
 
 const BtnAdd = styled.div`
-position: relative;
+position: static;
 display:flex;
 align-items:center;
 justify-content:center;
@@ -62,7 +62,7 @@ border-bottom-right-radius: 1rem;
 
 
 const TitleContainer = styled.div`
-position: relative;
+position: static;
 display:flex;
 flex-direction:column;
 justify-content:start;
@@ -94,8 +94,10 @@ color:#2f3030;
 `;
 
 const ContentContainer = styled.div`
-    margin-top: auto;
+   margin-top:auto;
     width: 100%;
+    
+    
    
 
 @media screen and (max-width: ${theme.screenSize.small}){
@@ -133,7 +135,7 @@ const Soup = (props) => {
         <SoupMainContainer>
 
                    
-                {openModalItem != null ? <AddSoup toggle={() => openHandler(null)} openItem={openModalItem} /> : null}
+                {openModalItem != null ? <AddSoup toggle={() => openHandler(null)} openItem={openModalItem} soup={props.item} /> : null}
                 
                         
             <MenuSoupContainer image={props.item.image}>

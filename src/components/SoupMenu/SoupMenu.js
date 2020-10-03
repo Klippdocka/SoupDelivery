@@ -18,7 +18,6 @@ width:100%;
 const StyledP = styled.p`
     margin-top:7.5rem;
     font-size:1.6rem;
-    z-index:10;
     color:#242425;
     position:fixed;
     

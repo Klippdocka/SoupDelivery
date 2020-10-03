@@ -15,7 +15,6 @@ align-items:center;
 
 
 
-
 const ImgContainer = styled.div`
 display:flex;
 justify-content:center;
@@ -27,8 +26,7 @@ const HomeImg = styled.img`
 width:100%; 
 height:100%;
 object-fit:cover;
-z-index:-7;
-position:relative;
+position:static;
 
 
 
@@ -49,7 +47,7 @@ justify-content:center;
 height:5rem;
 width:100%;
 margin-top:55rem;
-z-index:5;
+
 
 
 @media screen and (max-width: ${theme.screenSize.xsmall}){
