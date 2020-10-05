@@ -1,6 +1,6 @@
 import React, { useState, useReducer, useContext } from 'react';
 import { createGlobalStyle } from 'styled-components';
-
+import firebase from './firebase';
 
 import Routes from './Route/routes';
 import styled from 'styled-components';
@@ -46,15 +46,18 @@ const GlobalStyle = createGlobalStyle`
 `
 export const SoupsContext = React.createContext(null);
 
+
 const App = () => {
   const [soupList, dispatch] = useReducer(soupReducer, initialState);
+
+ 
   return (
     <SoupsContext.Provider value={dispatch}>
     <StyledDiv>
       <GlobalStyle />
       <Routes/>
    </StyledDiv>
-   </SoupsContext.Provider>
+  // </SoupsContext.Provider>
   );
 
 }

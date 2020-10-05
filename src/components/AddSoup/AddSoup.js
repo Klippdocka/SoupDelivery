@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import theme from '../../theme';
 import CloseIcone from '../../components/Icone/CloseIcone';
 import { accesssories, drinks } from '../../components/SoupService/SoupService';
-
+import { useLocalStorage } from '../Hooks/UseLocalState';
 import AddIcone from '../../components/Icone/AddIcone';
 import RemoveIcone from '../../components/Icone/RemoveIcone';
 import { useHistory } from "react-router-dom";
@@ -16,7 +16,7 @@ import {
     addAction,
     markAction,
     deleteAction
-  } from "../../soup";
+} from "../../soup";
 
 
 const ModalContainer = styled.div`
@@ -245,57 +245,93 @@ flex-direction:row;
 
 const AddSoup = (props) => {
 
- 
-  const [soup, setSoup] = useState("");
-  const dispatch = useContext(SoupsContext);
+
+    //const [soup, setSoup] = useLocalStorage('soup', []);
+   let Item = props.openItem;
+
+
+
+
+
+
+
+
+    // const [soup, setSoup] = useState("");
+    //const dispatch = useContext(SoupsContext);
     const [count, setCount] = useState(1);
 
-
+    
     const [checkbox, setCheckbox] = useState({
-        Selected: false,
-        value: ""
+        accesssory: {},
+        value: "",
+        selected: false
+    });
+    
+    
+    const [checkboxDrinks, setCheckboxDrinks] = useState({
+        drink: {},
+        value: "",
+        selected: false        
     })
 
+    
 
-    const handleChange = (event) => {
-        const target = event.target
-        const name = target.name
-        const value = target.value
+
+    const handleChange = (element) => {
         setCheckbox({
-            ...checkbox,
-            [name]: value
+            accesssory: element,
+            value: element.title,
+            selected: !checkbox.selected
         })
+        
+      
         // för varje givet event (dvs nån har kryssat i eller ur en drink lr tillb)
         // kolla vilket ID event.target 
         // är detta ett ikryssat event? isf sätt value inuti tillbehör till true.
         // annars, sätt value till false
-        let newAccessories = {[target.id]: target.checked}
-        setSoup({id: props.soup.id, accessories: [{ ...newAccessories }], drinks: []})
-        
-    }
+        //  let newAccessories = {[target.id]: target.checked}
+         // let newDrinks = {[target.id] : target.checked}
+        // setSoup({id: props.soup.id, accessories: [{ ...newAccessories }], drinks: [{ ...newDrinks }]}) 
+
+    }    
+
     const handleSubmit = (event) => {
         //event.preventDefault();
-        dispatch(addAction(soup));
-        setSoup("");
+       //  dispatch(addAction(soup)); 
+        // setSoup(curr => [...curr, soup]);
+        //setSoup(soup);
+
+
+        let shoppingCart = [];
+
+       if (localStorage.getItem('item') != null) {
+           shoppingCart = JSON.parse(localStorage.getItem('item'));  
+        }    
+        
+        const item = {
+            item: Item,
+            drink: checkboxDrinks.drink,
+            accessory: checkbox.accesssory,
+            amount: count
+        }
+        shoppingCart.push(item)
+        localStorage.setItem('item', JSON.stringify(shoppingCart))
+
+        setCheckbox({})
+        setCheckboxDrinks({})
+        setCount(1)
+
         props.toggle();
-    }
 
+    }    
 
+    
 
-
-    const [checkboxDrinks, setCheckboxDrinks] = useState({
-        Selected: false,
-        value: ""
-    })
-
-
-    const handleChangeDrinks = (event) => {
-        const target = event.target
-        const name = target.name
-        const value = target.value
+    const handleChangeDrinks = (element) => {
         setCheckboxDrinks({
-            ...checkboxDrinks,
-            [name]: value
+            drink: element,
+            value: element.title,
+            selected: !checkboxDrinks.selected
         })
 
 
@@ -304,84 +340,90 @@ const AddSoup = (props) => {
     return (
 
         <ModalContainer modalOpen={props.openItem != null}>
-            
+
             <AddSoupWrapper>
-            <AddSoupCard>
+                <AddSoupCard>
 
-                <ImgContainer image={props.openItem.image}>
+                    <ImgContainer image={props.openItem.image}>
 
-                    <CloseIconeContainer onClick={props.toggle}>
-                        <StyledCloseIcone><CloseIcone /></StyledCloseIcone>
-                    </CloseIconeContainer>
-                </ImgContainer>
-
-
+                        <CloseIconeContainer onClick={props.toggle}>
+                            <StyledCloseIcone><CloseIcone /></StyledCloseIcone>
+                        </CloseIconeContainer>
+                    </ImgContainer>
 
 
-                <TitleContainer><Title>{props.openItem.title}</Title>
-                    <Price>{props.openItem.price} Kr</Price></TitleContainer>
 
-                <TitleGrey><StyledH3>Välj tillbehör (obligatoriskt)</StyledH3></TitleGrey>
 
-                <Options>
-                    <OptionsItems>
+                    <TitleContainer><Title>{props.openItem.title}</Title>
+                        <Price>{props.openItem.price} Kr</Price></TitleContainer>
 
-                        <StyledInputContainer>
+                    <TitleGrey><StyledH3>Välj tillbehör (obligatoriskt)</StyledH3></TitleGrey>
+
+                    <Options>
+                        <OptionsItems>
+
+                            <StyledInputContainer>
 
 
 
                                 {accesssories.map((element, index) => {
                                     return (<InputContainer key={index} item={element}>
                                         <Container>
-                                        <input type="checkbox" name="value" id={element.id} value={element.title} onChange={handleChange} checked={checkbox.value == element.title} />
-                                        <CheckboxContainer> {element.title} </CheckboxContainer>
+                                            <input type="checkbox" name="value" id={element.id} value={element.title} onChange={() => handleChange(element)} checked={checkbox.selected && element.title === checkbox.value} />
+                                            <CheckboxContainer> {element.title} </CheckboxContainer>
                                         </Container>
 
                                     </InputContainer>)
                                 })}
 
-                          
 
-                        </StyledInputContainer>
 
-                    </OptionsItems>
-                </Options>
+                            </StyledInputContainer>
 
-                <TitleGrey><StyledH3>Välj dryck</StyledH3></TitleGrey>
+                        </OptionsItems>
+                    </Options>
 
-                <Options>
-                    <OptionsItems>
-                        <StyledInputContainer>
-                        {drinks.map((element, index) => {
+                    <TitleGrey><StyledH3>Välj dryck</StyledH3></TitleGrey>
+
+                    <Options>
+                        <OptionsItems>
+                            <StyledInputContainer>
+                                {drinks.map((element, index) => {
                                     return (<InputContainer key={index} item={element}>
-                                          <Container>
-                                        <input type="checkbox" name="value" id={element.id} value={element.title} onChange={handleChangeDrinks} checked={checkboxDrinks.value == element.title} />
-                                      
-                                        <CheckboxContainer>{element.title} </CheckboxContainer>
-                                        <PriceContainer>{`+`} {element.price} {`kr`} </PriceContainer>
-                                   
-                                    </Container>
+                                        <Container>
+                                            <input type="checkbox" name="value" id={element.id} value={element.title} onChange={() => handleChangeDrinks(element)} checked={checkboxDrinks.selected && element.title === checkboxDrinks.value} />
+
+                                            <CheckboxContainer>{element.title} </CheckboxContainer>
+                                            <PriceContainer>{`+`} {element.price} {`kr`} </PriceContainer>
+
+                                        </Container>
 
 
                                     </InputContainer>)
                                 })}
 
-                        </StyledInputContainer>
-                    </OptionsItems>
-                </Options>
+                            </StyledInputContainer>
+                        </OptionsItems>
+                    </Options>
 
-                <StyledDiv>
+                    <StyledDiv>
 
-                    <AddSoupContainer>
+                        <AddSoupContainer>
 
-                        <IconeDiv onClick={() => setCount(count - 1)}> <RemoveIcone /></IconeDiv>
-                        <TotalSoup>{count}</TotalSoup>
-                        <IconeDiv onClick={() => setCount(count + 1)}><AddIcone /></IconeDiv>
-                    </AddSoupContainer>
-                   <AddSoupButton onClick={() => handleSubmit()}>Lägg till i varukorg</AddSoupButton>
-                </StyledDiv>
+                            <IconeDiv onClick={() => {
+                                if(count > 1 && count < 11)
+                                setCount(count - 1)
+                            }}> <RemoveIcone /></IconeDiv>
+                            <TotalSoup>{count}</TotalSoup>
+                            <IconeDiv onClick={() => {
+                                if(count > 0 && count < 10)
+                                setCount(count + 1)
+                            }}><AddIcone /></IconeDiv>
+                        </AddSoupContainer>
+                        <AddSoupButton onClick={() => handleSubmit()}>Lägg till i varukorg</AddSoupButton>
+                    </StyledDiv>
 
-            </AddSoupCard>
+                </AddSoupCard>
             </AddSoupWrapper>
 
         </ModalContainer>

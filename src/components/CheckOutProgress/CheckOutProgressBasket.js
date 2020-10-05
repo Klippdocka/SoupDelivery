@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import CheckOutProgressMain from '../../components/CheckOutProgress/CheckOutProgressMain';
 import NextBtn from '../../components/Buttons/NextBtn';
-
+import { useLocalStorage } from '../Hooks/UseLocalState';
 
 
 
@@ -152,6 +152,23 @@ text-align:center;
 
 const CheckOutProgressBasket = (props) => {
 
+    const [soup, setSoup] = useLocalStorage('soup');
+    const [items, setItems] = useState([]);
+
+
+    useEffect(() => {
+        let shoppingCart;
+    
+        if (localStorage.getItem('item') != null) {
+            const item = JSON.parse(localStorage.getItem('item'));
+            setItems(item);
+        }
+    }, []);
+
+     
+
+ 
+
     const [active, setActive] = useState(false);  
 
 
@@ -175,13 +192,35 @@ const CheckOutProgressBasket = (props) => {
 
         <ShoppingCartWrapper>
 
-            <ItemContainer>
-           
-          <FirstLineContainer> <Amount>1</Amount> <Title>Sweet potato & coconut</Title> <Price>105 kr</Price></FirstLineContainer> 
-          <Accesssories>Surdegsbröd, San Pellegrino(25kr)</Accesssories>
-            </ItemContainer>
-            <BorderUnderline/>
-        </ShoppingCartWrapper>
+    
+    {
+        items.map(({item, accessory, drink}, i) => {
+            console.log(item);
+            return <React.Fragment key={i}>
+                <ItemContainer>
+        <FirstLineContainer> <Amount>{i+1}</Amount> <Title>{item.title}</Title> <Price>{item.price}</Price></FirstLineContainer>
+            {
+                accessory.title && drink.title ?
+                    <Accesssories>
+                        {accessory.title + ', ' + drink.title + ' (' + drink.price + 'sek)'}
+                    </Accesssories>
+                : accessory.title && drink.title == undefined ?
+                    <Accesssories>
+                        {accessory.title}
+                    </Accesssories>
+                : accessory.title == undefined && drink.title ?
+                    <Accesssories>
+                        {drink.title + ' (' + drink.price + 'sek)'}
+                    </Accesssories>
+                : null
+            }
+    
+                </ItemContainer>
+                    <BorderUnderline/>
+            </React.Fragment>
+        })
+    }
+    </ShoppingCartWrapper>
         
             <NextBtnContainer><NextBtn/></NextBtnContainer>
             

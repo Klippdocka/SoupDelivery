@@ -120,7 +120,7 @@ const AllergyIcone = styled.div`
 
 const Soup = (props) => {
 
-
+    
     const [openModalItem, setOpenModalItem] = useState(null);
     
   
