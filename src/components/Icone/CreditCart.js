@@ -2,7 +2,7 @@ import React from 'react';
 
 const CreditCard = () => (
    
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="40px" height="40px"><path d="M0 0h24v24H0z" fill="none"/><path fill="#9ab54a" d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" width="38px" height="38px"><path d="M0 0h24v24H0z" fill="none"/><path fill="#9ab54a" d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
 
 )
 

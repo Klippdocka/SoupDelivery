@@ -6,6 +6,7 @@ import CreditCard from '../../components/Icone/CreditCart';
 
 
 const MainWrapper = styled.div`
+
 height:100%;
 width:100%;
 `;

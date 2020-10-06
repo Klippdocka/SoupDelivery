@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import CheckOutProgressMain from '../../components/CheckOutProgress/CheckOutProgressMain';
 import NextBtn from '../../components/Buttons/NextBtn';
 import { useLocalStorage } from '../Hooks/UseLocalState';
-
+import Close from '../../components/Icone/Close';
 
 
 
@@ -18,7 +18,7 @@ const NextBtnContainer = styled.div`
 display:flex;
 
 align-items:baseline;
-margin-top:40rem;
+margin-top:4rem;
 `;
 
 const ContentContainer = styled.div`
@@ -45,13 +45,13 @@ justify-content:center;
 align-items:center;
 height:4rem;
 width:12rem;
-background-color:${props => props.active ? '#9ab54a' : '#f5f5f5'};
+background-color:${props => !props.active ? '#9ab54a' : '#f5f5f5'};
 border-radius:0.5rem;
 text-align:center;
 `;
 
 const DeliveryP = styled.p`
-color:${props => props.active ? 'white' : '#707070'};
+color:${props => props.active ? '#707070' : 'white'};
 
 font-size:1.6rem;
 margin-block-start: 0em;
@@ -60,7 +60,7 @@ margin-block-start: 0em;
 `;
 
 const PickUpP = styled.p`
-color:${props => !props.active ? 'white' : '#707070'};
+color:${props => props.active ? 'white' : '#707070'};
 font-size:1.6rem;
 margin-block-start: 0em;
     margin-block-end: 0em;
@@ -71,7 +71,7 @@ const PickUp = styled.div`
 display:flex;
 justify-content:center;
 align-items:center;
-background-color:${props => !props.active ? '#9ab54a' : '#f5f5f5'};
+background-color:${props => props.active ? '#9ab54a' : '#f5f5f5'};
 height:4rem;
 width:12rem;
 border-radius:0.5rem;
@@ -100,7 +100,7 @@ const ItemContainer = styled.div`
 display:flex;
 justify-content:Center;
 align-items:center;
-height:5rem;
+height:7rem;
 width:100%;
 
 flex-direction:column;
@@ -111,6 +111,18 @@ const Price = styled.p`
 font-size:1.3rem;
 margin-bottom:0rem;
 color:#707070;
+
+`;
+
+
+
+const AmountWrapper = styled.div`
+flex:1;
+display:flex;
+justify-content:start;
+align-items:center;
+margin-top:1.3rem;
+margin-left:2.2rem;
 `;
 
 const Amount = styled.p`
@@ -118,119 +130,182 @@ display:flex;
 font-weight:600;
 font-size:1.5rem;
 justify-content:center;
-width:2.5rem;
-height:2.5rem;
+width:2rem;
+height:2rem;
 background-color:#f5f5f5;
 margin-bottom:0rem;
+margin-top:0rem;
 color:#707070;
-margin-top:1rem;
-align-items:center;
+margin-block-start: 0em;
+    margin-block-end: 0em;
 `;
 
 const Title = styled.p`
+flex:5;
 margin-right:5rem;
 margin-bottom:0rem;
 font-size:1.4rem;
 color:#707070;
 `;
 
+const AccesssoriesWrapper = styled.div`
+width:67%;
+display:flex;
+justify-content:flex-start;
+text-align:start;
+
+`;
+
 const Accesssories = styled.p`
-margin-right:6rem;
+margin-block-start: 0em;
+margin-block-end: 0em;
+margin-bottom:0.8rem;
+text-align:start;
 margin-top:0.3rem;
 color:#707070;
+
 `;
 
 const FirstLineContainer = styled.div`
-width:80%;
+width:100%;
+
 display:flex;
 align-items:center;
 justify-content:space-between;
-text-align:center;
+text-align:start;
 
-`
-;
+` ;
+
+const CloseIconeWrapper = styled.div`
+display:flex;
+position:relative;
+flex:1;
+justify-content:center;
+align-items:top;
+height:5rem;
+margin-bottom:0rem;
+text-align:center;
+margin-left:2rem;
+margin-top:0.4rem;
+
+
+
+`;
+
+const TotalContainer = styled.div`
+width:100%;
+display:flex;
+justify-content:flex-start;
+flex-direction:row;
+`;
+
+const TotalWrapper = styled.div`
+margin-top:4rem;
+width:80%;
+display:flex;
+justify-content:flex-start;
+flex-direction:column;
+`;
+
+
+
 
 const CheckOutProgressBasket = (props) => {
 
-    const [soup, setSoup] = useLocalStorage('soup');
+    const [active, setActive] = useState(false);
     const [items, setItems] = useState([]);
 
 
     useEffect(() => {
         let shoppingCart;
-    
+
         if (localStorage.getItem('item') != null) {
             const item = JSON.parse(localStorage.getItem('item'));
             setItems(item);
         }
     }, []);
 
-     
-
- 
-
-    const [active, setActive] = useState(false);  
 
 
 
+    const handleRemoveItem = (index) => {
+        console.log(index);
+        console.log(items);
 
-    return(
-        <MainWrapper>
-            
-            <CheckOutProgressMain page={1}/>
-
-        <ContentContainer>
-
-
-            <DeliveryContainer> 
-                <Delivery  onClick={() => setActive(!active)} active={active}><DeliveryP active={active}>Leverans</DeliveryP></Delivery> 
-            
-                <PickUp  onClick={() => setActive(!active)} active={active}><PickUpP active={active}>Avhämtning</PickUpP></PickUp>
-            </DeliveryContainer>
-
-        </ContentContainer>
-
-        <ShoppingCartWrapper>
-
-    
-    {
-        items.map(({item, accessory, drink}, i) => {
-            console.log(item);
-            return <React.Fragment key={i}>
-                <ItemContainer>
-        <FirstLineContainer> <Amount>{i+1}</Amount> <Title>{item.title}</Title> <Price>{item.price}</Price></FirstLineContainer>
-            {
-                accessory.title && drink.title ?
-                    <Accesssories>
-                        {accessory.title + ', ' + drink.title + ' (' + drink.price + 'sek)'}
-                    </Accesssories>
-                : accessory.title && drink.title == undefined ?
-                    <Accesssories>
-                        {accessory.title}
-                    </Accesssories>
-                : accessory.title == undefined && drink.title ?
-                    <Accesssories>
-                        {drink.title + ' (' + drink.price + 'sek)'}
-                    </Accesssories>
-                : null
-            }
-    
-                </ItemContainer>
-                    <BorderUnderline/>
-            </React.Fragment>
-        })
+        let item = JSON.parse(localStorage.getItem('item'));
+        item = item.filter((row, i) => i !== index);
+        localStorage.setItem('item', JSON.stringify(item));
+        if (item.lenght === 0) {
+            localStorage.removeItem('item');
+        }
+        // setItems(items.filter((row, i) => i !== index))
+        window.location.reload(false);
     }
-    </ShoppingCartWrapper>
-        
-            <NextBtnContainer><NextBtn/></NextBtnContainer>
-            
 
-        
+
+    return (
+        <MainWrapper>
+
+            <CheckOutProgressMain page={1} />
+
+            <ContentContainer>
+
+
+                <DeliveryContainer>
+                    <Delivery onClick={() => setActive(!active)} active={active}><DeliveryP active={active}>Leverans</DeliveryP></Delivery>
+
+                    <PickUp onClick={() => setActive(!active)} active={active}><PickUpP active={active}>Avhämtning</PickUpP></PickUp>
+                </DeliveryContainer>
+
+            </ContentContainer>
+
+            <ShoppingCartWrapper>
+
+
+                {
+                    items.map(({ item, accessory, drink, amount }, i) => {
+
+                        return <React.Fragment key={i}>
+                            <ItemContainer>
+                                <FirstLineContainer> <AmountWrapper><Amount>{amount}</Amount></AmountWrapper> <Title>{item.title}</Title> <Price>{item.price} kr</Price>  <CloseIconeWrapper onClick={() => handleRemoveItem(i)}><Close /></CloseIconeWrapper></FirstLineContainer>
+                                {
+                                    accessory.title && drink.title ?
+                                        <AccesssoriesWrapper> <Accesssories>
+                                            {accessory.title + ', ' + drink.title + ' (' + drink.price + 'kr)'}
+                                        </Accesssories> </AccesssoriesWrapper>
+                                        : accessory.title && drink.title == undefined ?
+                                            <AccesssoriesWrapper><Accesssories>
+                                                {accessory.title}
+                                            </Accesssories></AccesssoriesWrapper>
+                                            : accessory.title == undefined && drink.title ?
+                                                <AccesssoriesWrapper>  <Accesssories>
+                                                    {drink.title + ' (' + drink.price + 'kr)'}
+                                                </Accesssories></AccesssoriesWrapper>
+                                                : null
+                                }
+
+                            </ItemContainer>
+
+                            <BorderUnderline />
+                        </React.Fragment>
+                    })
+                }
+                <TotalWrapper>
+                    <TotalContainer><Title> Delsumma </Title> <Price>kr</Price></TotalContainer>
+            <TotalContainer><Title> Leverans</Title> <Price> 39 </Price><Price> kr</Price></TotalContainer>
+                    <TotalContainer><Title> Totalbelopp</Title> <Price>kr</Price></TotalContainer>
+                </TotalWrapper>
+            </ShoppingCartWrapper>
+
+            <NextBtnContainer><NextBtn /></NextBtnContainer>
+
+
+
         </MainWrapper>
 
     )
 
-    
+
 };
 
 

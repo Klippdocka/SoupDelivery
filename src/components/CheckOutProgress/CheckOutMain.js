@@ -35,7 +35,7 @@ position:absolute;
 `;
 
 const TitleContainer = styled.div`
-position:fixed;
+position:absolute;
 
 
 
