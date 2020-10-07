@@ -4,7 +4,7 @@ import CheckOutProgressMain from '../../components/CheckOutProgress/CheckOutProg
 import NextBtn from '../../components/Buttons/NextBtn';
 import { useLocalStorage } from '../Hooks/UseLocalState';
 import Close from '../../components/Icone/Close';
-
+import { useHistory } from "react-router-dom";
 
 
 const MainWrapper = styled.div`
@@ -106,6 +106,15 @@ width:100%;
 flex-direction:column;
 
 `;
+
+const DeliveryDiv = styled.div`
+display:${props => !props.active ? 'block': 'none'};
+`;
+const PriceDelivery = styled.p`
+font-size:1.3rem;
+margin-bottom:0rem;
+
+color:${props => !props.active ? '#707070' : '#ffffff'};`;
 
 const Price = styled.p`
 font-size:1.3rem;
@@ -214,6 +223,19 @@ const CheckOutProgressBasket = (props) => {
 
     const [active, setActive] = useState(false);
     const [items, setItems] = useState([]);
+    const [cartTotal, setCartTotal] = useState(0);
+    const [total, setTotal] = useState();
+    let history = useHistory();
+
+
+
+    useEffect(() => {
+        subTotal();
+    }, [items]);
+
+    useEffect(() => {
+    deliveryTotal();
+    } , [items]);
 
 
     useEffect(() => {
@@ -240,6 +262,52 @@ const CheckOutProgressBasket = (props) => {
         }
         // setItems(items.filter((row, i) => i !== index))
         window.location.reload(false);
+    };
+
+
+    const handleActiveDelivery = () => {
+        setActive(!active)
+    };
+
+
+  
+   
+
+
+    const subTotal = () => {
+       
+     let totalVal = 0;
+     for (let i = 0; i < items.length; i++){
+         totalVal += items[i].item.price;
+     }
+      setCartTotal(totalVal);
+     
+    }
+
+    const deliveryTotal = () => {
+          
+     let totalVal = 39;
+     for (let i = 0; i < items.length; i++){
+         totalVal += items[i].item.price; 
+       
+         
+     }
+
+
+     let totalDrink = 0;
+     console.log()
+     for (let i = 0; i < items.length; i++){
+         if( items[i].drink.price != null)
+            totalDrink +=  items[i].drink.price;
+         
+     }
+      setTotal(totalVal + totalDrink)
+
+    }
+
+    const btnNext = () => {
+       console.log('clicked')
+        history.push('/ShoppingCartAddres')
     }
 
 
@@ -254,7 +322,7 @@ const CheckOutProgressBasket = (props) => {
                 <DeliveryContainer>
                     <Delivery onClick={() => setActive(!active)} active={active}><DeliveryP active={active}>Leverans</DeliveryP></Delivery>
 
-                    <PickUp onClick={() => setActive(!active)} active={active}><PickUpP active={active}>Avhämtning</PickUpP></PickUp>
+                    <PickUp onClick={handleActiveDelivery} active={active}><PickUpP active={active}>Avhämtning</PickUpP></PickUp>
                 </DeliveryContainer>
 
             </ContentContainer>
@@ -291,13 +359,17 @@ const CheckOutProgressBasket = (props) => {
                     })
                 }
                 <TotalWrapper>
-                    <TotalContainer><Title> Delsumma </Title> <Price>kr</Price></TotalContainer>
-            <TotalContainer><Title> Leverans</Title> <Price> 39 </Price><Price> kr</Price></TotalContainer>
-                    <TotalContainer><Title> Totalbelopp</Title> <Price>kr</Price></TotalContainer>
+            <TotalContainer><Title> Delsumma </Title> <Price>{cartTotal}kr</Price></TotalContainer>
+            <TotalContainer><Title> Leverans</Title> 
+            
+           <DeliveryDiv active={active}><PriceDelivery>39</PriceDelivery></DeliveryDiv>
+           <DeliveryDiv active={!active}><PriceDelivery >0</PriceDelivery></DeliveryDiv>
+            <Price> kr</Price></TotalContainer>
+            <TotalContainer><Title> Totalbelopp</Title> <Price>{total}kr</Price></TotalContainer>
                 </TotalWrapper>
             </ShoppingCartWrapper>
 
-            <NextBtnContainer><NextBtn /></NextBtnContainer>
+            <NextBtnContainer  onClick={btnNext}><NextBtn/></NextBtnContainer>
 
 
 

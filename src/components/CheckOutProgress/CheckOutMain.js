@@ -58,6 +58,20 @@ font-weight:300;
 const CheckOutMain = (props) => {
 
 
+const ProgressTitle = (pageTitle) => {
+
+    if(pageTitle == 1){
+        return 'Din varukorg';
+    }
+    else if(pageTitle == 2){
+        return 'Leveransdetaljer';
+    }
+    else if(pageTitle == 3) {
+        return 'Betalning';
+    }
+
+};
+
    
 
 
@@ -69,7 +83,7 @@ const CheckOutMain = (props) => {
 
             <StyledDiv>
             <BackPinContainer onClick={() => props.history.goBack()}><BackPin/></BackPinContainer>
-            <TitleContainer> <Title> Din varukorg</Title></TitleContainer>
+    <TitleContainer> <Title>{ProgressTitle(props.pageTitle)}</Title></TitleContainer>
             </StyledDiv>
 
             </MainWrapper>

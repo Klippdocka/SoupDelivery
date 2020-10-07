@@ -109,9 +109,15 @@ const Position = () => {
 
 
     const [address, setAddress] = useLocalState('address');
+    const [longAddress, setLongAdress] = useLocalState('longAddress');
 
     const handleSelect = async (value) => {
 
+        let fullAddress = value;
+        setLongAdress(fullAddress);
+        
+
+        
         let splitted = value.split(",")
         
         let result;
@@ -124,6 +130,8 @@ const Position = () => {
 
         setAddress(result);
         history.push('/SoupMenu');
+
+
     };
 
     return (

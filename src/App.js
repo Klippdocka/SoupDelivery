@@ -57,7 +57,7 @@ const App = () => {
       <GlobalStyle />
       <Routes/>
    </StyledDiv>
-  // </SoupsContext.Provider>
+   </SoupsContext.Provider>
   );
 
 }
