@@ -23,7 +23,7 @@ margin-top:1.5rem;
 
 const TitleDiv = styled.div`
 
-height:4rem;
+height:4.5rem;
 width:100%;
 background-color:#f5f5f5;
 display:flex;
@@ -34,7 +34,7 @@ margin-top:2rem;
 `;
 
 const StyledH2 = styled.h2`
-margin-left:2rem;
+margin-left:4.5rem;
 font-size:1.8rem;
 color:#656565;
 font-weight:400;
@@ -144,12 +144,20 @@ font-weight:600;
 
 const NameDiv = styled.div`
 display:flex;
-width:100%;
+justify-content:flex-start;
+align-items:flex-start;
+flex-direction:column;
+margin-right:7rem;
+text-align:center;
+;`
+
+const NameContainer = styled.div`
+display:flex;
 justify-content:flex-start;
 align-items:flex-start;
 flex-direction:row;
-margin-left:12rem;
-;`
+text-align:center;
+`;
 
 
 const DeliveryDiv = styled.div`
@@ -167,8 +175,6 @@ const PaymentDiv = styled.div`
 display:flex;
 justify-content:flex-start;
 align-items:center;
-width:100%;
-margin-left:8rem;
 margin-top:2.5rem;
 flex-direction:row;
 
@@ -262,15 +268,15 @@ justify-content:center;
 align-items:center;
 text-align:center;
 flex-direction:row;
-margin-left:13rem;
+margin-left:11.5rem;
 
 
 `;
 
 const StyledTime = styled.p`
-font-size:1.5rem;
+font-size:1.4rem;
 color:#707070;
-margin-left:1rem;
+margin-left:0.5rem;
 margin-bottom:1rem;
 `;
 
@@ -319,7 +325,7 @@ const CheckOutProgressOrder = (props) => {
             <ContentContainer>
 
                 <TitleDiv>
-                    <StyledH2>Dina varor</StyledH2>
+                    <StyledH2>Din varukorg</StyledH2>
                 </TitleDiv>
 
 
@@ -362,8 +368,8 @@ const CheckOutProgressOrder = (props) => {
 
                 </TitleDiv>
                 <DeliveryDiv>
-                    <NameDiv> <StyledName>{localCreds.firstName}</StyledName><StyledName>{localCreds.lastName}</StyledName></NameDiv>
-                    <NameDiv> <StyledP>{longAddress}</StyledP></NameDiv>
+                    <NameDiv> <NameContainer><StyledName>{localCreds.firstName}</StyledName><StyledName>{localCreds.lastName} </StyledName></NameContainer>
+                     <StyledP>{longAddress}</StyledP></NameDiv>
 
 
                 </DeliveryDiv>
