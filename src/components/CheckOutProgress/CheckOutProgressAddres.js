@@ -65,6 +65,7 @@ const CheckOutProgressAddres = (props) => {
    
 
     const [longAddress, setLongAdress] = useLocalState('longAddress');
+  
  
     const [creds, setCreds] = useState({ firstName: '', lastName:'', address:longAddress , email:'' });
     const [localCreds, setLocalCreads] = useLocalStorage('creads');

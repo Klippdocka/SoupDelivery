@@ -224,7 +224,8 @@ const CheckOutProgressBasket = (props) => {
     const [active, setActive] = useState(false);
     const [items, setItems] = useState([]);
     const [cartTotal, setCartTotal] = useState(0);
-    const [total, setTotal] = useState();
+    const [total, setTotal] = useLocalStorage('total');
+
     let history = useHistory();
 
 
@@ -306,7 +307,7 @@ const CheckOutProgressBasket = (props) => {
     }
 
     const btnNext = () => {
-       console.log('clicked')
+      
         history.push('/ShoppingCartAddres')
     }
 

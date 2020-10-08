@@ -8,6 +8,7 @@ import CheckOutProgressBasket from '../components/CheckOutProgress/CheckOutProgr
 import CheckOutMain from '../components/CheckOutProgress/CheckOutMain';
 import CheckOutProgressAddres from '../components/CheckOutProgress/CheckOutProgressAddres';
 import CheckOutProgressPayment from '../components/CheckOutProgress/CheckOutProgressPayment';
+import CheckOutProgressOrder from '../components/CheckOutProgress/CheckOutProgressOrder';
 
 const Routes = (props) => {
     return (
@@ -49,22 +50,25 @@ const Routes = (props) => {
                         <CheckOutProgressAddres />
                     </CheckOutMain>
 
-
-
-
                 </Route>
 
 
                 <Route exact path="/ShoppingCartPayment">
 
                     <CheckOutMain pageTitle={3}>
-                       <CheckOutProgressPayment />
+                        <CheckOutProgressPayment />
                     </CheckOutMain>
 
+                </Route>
 
+                <Route exact path="/ShoppingCartOrder">
 
+                    <CheckOutMain pageTitle={4}>
+                       <CheckOutProgressOrder/>
+                    </CheckOutMain>
 
                 </Route>
+
 
 
             </Switch>

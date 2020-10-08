@@ -68,6 +68,8 @@ const ProgressTitle = (pageTitle) => {
     }
     else if(pageTitle == 3) {
         return 'Betalning';
+    } else if(pageTitle == 4){
+        return 'Din beställning'
     }
 
 };
