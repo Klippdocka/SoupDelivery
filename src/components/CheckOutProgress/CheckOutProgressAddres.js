@@ -65,25 +65,46 @@ const CheckOutProgressAddres = (props) => {
    
 
     const [longAddress, setLongAdress] = useLocalState('longAddress');
-  
- 
-    const [creds, setCreds] = useState({ firstName: '', lastName:'', address:longAddress , email:'' });
     const [localCreds, setLocalCreads] = useLocalStorage('creads');
+ 
+    const [creds, setCreds] = useState({ firstName:localCreds.firstName, lastName:setLocalCreads.lastName, address:longAddress , email:localStorage.email });
+    const [errors, setErrors] = useState('');
 
 
     let history = useHistory();
 
+    const errorMessage = {
+       firstName : "Förnamnet måste vara i fyllt och bestå av bokstäver",
+    }
+
     const handleSubmit = (e) => {
+    e.preventDefault();
+  
+    const firstName = e.target.value;
+    let letters = /^[A-Za-z]+$/;
+    if( firstName && firstName.length === 0 || firstName == null || firstName.match(letters));{
+      alert(errorMessage.firstName);
+      
+    }
+   
+
+
+    const Cre = { firstName }
+   
+    if(Cre) {
+        let Cre = creds;
+        setLocalCreads(Cre);
+        history.push('/ShoppingCartPayment')
+    }
+
+
     
 
 
-        
-        let c = creds;
-        setLocalCreads(c);
-        console.log(localCreds);
+  
+        //console.log(localCreds);
 
-        history.push('/ShoppingCartPayment')
-
+            
     }
 
 
@@ -92,8 +113,8 @@ const CheckOutProgressAddres = (props) => {
         
         const {name, value} = e.target;
         setCreds({...creds, [name]: value})
-        
-       
+
+    
 
 
     }
@@ -112,14 +133,14 @@ const CheckOutProgressAddres = (props) => {
                 
                 <InputContainer>
                 <StyledH2>Förnamn</StyledH2>
-                 <Input type="firstName" name="firstName" onChange={onChangeInputHandler}/>
+                 <Input type="firstName" name="firstName"  placeholder={localCreds.firstName} onChange={onChangeInputHandler}/>
                  
             <BorderUnderline/>
             </InputContainer>
 
             <InputContainer>
             <StyledH2>Efternamn</StyledH2>
-            <Input type="lastName" name="lastName" onChange={onChangeInputHandler}/>
+            <Input type="lastName" name="lastName" placeholder={localCreds.lastName} onChange={onChangeInputHandler}/>
             <BorderUnderline/>
             </InputContainer>
 
@@ -135,7 +156,7 @@ const CheckOutProgressAddres = (props) => {
 
             <InputContainer>
             <StyledH2>Mejladress</StyledH2>
-            <Input type="email" name="email"onChange={onChangeInputHandler}></Input>
+            <Input type="email" name="email" placeholder={localCreds.email} onChange={onChangeInputHandler}></Input>
             <BorderUnderline/>
             </InputContainer>
        
