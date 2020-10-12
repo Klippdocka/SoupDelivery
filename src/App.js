@@ -4,7 +4,7 @@ import firebase from './firebase';
 
 import Routes from './Route/routes';
 import styled from 'styled-components';
-
+import { AuthProvider } from '../src/Auth';
 import {
   soupReducer,
   initialState,
@@ -52,12 +52,14 @@ const App = () => {
 
  
   return (
+    <AuthProvider>
     <SoupsContext.Provider value={dispatch}>
     <StyledDiv>
       <GlobalStyle />
       <Routes/>
    </StyledDiv>
    </SoupsContext.Provider>
+   </AuthProvider>
   );
 
 }

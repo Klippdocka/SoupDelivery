@@ -9,7 +9,9 @@ import CheckOutMain from '../components/CheckOutProgress/CheckOutMain';
 import CheckOutProgressAddres from '../components/CheckOutProgress/CheckOutProgressAddres';
 import CheckOutProgressPayment from '../components/CheckOutProgress/CheckOutProgressPayment';
 import CheckOutProgressOrder from '../components/CheckOutProgress/CheckOutProgressOrder';
-import Admin from '../components/Admin/AdminLogin';
+import AdminLogin from '../components/Admin/AdminLogin';
+import Admin from '../components/Admin/Admin';
+import AdminRegi from '../components/Admin/AdminRegi';
 
 const Routes = (props) => {
     return (
@@ -71,7 +73,21 @@ const Routes = (props) => {
                 </Route>
 
 
-                <Route exact path="/admin">
+                <Route exact path="/AdminLogin">
+                    <AdminLogin/>
+
+                </Route>
+
+
+                <Route exact path="/AdminRegi">
+                    <AdminRegi/>
+
+                </Route>
+
+
+
+
+                <Route exact path="/Admin">
                     <Admin/>
 
                 </Route>

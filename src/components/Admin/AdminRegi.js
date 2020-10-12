@@ -1,8 +1,9 @@
+
 import React, { useState }from 'react';
 import styled from 'styled-components';
 import Loggo from '../Icone/Loggo';
 import { withRouter } from 'react-router';
-import firebase from '../../firebase';
+import Firebase from '../../firebase';
 
 
 const MainContainer = styled.div`
@@ -96,19 +97,25 @@ height:30rem;
 
 
 const AdminLogin = (props) => {
-
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = e => {
     e.preventDefault();
-    firebase.login(email, password)
-    .then(props.history.push('/Admin'))
-    .catch(err => {
-      alert(err);
-    })
-
+    onRegister();
   };
+
+  async function onRegister(){
+      try{
+          Firebase.register(email, password, firstName, lastName)
+            props.history.push('/Admin');
+      } catch (err) {
+          alert(err.message);
+      }
+
+  }
 
     
         return (
@@ -118,10 +125,12 @@ const AdminLogin = (props) => {
 
       <Form onSubmit={handleSubmit}>
           <SignInWrapper>
+          <Input  autoComplete="off" placeholder="Förnamn" autoFocus value={firstName} onChange={e => setFirstName(e.target.value)}/>
+              <Input autoComplete="off" placeholder="Efternamn"  autoFocus value={lastName} onChange={e => setLastName(e.target.value)}/>
               <Input  autoComplete="off" placeholder="Email" autoFocus value={email} onChange={e => setEmail(e.target.value)}/>
               <Input autoComplete="off" placeholder="Lösenord"  autoFocus value={password} onChange={e => setPassword(e.target.value)}/>
-              <PasswordForget onClick={() => props.history.push('AdminRegi')}> <StyledP>Ny användare? Skapa konto här</StyledP></PasswordForget>    <PasswordForget> <StyledP>Glömt lösenord?</StyledP></PasswordForget>
-              <SignInBtn onClick={() => props.history.push('/Admin')}>Logga in</SignInBtn>
+             <PasswordForget> <StyledP>Glömt lösenord?</StyledP></PasswordForget>
+              <SignInBtn onClick={() => onRegister()}>Registrera</SignInBtn>
 
           </SignInWrapper>
           </Form>
