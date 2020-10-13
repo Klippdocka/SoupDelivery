@@ -107,7 +107,7 @@ const AdminLogin = (props) => {
     onRegister();
   };
 
-  async function onRegister(){
+  async function onRegister() {
       try{
           Firebase.register(email, password, firstName, lastName)
             props.history.push('/Admin');
@@ -128,7 +128,7 @@ const AdminLogin = (props) => {
           <Input  autoComplete="off" placeholder="Förnamn" autoFocus value={firstName} onChange={e => setFirstName(e.target.value)}/>
               <Input autoComplete="off" placeholder="Efternamn"  autoFocus value={lastName} onChange={e => setLastName(e.target.value)}/>
               <Input  autoComplete="off" placeholder="Email" autoFocus value={email} onChange={e => setEmail(e.target.value)}/>
-              <Input autoComplete="off" placeholder="Lösenord"  autoFocus value={password} onChange={e => setPassword(e.target.value)}/>
+              <Input type="password" autoComplete="off" placeholder="Lösenord"  autoFocus value={password} onChange={e => setPassword(e.target.value)}/>
              <PasswordForget> <StyledP>Glömt lösenord?</StyledP></PasswordForget>
               <SignInBtn onClick={() => onRegister()}>Registrera</SignInBtn>
 

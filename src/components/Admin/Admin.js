@@ -98,6 +98,10 @@ background-color:#dedede;
 
 const Admin = (props) => {
 
+const LogOut = () => {
+    Firebase.logout();
+    props.history.push('/AdminLogin');
+}
 
 const {currentUser} = useContext(AuthContext);
 
@@ -128,7 +132,7 @@ if(currentUser !=null) {
              </StyledA>
              <BorderUnderline/>
 
-             <StyledATag href="/">
+             <StyledATag onClick={()=> LogOut()}>
                  <span>Logga ut</span>
              </StyledATag>
              <BorderUnderline/>

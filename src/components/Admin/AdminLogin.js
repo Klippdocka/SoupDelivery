@@ -51,7 +51,7 @@ color:black;
 
 `;
 
-const SignInBtn = styled.div`
+const SignInBtn = styled.button`
 display:flex;
 justify-content:center;
 align-items:center;
@@ -66,6 +66,7 @@ text-align:center;
 margin-top:1rem;
 color:white;
 font-size:1.5rem;
+border:none;
 `;
 
 
@@ -100,32 +101,41 @@ const AdminLogin = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    firebase.login(email, password)
-    .then(props.history.push('/Admin'))
-    .catch(err => {
-      alert(err);
-    })
+  //const handleSubmit = e => {
+  //  e.preventDefault();
+ //   Firebase.login(email, password)
+ //   .then(props.history.push('/Admin'))
+ //   .catch(err => {
+ //     alert(err);
+ //   })
 
-  };
+ // };
 
+ async function login() {
+   try {
+     await firebase.login(email, password)
+     props.history.push('/Admin')
+   } catch(err) {
+     alert(err.message)
+   }
+ }
     
         return (
             <MainContainer>
 
                <LoggoDiv> <Loggo/></LoggoDiv>
 
-      <Form onSubmit={handleSubmit}>
+  
           <SignInWrapper>
+        
               <Input  autoComplete="off" placeholder="Email" autoFocus value={email} onChange={e => setEmail(e.target.value)}/>
-              <Input autoComplete="off" placeholder="Lösenord"  autoFocus value={password} onChange={e => setPassword(e.target.value)}/>
+              <Input type="password" autoComplete="off" placeholder="Lösenord"  autoFocus value={password} onChange={e => setPassword(e.target.value)}/>
               <PasswordForget onClick={() => props.history.push('AdminRegi')}> <StyledP>Ny användare? Skapa konto här</StyledP></PasswordForget>    <PasswordForget> <StyledP>Glömt lösenord?</StyledP></PasswordForget>
-              <SignInBtn onClick={() => props.history.push('/Admin')}>Logga in</SignInBtn>
+              <SignInBtn onClick={() => login()}>Logga in</SignInBtn>
+          
 
           </SignInWrapper>
-          </Form>
-
+        
                 
             </MainContainer>
 
