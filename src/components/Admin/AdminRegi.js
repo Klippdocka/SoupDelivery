@@ -44,6 +44,8 @@ font-size:1.5rem;
 box-shadow: 2px 1px 4px -1px rgba(0,0,0,0.06);
 margin-bottom:1.5rem;
 color:black;
+padding-left:1.5rem; 
+
 ::placeholder,
   ::-webkit-input-placeholder {
     color: black;

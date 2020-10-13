@@ -5,6 +5,7 @@ import { withRouter } from 'react-router';
 import Firebase from '../../firebase';
 import { AuthContext } from '../../Auth';
 import HamburgerIcone from '../../components/Icone/hamburgerIcone';
+import axios from '../../axios';
 
 const MainWrapper = styled.div`
 height:100%;
@@ -24,12 +25,11 @@ width:100%;
 height:5rem;
 background-color:#f2f3f5;
 box-shadow: 2px 1px 4px -1px rgba(0,0,0,0.06);
-
+padding: 0 0 2 0;
 `;
 
 const HamburgerDiv = styled.div`
-height:3rem;
-width:3rem;
+
 
 `;
 
@@ -47,6 +47,7 @@ height:50rem;
 display: ${props => props.menuOpen ? 'block' : 'none'};
 flex-direction:row;
 background-color:#f2f3f5;
+
 `;
 
 
@@ -69,7 +70,7 @@ color:#8b8b8b;
 font-size:2rem;
 margin-left:3rem;
 padding-bottom:1rem;
-padding-top:10rem;
+margin-top:20rem;
 
 
 
@@ -98,6 +99,7 @@ background-color:#dedede;
 
 const Admin = (props) => {
 
+    
 const LogOut = () => {
     Firebase.logout();
     props.history.push('/AdminLogin');

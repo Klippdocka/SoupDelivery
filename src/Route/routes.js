@@ -12,6 +12,7 @@ import CheckOutProgressOrder from '../components/CheckOutProgress/CheckOutProgre
 import AdminLogin from '../components/Admin/AdminLogin';
 import Admin from '../components/Admin/Admin';
 import AdminRegi from '../components/Admin/AdminRegi';
+import SoupServiceFirebase from '../components/SoupService/soupServiceFirebase';
 
 const Routes = (props) => {
     return (
@@ -91,6 +92,14 @@ const Routes = (props) => {
                     <Admin/>
 
                 </Route>
+
+
+
+                <Route exact path="/Test">
+                   <SoupServiceFirebase/>
+
+                </Route>
+
 
             </Switch>
 
