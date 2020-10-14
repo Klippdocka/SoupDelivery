@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled, { isStyledComponent } from 'styled-components';
 import {useLocalState} from '../Hooks/UseLocalState';
 import theme from '../../theme';
 import {MainWrapper} from '../Home/styledHome';
 import Soup from '../Soup/Soup';
-import { Items } from '../../components/SoupService/SoupService'
+//import { Items } from '../../components/SoupService/SoupService'
+import axios from '../../axios';
 
 
 const NavbarContainer = styled.div`
@@ -46,7 +47,22 @@ width:100%;
 
 const SoupMenu = (props) => {
 
-    const [address, setAddress] = useLocalState('address');
+const [address, setAddress] = useLocalState('address');
+
+const [items, setItems] = useState([]);
+
+
+useEffect(() => {
+
+    axios.getSoups()
+    .then(response => {
+        setItems(response.data);
+       
+
+    })
+
+}, []);
+
 
 
 
@@ -65,9 +81,11 @@ return(
 
 <SoupMainContainer>
 
-    {Items.map((element, index) => {
+   {items.map((element, index) => {
         return (<Soup key={index} item={element} />)
     })}
+    
+    
 
 </SoupMainContainer>
 
