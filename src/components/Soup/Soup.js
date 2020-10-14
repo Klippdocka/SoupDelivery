@@ -126,7 +126,7 @@ const Soup = (props) => {
   
     const openHandler = (item) => {
         setOpenModalItem(item)     
-        console.log('clicked');   
+       
     }
 
     return (

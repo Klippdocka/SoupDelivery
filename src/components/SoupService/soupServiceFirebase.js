@@ -1,25 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import axios from '../../axios';
+import styled from 'styled-components';
 
-
+const SoupWrapper = styled.div`
+`;
 
 const SoupService = (props) => {
 
-const [soup, setSoup] = useState('')
+const [items, setItems] = useState([]);
 
 
 useEffect(() => {
 
-    axios.get('https://soup-delivery-34dda.firebaseio.com/items.json')
+    axios.getSoups()
     .then(response => {
-        console.log(response);
+        setItems(response.data);
+       
+
     })
 
-});
+}, []);
 
     return (
 <div>
-
+{items.map((element, index) => {
+            return (<SoupWrapper key={index} item={element} id={element.id} value={element.title}>
+                    <p>{element.title}</p>
+            </SoupWrapper>
+            );
+        })}
 </div>
     );
 
