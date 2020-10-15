@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Navbar from '../Navbar/navbar';
-import styled, { isStyledComponent } from 'styled-components';
+import styled from 'styled-components';
 import { useLocalState } from '../Hooks/UseLocalState';
 import HamburgerIcone from '../Icone/hamburgerIcone';
 import SoupIcon from '../../components/Icone/soupIcon';

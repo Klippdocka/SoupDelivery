@@ -7,6 +7,7 @@ import { AuthContext } from '../../Auth';
 import HamburgerIcone from '../../components/Icone/hamburgerIcone';
 import axios from '../../axios';
 import theme from '../../theme';
+import CloseIcone from '../../components/Icone/CloseIcone';
 
 const MainWrapper = styled.div`
 height:100%;
@@ -14,12 +15,10 @@ width:100%;
 
 `;
 
-const StyledP = styled.p`
-`;
 
 const Navbar = styled.div`
 top:0rem;
-position:absolute;
+position:fixed;
 display:flex;
 justify-content:space-between;
 align-items:center;
@@ -35,12 +34,6 @@ const HamburgerDiv = styled.div`
 
 `;
 
-const SignOutBtn = styled.div`
-height:2rem;
-width:2rem;
-border-radius:0.5rem;
-`
-    ;
 
 const Drawer = styled.div`
 left:0rem;
@@ -52,17 +45,6 @@ background-color:#f2f3f5;
 `;
 
 
-const StyledA = styled.a`
-text-decoration:none;
-color:#8b8b8b;
-font-size:2rem;
-margin-left:3rem;
-padding-bottom:1rem;
-padding-top:2rem;
-margin-top:3rem;
-
-
-`;
 
 
 const StyledATag = styled.a`
@@ -83,11 +65,11 @@ display:flex;
 flex-direction:column;
 align-items:center;
 justify-content:flex-start;
-height:30rem;
+height:40rem;
 background-color:#f2f3f5;
 left:0rem;
 top:0rem;
-width:7rem;
+width:10rem;
 padding-top:2.2rem;
 text-align:center;
 margin-top:5rem;
@@ -120,49 +102,13 @@ display:flex;
 
 `;
 
-const StyledH1 = styled.h1`
-margin-top:2rem;
-margin-left:6rem;
-color:#23591e;
-`;
-
-const Sidebar = styled.div`
-position:fixed;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:flex-start;
-height:100%;
-background-color:#f2f3f5;
-left:0rem;
-top:0rem;
-width:7rem;
-padding-top:2.2rem;
-text-align:center;
-`;
-
-const ImgContainer = styled.div`
-background-image: url(${props => props.image});
-background-repeat: no-repeat;
-background-size: cover;
-width:70%;
-height:10rem;
-`;
 
 const StyledH3 = styled.h3`
 color:#23591e;
 padding-right:1rem;
+font-size:1.5rem;
 `;
 
-const LogoContainer = styled.div`
-display:flex;
-align-items:center;
-margin-bottom:2rem;
-justify-content:center;
-height:0.5rem;
-width:100%;
-padding-left:1rem;
-`;
 
 
 const MenuSoupContainer = styled.div`
@@ -262,13 +208,117 @@ margin-bottom:2rem;
 color:#2f3030;
 `;
 
+const AddSoupWrapper = styled.div`
+display:flex;
+justify-content:center;
+align-items:center;
+position:fixed;
+top:0rem;
+width:100%;
+height:100%;
+background:rgba(79,79,79,0.4);
+display: ${props => props.menuOpen ? 'flex' : 'none'};
 
+`;
+
+const AddSoupContent = styled.div`
+position:absolute;
+display:flex;
+align-items:center;
+width:70%;
+height:50rem;
+flex-direction:column;
+background-color:#f5f5f5;
+border-radius:0.5rem;
+overflow:none;
+
+`;
+
+const Input = styled.input`
+margin-top:2rem;
+display:flex;
+justify-content:center;
+align-items:center;
+height:3rem;
+width:80%;
+border:none;
+font-size:1.5rem;
+-webkit-box-shadow: 2px 1px 4px -1px rgba(0,0,0,0.06);
+-moz-box-shadow: 2px 1px 4px -1px rgba(0,0,0,0.06);
+box-shadow: 2px 1px 4px -1px rgba(0,0,0,0.06);
+margin-bottom:1.5rem;
+color:black;
+padding-left:1rem; 
+
+
+::placeholder,
+  ::-webkit-input-placeholder {
+    color: black;
+    padding-left:1rem;
+
+
+  } 
+  
+ `;
+
+
+const InputBig = styled.textarea`
+margin-top:1rem;
+padding-top:1rem;
+height:7rem;
+width:80%;
+border:none;
+font-size:1.5rem;
+-webkit-box-shadow: 2px 1px 4px -1px rgba(0,0,0,0.06);
+-moz-box-shadow: 2px 1px 4px -1px rgba(0,0,0,0.06);
+box-shadow: 2px 1px 4px -1px rgba(0,0,0,0.06);
+margin-bottom:1.5rem;
+color:black;
+text-align:start;
+padding-left:1rem; 
+
+
+::placeholder,
+  ::-webkit-input-placeholder {
+    color: black;
+    padding-left:1rem;
+
+  } `;
+
+
+const AddSoupBtn = styled.div`
+display:flex;
+height:3rem;
+width:15rem;
+background-color:#9ab54a;
+margin-top:5rem;
+color:white;
+font-size:1.5rem;
+text-align:center;
+align-items:center;
+justify-content:center;
+
+`;
+
+
+const CloseIconeContainer = styled.div`
+padding-top:0.5rem;
+padding-right:0.5rem;
+display:flex;
+justify-content:flex-end;
+align-items:center;
+width:100%;
+
+`;
 
 
 
 const Admin = (props) => {
 
     const [items, setItems] = useState([]);
+    const [isModalOpen, setIsModalOpen] = useState('');
+    const { currentUser } = useContext(AuthContext);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
 
     useEffect(() => {
@@ -282,27 +332,38 @@ const Admin = (props) => {
 
     }, []);
 
+    const AddSoupHandler = () => {
+        if (!isModalOpen){
+            setIsModalOpen(true)
+        }else{
+            setIsModalOpen(false)
+        }
+
+    };
+
+    const postNewSoupHandler = () => {
+        axios.postSoup();
+    }
+
+    const ModalCloseHandler = () => {
+        setIsModalOpen(false);
+    }
 
     const LogOut = () => {
         Firebase.logout();
         props.history.push('/AdminLogin');
-    }
-
-    const { currentUser } = useContext(AuthContext);
+    };
 
 
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-    const openHandler = () => {
+    const openHandler = (e) => {
 
         if (!isMenuOpen) {
             setIsMenuOpen(true)
 
         } else {
             setIsMenuOpen(false)
-
-
         }
+        
     }
 
     { console.log(currentUser) }
@@ -315,7 +376,7 @@ const Admin = (props) => {
                 <DrawerContent>
 
 
-                <StyledATag>
+                <StyledATag onClick={() => AddSoupHandler()}>
                         <span>Lägg till soppa</span>
                     </StyledATag>
                     <BorderUnderline />
@@ -331,16 +392,13 @@ const Admin = (props) => {
             </Drawer>
 
 
+          
+
             <SoupList>
 
                 {items.map((element, index) => {
                     return (<SoupWrapper key={index} item={element} id={element.id} value={element.title} image={element.image}>
-                        { /*
-                    <StyledP>{element.title}</StyledP>
-            <ImgContainer image={element.image}></ImgContainer>
-            <StyledP>{element.description}</StyledP>
-            <StyledP>{element.price} SEK</StyledP>
-           </SoupWrapper> */}
+                 
 
 
                         <MenuSoupContainer image={element.image}>
@@ -365,6 +423,21 @@ const Admin = (props) => {
                     );
                 })}
             </SoupList>
+
+            <AddSoupWrapper menuOpen={isModalOpen}>
+  
+                <AddSoupContent>
+                    <CloseIconeContainer onClick={() => ModalCloseHandler()}><CloseIcone/></CloseIconeContainer>
+                <StyledH3>Lägg till soppa</StyledH3>
+                    <Input type="text" placeholder="Titel"></Input>
+        
+                    <InputBig type="text" placeholder="Beskrivning"></InputBig>
+                    <Input type="text" placeholder="Pris"></Input>
+                    <Input type="text" placeholder="Url till din bild"></Input>
+                    <AddSoupBtn>Lägg till</AddSoupBtn>
+                    </AddSoupContent>
+                </AddSoupWrapper>
+
 
         </MainWrapper>
     }

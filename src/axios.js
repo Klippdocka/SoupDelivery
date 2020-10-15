@@ -14,6 +14,12 @@ class Axios {
     getSoups() {
         return this.instance.get('https://soup-delivery-34dda.firebaseio.com/items.json')
     }
+
+
+    postSoup(){
+        return this.instance.post('/NewItems.json')
+    }
+
 }
 
 

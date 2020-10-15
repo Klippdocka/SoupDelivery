@@ -13,6 +13,7 @@ import AdminLogin from '../components/Admin/AdminLogin';
 import Admin from '../components/Admin/Admin';
 import AdminRegi from '../components/Admin/AdminRegi';
 import SoupServiceFirebase from '../components/SoupService/soupServiceFirebase';
+import AdminMain from '../components/Admin/AdminMain';
 
 const Routes = (props) => {
     return (
@@ -89,7 +90,8 @@ const Routes = (props) => {
 
 
                 <Route exact path="/Admin">
-                    <Admin/>
+                <Admin/>
+                
 
                 </Route>
 
