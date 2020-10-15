@@ -319,6 +319,10 @@ const Admin = (props) => {
     const [isModalOpen, setIsModalOpen] = useState('');
     const { currentUser } = useContext(AuthContext);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
+    const [price, setPrice] = useState('');
+    const [urlImage, setUrlImage] = useState('');
 
 
     useEffect(() => {
@@ -332,17 +336,44 @@ const Admin = (props) => {
 
     }, []);
 
+
+
+    function uuidv4() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+            var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
+    }
+
+
+
     const AddSoupHandler = () => {
-        if (!isModalOpen){
+        if (!isModalOpen) {
             setIsModalOpen(true)
-        }else{
+        } else {
             setIsModalOpen(false)
         }
-
+        setIsMenuOpen(false);
     };
 
-    const postNewSoupHandler = () => {
-        axios.postSoup();
+    const PostNewSoupHandler = () => {
+
+        let soup = {
+            description: description,
+            id: uuidv4(),
+            title: title,
+            price: price,
+
+        }
+        axios.postSoup(soup)
+            .then(response => alert('Soppan sparad'))
+            .catch(error => console.log(error));
+        
+
+        setIsModalOpen(false);
+
+
+
     }
 
     const ModalCloseHandler = () => {
@@ -363,10 +394,10 @@ const Admin = (props) => {
         } else {
             setIsMenuOpen(false)
         }
-        
+
     }
 
-    { console.log(currentUser) }
+
     if (currentUser != null) {
         return <MainWrapper>
             <Navbar><HamburgerDiv onClick={openHandler}><HamburgerIcone /></HamburgerDiv><StyledH3>{currentUser.email}</StyledH3></Navbar>
@@ -376,7 +407,7 @@ const Admin = (props) => {
                 <DrawerContent>
 
 
-                <StyledATag onClick={() => AddSoupHandler()}>
+                    <StyledATag onClick={() => AddSoupHandler()}>
                         <span>Lägg till soppa</span>
                     </StyledATag>
                     <BorderUnderline />
@@ -392,13 +423,13 @@ const Admin = (props) => {
             </Drawer>
 
 
-          
+
 
             <SoupList>
 
                 {items.map((element, index) => {
                     return (<SoupWrapper key={index} item={element} id={element.id} value={element.title} image={element.image}>
-                 
+
 
 
                         <MenuSoupContainer image={element.image}>
@@ -425,18 +456,19 @@ const Admin = (props) => {
             </SoupList>
 
             <AddSoupWrapper menuOpen={isModalOpen}>
-  
+
                 <AddSoupContent>
-                    <CloseIconeContainer onClick={() => ModalCloseHandler()}><CloseIcone/></CloseIconeContainer>
-                <StyledH3>Lägg till soppa</StyledH3>
-                    <Input type="text" placeholder="Titel"></Input>
-        
-                    <InputBig type="text" placeholder="Beskrivning"></InputBig>
-                    <Input type="text" placeholder="Pris"></Input>
-                    <Input type="text" placeholder="Url till din bild"></Input>
-                    <AddSoupBtn>Lägg till</AddSoupBtn>
-                    </AddSoupContent>
-                </AddSoupWrapper>
+                    <CloseIconeContainer onClick={() => ModalCloseHandler()}><CloseIcone /></CloseIconeContainer>
+                    <StyledH3>Lägg till soppa</StyledH3>
+
+                    <Input type="text" name="title" value={title} placeholder="Titel" onChange={e => setTitle(e.target.value)}></Input>
+
+                    <InputBig type="text" placeholder="Beskrivning" name="description" value={description} onChange={e => setDescription(e.target.value)}></InputBig>
+                    <Input type="text" placeholder="Pris" name="price" value={price} onChange={e => setPrice(e.target.value)}></Input>
+                    <Input type="text" placeholder="Url till din bild" name="urlImage" value={urlImage} onChange={e => setUrlImage(e.target.value)}></Input>
+                    <AddSoupBtn onClick={() => PostNewSoupHandler()}>Lägg till</AddSoupBtn>
+                </AddSoupContent>
+            </AddSoupWrapper>
 
 
         </MainWrapper>
