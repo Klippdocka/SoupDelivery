@@ -14,6 +14,9 @@ import Admin from '../components/Admin/Admin';
 import AdminRegi from '../components/Admin/AdminRegi';
 import SoupServiceFirebase from '../components/SoupService/soupServiceFirebase';
 import AdminMain from '../components/Admin/AdminMain';
+import About from '../components/Home/AboutUs';
+import Contact from '../components/Home/Contact';
+
 
 const Routes = (props) => {
     return (
@@ -99,6 +102,21 @@ const Routes = (props) => {
 
                 <Route exact path="/Test">
                    <SoupServiceFirebase/>
+
+                </Route>
+
+                <Route exact path="/About">
+                <Main showCart={false}>
+                    <About/>
+                </Main>
+
+                </Route>
+
+
+                <Route exact path="/Contact">
+                <Main showCart={false}>
+                    <Contact/>
+                </Main>
 
                 </Route>
 

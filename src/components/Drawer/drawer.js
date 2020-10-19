@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import CloseIcone  from '../Icone/CloseIcone';
 import Logo from '../../components/Icone/Loggo';
 import theme from '../../theme';
+import { withRouter } from 'react-router';
+
 
 const CloseBtnWrapper = styled.div`
 display:flex;
@@ -125,7 +127,7 @@ const Drawer = (props) => {
           
             <DrawerContent>
            
-            <StyledA href="/">
+            <StyledA href="/About">
                   <span>Om oss</span>
               </StyledA>
               <BorderUnderline/>
@@ -136,7 +138,7 @@ const Drawer = (props) => {
               <BorderUnderline/>
 
 
-              <StyledA href="/">
+              <StyledA href="/Contact">
                   <span>Hör av dig!</span>
               </StyledA>
               <BorderUnderline/>
@@ -160,4 +162,4 @@ const Drawer = (props) => {
 
 
 
-export default Drawer;
+export default withRouter(Drawer);
