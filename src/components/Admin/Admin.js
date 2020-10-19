@@ -8,6 +8,7 @@ import HamburgerIcone from '../../components/Icone/hamburgerIcone';
 import axios from '../../axios';
 import theme from '../../theme';
 import CloseIcone from '../../components/Icone/CloseIcone';
+import Delite from '../../components/Icone/Delite';
 
 const MainWrapper = styled.div`
 height:100%;
@@ -311,11 +312,23 @@ width:100%;
 
 `;
 
+const DeliteContainer = styled.div`
+padding-top:0.5rem;
+padding-right:1rem;
+display:flex;
+justify-content:flex-end;
+align-items:flex-end;
+width:100%;
+height:3rem;
+cursor: pointer;
+`;
+
 
 
 const Admin = (props) => {
 
     const [items, setItems] = useState([]);
+    const [indexToWrite, setIndexToWrite] = useState(0); // KJ NEW
     const [isModalOpen, setIsModalOpen] = useState('');
     const { currentUser } = useContext(AuthContext);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -326,11 +339,12 @@ const Admin = (props) => {
 
 
     useEffect(() => {
-
+        console.log("useEffect load soups ran")
         axios.getSoups()
             .then(response => {
-                setItems(response.data);
-
+                setItems(response.data.reverse());
+                //console.log(response.data)
+                setIndexToWrite(response.data.length)
 
             })
 
@@ -338,12 +352,6 @@ const Admin = (props) => {
 
 
 
-    function uuidv4() {
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-            var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-            return v.toString(16);
-        });
-    }
 
 
 
@@ -356,19 +364,22 @@ const Admin = (props) => {
         setIsMenuOpen(false);
     };
 
-    const PostNewSoupHandler = () => {
-
+    const PostNewSoupHandler = (indexToWrite) => {
+        console.log("index:" + indexToWrite)
         let soup = {
             description: description,
-            id: uuidv4(),
+        
             title: title,
             price: price,
 
         }
-        axios.postSoup(soup)
-            .then(response => alert('Soppan sparad'))
+        axios.postSoup(soup, indexToWrite)
+            .then(response => {
+                alert('Soppan sparad')
+                window.location.reload(false);
+            })
             .catch(error => console.log(error));
-        
+
 
         setIsModalOpen(false);
 
@@ -433,8 +444,10 @@ const Admin = (props) => {
 
 
                         <MenuSoupContainer image={element.image}>
+                        <DeliteContainer><Delite/></DeliteContainer>  
 
-                            <ContentContainer>
+                            <ContentContainer>  
+                             
                                 <TitleContainer>
                                     <Title>{element.title}</Title>
                                     <SoupDescription>{element.description}</SoupDescription>
@@ -466,7 +479,7 @@ const Admin = (props) => {
                     <InputBig type="text" placeholder="Beskrivning" name="description" value={description} onChange={e => setDescription(e.target.value)}></InputBig>
                     <Input type="text" placeholder="Pris" name="price" value={price} onChange={e => setPrice(e.target.value)}></Input>
                     <Input type="text" placeholder="Url till din bild" name="urlImage" value={urlImage} onChange={e => setUrlImage(e.target.value)}></Input>
-                    <AddSoupBtn onClick={() => PostNewSoupHandler()}>Lägg till</AddSoupBtn>
+                    <AddSoupBtn onClick={() => PostNewSoupHandler(indexToWrite)}>Lägg till</AddSoupBtn>
                 </AddSoupContent>
             </AddSoupWrapper>
 

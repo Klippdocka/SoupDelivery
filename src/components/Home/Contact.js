@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { MainWrapper, ImgContainer, HomeImg, PositionContainer } from './styledHome';
 import Soup5 from '../Images/Soup5.jpg';
 import Position from '../Position/position'
@@ -101,6 +101,20 @@ text-align:center;
 `;
 
 const About = (props) => {
+const [name, setName] = useState('');
+const [email, setEmail] = useState('');
+const [message, setMessage] = useState('');
+
+    const SelectHandler = (e) => {
+    if(name === ""){
+        alert('du måste fylla i alla fält')
+        
+    }else {
+        alert('ditt mail har skickats')
+    }
+
+    }
+
 
 
     return (
@@ -121,13 +135,13 @@ const About = (props) => {
             </TextContainer>
             <TextContainer>
                 <P>Ditt namn</P>
-                <Input/>
+                <Input value={name} onChange={e => setName(e.target.value)} />
                 <P>Din e-post</P>
-                <Input/>
+                <Input value={email} onChange={e => setEmail(e.target.value)} />
                 <P>Ditt meddelande</P>
-                    <MessageInput/>
+                    <MessageInput value={message} onChange={e => setMessage(e.target.value)}/>
 
-                 <ButtonContainer><Button>Skicka</Button></ButtonContainer> 
+                 <ButtonContainer><Button onClick={() => SelectHandler()}>Skicka</Button></ButtonContainer> 
                     </TextContainer>
               
 

@@ -15,8 +15,9 @@ class Axios {
         return this.instance.get('/items.json')
     }
 
-    postSoup(soup){
-        return this.instance.post('/items.json', soup);
+    postSoup(soup, indexToWrite){
+        console.log("inside: " + indexToWrite)
+        return this.instance.put(`/items/${indexToWrite}.json`, soup);
         
     }
 
