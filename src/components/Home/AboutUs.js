@@ -31,7 +31,7 @@ background-color:white;
 max-width:35rem;
 min-height:30rem;
 margin-top:20rem;
-opacity:0.7;
+opacity:0.9;
 border-radius:0.5rem;
 `;
 

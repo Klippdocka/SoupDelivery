@@ -16,6 +16,7 @@ import SoupServiceFirebase from '../components/SoupService/soupServiceFirebase';
 import AdminMain from '../components/Admin/AdminMain';
 import About from '../components/Home/AboutUs';
 import Contact from '../components/Home/Contact';
+import Terms from '../components/Home/Terms';
 
 
 const Routes = (props) => {
@@ -120,6 +121,12 @@ const Routes = (props) => {
 
                 </Route>
 
+                <Route exact path="/villkor">
+                <Main showCart={false}>
+                    <Terms/>
+                </Main>
+
+                </Route>
 
             </Switch>
 

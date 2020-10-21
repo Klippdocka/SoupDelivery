@@ -41,6 +41,44 @@ const Items = [
         price: 99,
         allergy: "Laktosfri"
     },
+
+    {
+        id:5,
+        image:"",
+        title:"Thai coconut noodle",
+        description:"Röd curry, kokosnötmjölk,risnudlar,paprika toppat med koriander och sesamfrön",
+        price:79,
+    },
+    {
+        id:6,
+        image:"",
+        title:"Thai noodle soup",
+        description:"Nudlar, ägg och grönsaker i härlig buljong. Toppat med salladslök och sesamfrön",
+        price:89,
+    },
+
+    {
+        id:7,
+        image:"",
+        title:"Thai dumplings soup",
+        description:"Svampfyllda dumplints i smakrik buljong, toppat med salladslök och sesamfrön",
+        price:99,
+    },
+
+    {
+        id:8,
+        image:"",
+        title:"Thai dumplings soup",
+        description:"Svampfyllda dumplints i smakrik buljong, toppat med salladslök och sesamfrön",
+        price:99,
+    },
+
+    
+
+  
+
+    
+
 ]
 
 

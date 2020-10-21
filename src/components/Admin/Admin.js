@@ -13,6 +13,7 @@ import Delite from '../../components/Icone/Delite';
 const MainWrapper = styled.div`
 height:100%;
 width:100%;
+margin-top:5rem;
 
 `;
 
@@ -124,7 +125,7 @@ background-repeat: no-repeat;
 background-size: cover;
 box-shadow: 2px 2px 10px 5px rgba(0,0,0,0.11);
 border-radius:1rem;
-margin-top:2rem;
+margin-top:1rem;
 margin-bottom:4rem;
 
 
@@ -321,6 +322,10 @@ align-items:flex-end;
 width:100%;
 height:3rem;
 cursor: pointer;
+
+`;
+
+const DeleteWrapper = styled.div`
 `;
 
 
@@ -328,22 +333,22 @@ cursor: pointer;
 const Admin = (props) => {
 
     const [items, setItems] = useState([]);
-    const [indexToWrite, setIndexToWrite] = useState(0); // KJ NEW
     const [isModalOpen, setIsModalOpen] = useState('');
     const { currentUser } = useContext(AuthContext);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
-    const [urlImage, setUrlImage] = useState('');
+    const [urlImage, setUrlImage] = useState(null);
+    const [image, setImage] = useState(null);
+    const [error, setError] = useState('');
 
 
     useEffect(() => {
-        console.log("useEffect load soups ran")
+
         axios.getSoups()
             .then(response => {
-                setItems(response.data.reverse());
-                //console.log(response.data)
+                setItems(response.data)
                 setIndexToWrite(response.data.length)
 
             })
@@ -351,7 +356,31 @@ const Admin = (props) => {
     }, []);
 
 
+    function makeid(length) {
+        var result = '';
+        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var charactersLength = characters.length;
+        for (var i = 0; i < length; i++) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+        return result;
+    }
 
+
+
+
+    const DeleteHandler = (id) => {
+        let soups = items
+
+        soups = soups.filter(soup => soup.id != id)
+
+        axios.updateSoups(soups)
+            .then(resp => {
+                setItems(soups)
+                alert("Soppa borttagen!")
+            })
+            .catch(error => console.log(error))
+    }
 
 
 
@@ -364,26 +393,28 @@ const Admin = (props) => {
         setIsMenuOpen(false);
     };
 
-    const PostNewSoupHandler = (indexToWrite) => {
-        console.log("index:" + indexToWrite)
+    const PostNewSoupHandler = () => {
+
+
         let soup = {
             description: description,
-        
+            id: makeid(5),
             title: title,
             price: price,
 
         }
-        axios.postSoup(soup, indexToWrite)
+        let soups = items
+        soups.unshift(soup)
+
+        axios.updateSoups(soups)
             .then(response => {
+                setItems(soups)
                 alert('Soppan sparad')
-                window.location.reload(false);
             })
             .catch(error => console.log(error));
 
 
         setIsModalOpen(false);
-
-
 
     }
 
@@ -437,17 +468,17 @@ const Admin = (props) => {
 
 
             <SoupList>
-
+                {console.log(items)}
                 {items.map((element, index) => {
                     return (<SoupWrapper key={index} item={element} id={element.id} value={element.title} image={element.image}>
 
 
 
                         <MenuSoupContainer image={element.image}>
-                        <DeliteContainer><Delite/></DeliteContainer>  
+                            <DeliteContainer><DeleteWrapper onClick={() => DeleteHandler(element.id)}><Delite /></DeleteWrapper></DeliteContainer>
 
-                            <ContentContainer>  
-                             
+                            <ContentContainer>
+
                                 <TitleContainer>
                                     <Title>{element.title}</Title>
                                     <SoupDescription>{element.description}</SoupDescription>
@@ -479,6 +510,7 @@ const Admin = (props) => {
                     <InputBig type="text" placeholder="Beskrivning" name="description" value={description} onChange={e => setDescription(e.target.value)}></InputBig>
                     <Input type="text" placeholder="Pris" name="price" value={price} onChange={e => setPrice(e.target.value)}></Input>
                     <Input type="text" placeholder="Url till din bild" name="urlImage" value={urlImage} onChange={e => setUrlImage(e.target.value)}></Input>
+                
                     <AddSoupBtn onClick={() => PostNewSoupHandler(indexToWrite)}>Lägg till</AddSoupBtn>
                 </AddSoupContent>
             </AddSoupWrapper>

@@ -132,7 +132,7 @@ const Drawer = (props) => {
               </StyledA>
               <BorderUnderline/>
 
-              <StyledA href="/">
+              <StyledA href="/villkor">
                   <span>Villkor</span>
               </StyledA>
               <BorderUnderline/>
@@ -144,9 +144,6 @@ const Drawer = (props) => {
               <BorderUnderline/>
 
 
-              <StyledA href="/">
-                  <span>Dela och få rabatt</span>
-              </StyledA>
            
 
             </DrawerContent>
