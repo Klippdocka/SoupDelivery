@@ -1,6 +1,9 @@
 import App from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firebase-firestore';
+import 'firebase/storage';
+
+
 
 
 
@@ -21,11 +24,13 @@ const config = {
           App.initializeApp(config)
           this.auth = App.auth()
           this.db = App.firestore()
+          this.storage = App.storage()
       }
 
       login(email, password) {
             return this.auth.signInWithEmailAndPassword(email, password)
       }
+
       
       logout() {
       return this.auth.signOut()

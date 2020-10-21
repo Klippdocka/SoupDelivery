@@ -342,6 +342,7 @@ const Admin = (props) => {
     const [urlImage, setUrlImage] = useState(null);
     const [image, setImage] = useState(null);
     const [error, setError] = useState('');
+    const [progress, setProgress] = useState(0);
 
 
     useEffect(() => {
@@ -349,8 +350,7 @@ const Admin = (props) => {
         axios.getSoups()
             .then(response => {
                 setItems(response.data)
-                setIndexToWrite(response.data.length)
-
+            
             })
 
     }, []);
@@ -368,8 +368,49 @@ const Admin = (props) => {
 
 
 
+    const HandleChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+        const fileType = file['type']
+        const validImageTypes = ['image/gif', 'image/jpeg','image/png']
+        if(validImageTypes.includes(fileType)) {
+            setError('');
+            setImage(file);
+        }else {
+            setError('Du behöver välja en bild i rätt format , gif,jpeg eller png.')
+        }
+    }
+    };
+
+    const HandleUpdate = () => {
+        if (image) {
+            const uploadTask = Firebase.storage.ref(`images/${image.name}`).put(image)
+
+            uploadTask.on(
+                "state_changed",
+                snapshot => {
+                    const progress = Math.round(
+                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                    );
+                    setProgress(progress);
+                },
+                error => {
+                    setError(error)
+                },
+                () => {
+                    Firebase.storage.ref('images').child(image.name).getDownloadURL().then(url => {
+                        setUrlImage(url)
+                        setProgress(0);
+                    });
+                }
+                );
+        } else {
+            setError('välj en bild för att ladda upp');
+        }
+    };
 
     const DeleteHandler = (id) => {
+    
         let soups = items
 
         soups = soups.filter(soup => soup.id != id)
@@ -394,11 +435,12 @@ const Admin = (props) => {
     };
 
     const PostNewSoupHandler = () => {
-
+    
 
         let soup = {
             description: description,
             id: makeid(5),
+            image:urlImage,
             title: title,
             price: price,
 
@@ -509,9 +551,12 @@ const Admin = (props) => {
 
                     <InputBig type="text" placeholder="Beskrivning" name="description" value={description} onChange={e => setDescription(e.target.value)}></InputBig>
                     <Input type="text" placeholder="Pris" name="price" value={price} onChange={e => setPrice(e.target.value)}></Input>
-                    <Input type="text" placeholder="Url till din bild" name="urlImage" value={urlImage} onChange={e => setUrlImage(e.target.value)}></Input>
+                    <Input type="file" onChange={HandleChange}></Input>
+            <div>{error}{progress > 0? <progress value={progress} max="100" />: ""}</div>
+                       <button onClick={() => HandleUpdate()}>Ladda upp bild</button>
+                        
                 
-                    <AddSoupBtn onClick={() => PostNewSoupHandler(indexToWrite)}>Lägg till</AddSoupBtn>
+                    <AddSoupBtn onClick={() => PostNewSoupHandler()}>Lägg till</AddSoupBtn>
                 </AddSoupContent>
             </AddSoupWrapper>
 
