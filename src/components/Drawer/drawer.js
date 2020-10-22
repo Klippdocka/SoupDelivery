@@ -126,6 +126,11 @@ const Drawer = (props) => {
          </LogoWrapper>
           
             <DrawerContent>
+            <StyledA href="/">
+                  <span>Hem</span>
+              </StyledA>
+              <BorderUnderline/>
+
            
             <StyledA href="/About">
                   <span>Om oss</span>

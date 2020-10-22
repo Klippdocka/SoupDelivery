@@ -61,111 +61,132 @@ color:#707070;
 margin-bottom:0rem;
 `;
 
+const StyledP = styled.p`
+margin-top:0rem;
+margin-bottom:0rem;
+color:red;
+`;
+
 const CheckOutProgressAddres = (props) => {
-   
+
 
     const [longAddress, setLongAdress] = useLocalState('longAddress');
     const [localCreds, setLocalCreads] = useLocalStorage('creads');
- 
-    const [creds, setCreds] = useState({ firstName:localCreds.firstName, lastName:setLocalCreads.lastName, address:longAddress , email:localStorage.email });
-    const [errors, setErrors] = useState('');
 
+    const [creds, setCreds] = useState({ firstName: localCreds ? localCreds.firstName : null, lastName: localCreds ? localCreds.lastName : null, address: longAddress, email: localCreds ? localCreds.email : localCreds });
+    const [error, setError] = useState('');
+
+
+    //firstName.match(letters));
 
     let history = useHistory();
 
     const errorMessage = {
-       firstName : "Förnamnet måste vara i fyllt och bestå av bokstäver",
-    }
-
-    const handleSubmit = (e) => {
-    e.preventDefault();
-  
-    const firstName = e.target.value;
-    let letters = /^[A-Za-z]+$/;
-    if( firstName && firstName.length === 0 || firstName == null || firstName.match(letters));{
-      alert(errorMessage.firstName);
+        firstName: 'Du behöver fylla i alla fälten.',
+        email: 'Du behöver fylla i din mejl',
       
     }
-   
 
 
-    const Cre = { firstName }
-   
-    if(Cre) {
-        let Cre = creds;
-        setLocalCreads(Cre);
-        history.push('/ShoppingCartPayment')
-    }
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        let letters = /^[A-Za-z]+$/;
+
+        const firstName = creds.firstName
+        const lastName = creds.lastName
+        const address = creds.address
+        const email = creds.email
+
+        if (firstName && firstName.length === 0 || firstName.match(letters) == null) {
+            setError(errorMessage.firstName)
+            console.log('firstname')
+
+        } else if (lastName && lastName.length === 0 || lastName.match(letters) == null) {
+
+            setError(errorMessage.firstName)
+            console.log('lastName');
+        } else if (address && address.length === 0) {
+            console.log('address');
+            setError(errorMessage.firstName)
+
+        }else if (email && email.length === 0) {
+
+            setError(errorMessage.firstName)
+            console.log('email');
+        }  
+        else {
+            setError('')
+            console.log("else")
+            let Cre = creds;
+            setLocalCreads(Cre);
+            history.push('/ShoppingCartPayment')
 
 
-    
-
-
-  
-        //console.log(localCreds);
-
-            
+        }
     }
 
 
     const onChangeInputHandler = (e) => {
-    
-        
-        const {name, value} = e.target;
-        setCreds({...creds, [name]: value})
 
-    
+
+        const { name, value } = e.target;
+        setCreds({ ...creds, [name]: value })
+
+
 
 
     }
 
 
 
-    return(
+    return (
         <MainWrapper>
-            
-            <CheckOutProgressMain page={2}/>
+
+            <CheckOutProgressMain page={2} />
 
 
             <ContentContainer>
 
 
-                
+
                 <InputContainer>
-                <StyledH2>Förnamn</StyledH2>
-                 <Input type="firstName" name="firstName"  placeholder={localCreds.firstName} onChange={onChangeInputHandler}/>
-                 
-            <BorderUnderline/>
-            </InputContainer>
+                    <StyledH2>Förnamn</StyledH2>
+                    <Input type="firstName" name="firstName" placeholder={creds.firstName} onChange={onChangeInputHandler} />
 
-            <InputContainer>
-            <StyledH2>Efternamn</StyledH2>
-            <Input type="lastName" name="lastName" placeholder={localCreds.lastName} onChange={onChangeInputHandler}/>
-            <BorderUnderline/>
-            </InputContainer>
+                    <BorderUnderline />
 
+                </InputContainer>
 
-            <InputContainer>
-            <StyledH2>Adress</StyledH2>
-            <Input type="address" name="address" placeholder={creds.address} onChange={onChangeInputHandler}></Input>
-            <BorderUnderline/>
-            </InputContainer>
+                <InputContainer>
+                    <StyledH2>Efternamn</StyledH2>
+                    <Input type="lastName" name="lastName" placeholder={creds.lastName} onChange={onChangeInputHandler} />
+                    <BorderUnderline />
+
+                </InputContainer>
 
 
+                <InputContainer>
+                    <StyledH2>Adress</StyledH2>
+                    <Input type="address" name="address" placeholder={creds.address} onChange={onChangeInputHandler}></Input>
+                    <BorderUnderline />
+                </InputContainer>
 
 
-            <InputContainer>
-            <StyledH2>Mejladress</StyledH2>
-            <Input type="email" name="email" placeholder={localCreds.email} onChange={onChangeInputHandler}></Input>
-            <BorderUnderline/>
-            </InputContainer>
-       
+
+
+                <InputContainer>
+                    <StyledH2>Mejladress</StyledH2>
+                    <Input type="email" name="email" placeholder={creds.email} onChange={onChangeInputHandler}></Input>
+                    <BorderUnderline />
+                </InputContainer>
+                <StyledP>{error}</StyledP>
 
             </ContentContainer>
-          
 
 
-           <NextBtnContainer onClick={handleSubmit} ><NextBtn/></NextBtnContainer> 
+
+
+            <NextBtnContainer onClick={handleSubmit} ><NextBtn /></NextBtnContainer>
         </MainWrapper>
     )
 }

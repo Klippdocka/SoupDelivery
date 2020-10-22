@@ -45,13 +45,13 @@ justify-content:center;
 align-items:center;
 height:4rem;
 width:12rem;
-background-color:${props => !props.active ? '#9ab54a' : '#f5f5f5'};
+background-color:${props => props.active ? '#9ab54a' : '#f5f5f5'};
 border-radius:0.5rem;
 text-align:center;
 `;
 
 const DeliveryP = styled.p`
-color:${props => props.active ? '#707070' : 'white'};
+color:${props => props.active ? 'white' : '#707070'};
 
 font-size:1.6rem;
 margin-block-start: 0em;
@@ -60,7 +60,7 @@ margin-block-start: 0em;
 `;
 
 const PickUpP = styled.p`
-color:${props => props.active ? 'white' : '#707070'};
+color:${props => !props.active ? 'white' : '#707070'};
 font-size:1.6rem;
 margin-block-start: 0em;
     margin-block-end: 0em;
@@ -71,7 +71,7 @@ const PickUp = styled.div`
 display:flex;
 justify-content:center;
 align-items:center;
-background-color:${props => props.active ? '#9ab54a' : '#f5f5f5'};
+background-color:${props => !props.active ? '#9ab54a' : '#f5f5f5'};
 height:4rem;
 width:12rem;
 border-radius:0.5rem;
@@ -108,7 +108,7 @@ flex-direction:column;
 `;
 
 const DeliveryDiv = styled.div`
-display:${props => !props.active ? 'block': 'none'};
+display:${props => props.active ? 'block' : 'none'};
 `;
 const PriceDelivery = styled.p`
 font-size:1.3rem;
@@ -221,7 +221,7 @@ flex-direction:column;
 
 const CheckOutProgressBasket = (props) => {
 
-    const [active, setActive] = useState(false);
+    const [active, setActive] = useState(true);
     const [items, setItems] = useState([]);
     const [cartTotal, setCartTotal] = useState(0);
     const [total, setTotal] = useLocalStorage('total');
@@ -235,8 +235,8 @@ const CheckOutProgressBasket = (props) => {
     }, [items]);
 
     useEffect(() => {
-    deliveryTotal();
-    } , [items]);
+        deliveryTotal();
+    }, [items]);
 
 
     useEffect(() => {
@@ -252,8 +252,7 @@ const CheckOutProgressBasket = (props) => {
 
 
     const handleRemoveItem = (index) => {
-        console.log(index);
-        console.log(items);
+
 
         let item = JSON.parse(localStorage.getItem('item'));
         item = item.filter((row, i) => i !== index);
@@ -268,46 +267,49 @@ const CheckOutProgressBasket = (props) => {
 
     const handleActiveDelivery = () => {
         setActive(!active)
+
+        deliveryTotal()
     };
 
 
-  
-   
+
+
 
 
     const subTotal = () => {
-       
-     let totalVal = 0;
-     for (let i = 0; i < items.length; i++){
-         totalVal += items[i].item.price;
-     }
-      setCartTotal(totalVal);
-     
+
+        let totalVal = 0;
+        for (let i = 0; i < items.length; i++) {
+            totalVal += items[i].item.price;
+    
+        }
+        setCartTotal(totalVal);
+
     }
 
     const deliveryTotal = () => {
-          
-     let totalVal = 39;
-     for (let i = 0; i < items.length; i++){
-         totalVal += items[i].item.price; 
+        console.log(active)
+        let totalVal = !active ? 39 : 0;
+        for (let i = 0; i < items.length; i++) {
+            totalVal += items[i].item.price;
+            
+
+        }
+
+
+        let totalDrink = 0;
        
-         
-     }
+        for (let i = 0; i < items.length; i++) {
+            if (items[i].drink.price != null)
+                totalDrink += items[i].drink.price;
 
-
-     let totalDrink = 0;
-     console.log()
-     for (let i = 0; i < items.length; i++){
-         if( items[i].drink.price != null)
-            totalDrink +=  items[i].drink.price;
-         
-     }
-      setTotal(totalVal + totalDrink)
+        }
+        setTotal(totalVal + totalDrink)
 
     }
 
     const btnNext = () => {
-      
+
         history.push('/ShoppingCartAddres')
     }
 
@@ -321,7 +323,7 @@ const CheckOutProgressBasket = (props) => {
 
 
                 <DeliveryContainer>
-                    <Delivery onClick={() => setActive(!active)} active={active}><DeliveryP active={active}>Leverans</DeliveryP></Delivery>
+                    <Delivery onClick={handleActiveDelivery} active={active}><DeliveryP active={active}>Leverans</DeliveryP></Delivery>
 
                     <PickUp onClick={handleActiveDelivery} active={active}><PickUpP active={active}>Avhämtning</PickUpP></PickUp>
                 </DeliveryContainer>
@@ -360,17 +362,17 @@ const CheckOutProgressBasket = (props) => {
                     })
                 }
                 <TotalWrapper>
-            <TotalContainer><Title> Delsumma </Title> <Price>{cartTotal}kr</Price></TotalContainer>
-            <TotalContainer><Title> Leverans</Title> 
-            
-           <DeliveryDiv active={active}><PriceDelivery>39</PriceDelivery></DeliveryDiv>
-           <DeliveryDiv active={!active}><PriceDelivery >0</PriceDelivery></DeliveryDiv>
-            <Price> kr</Price></TotalContainer>
-            <TotalContainer><Title> Totalbelopp</Title> <Price>{total}kr</Price></TotalContainer>
+                    <TotalContainer><Title> Delsumma </Title> <Price>{cartTotal}kr</Price></TotalContainer>
+                    <TotalContainer><Title> Leverans</Title>
+
+                        <DeliveryDiv active={active}><PriceDelivery>39</PriceDelivery></DeliveryDiv>
+                        <DeliveryDiv active={!active}><PriceDelivery>0</PriceDelivery></DeliveryDiv>
+                        <Price> kr</Price></TotalContainer>
+                    <TotalContainer><Title> Totalbelopp</Title> <Price>{total}kr</Price></TotalContainer>
                 </TotalWrapper>
             </ShoppingCartWrapper>
 
-            <NextBtnContainer  onClick={btnNext}><NextBtn/></NextBtnContainer>
+            <NextBtnContainer onClick={btnNext}><NextBtn /></NextBtnContainer>
 
 
 

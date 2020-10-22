@@ -338,7 +338,7 @@ const Admin = (props) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [price, setPrice] = useState('');
+    const [price, setPrice] = useState(0);
     const [urlImage, setUrlImage] = useState(null);
     const [image, setImage] = useState(null);
     const [error, setError] = useState('');
@@ -550,7 +550,7 @@ const Admin = (props) => {
                     <Input type="text" name="title" value={title} placeholder="Titel" onChange={e => setTitle(e.target.value)}></Input>
 
                     <InputBig type="text" placeholder="Beskrivning" name="description" value={description} onChange={e => setDescription(e.target.value)}></InputBig>
-                    <Input type="text" placeholder="Pris" name="price" value={price} onChange={e => setPrice(e.target.value)}></Input>
+                    <Input type="number" placeholder="Pris" name="price" value={price} onChange={e => setPrice(e.target.value)}></Input>
                     <Input type="file" onChange={HandleChange}></Input>
             <div>{error}{progress > 0? <progress value={progress} max="100" />: ""}</div>
                        <button onClick={() => HandleUpdate()}>Ladda upp bild</button>
