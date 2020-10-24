@@ -222,6 +222,7 @@ flex-direction:column;
 const CheckOutProgressBasket = (props) => {
 
     const [active, setActive] = useState(true);
+    const [localActive, setLocalActive] = useLocalStorage('delivery')
     const [items, setItems] = useState([]);
     const [cartTotal, setCartTotal] = useState(0);
     const [total, setTotal] = useLocalStorage('total');
@@ -235,7 +236,7 @@ const CheckOutProgressBasket = (props) => {
     }, [items]);
 
     useEffect(() => {
-        deliveryTotal();
+        saveDeliveryTotalToLocalStorage(active);
     }, [items]);
 
 
@@ -260,21 +261,17 @@ const CheckOutProgressBasket = (props) => {
         if (item.lenght === 0) {
             localStorage.removeItem('item');
         }
-        // setItems(items.filter((row, i) => i !== index))
         window.location.reload(false);
     };
 
 
     const handleActiveDelivery = () => {
-        setActive(!active)
+        let newActive = !active
 
-        deliveryTotal()
+        saveDeliveryTotalToLocalStorage(newActive)
+        setActive(newActive)
+        setLocalActive(newActive)
     };
-
-
-
-
-
 
     const subTotal = () => {
 
@@ -287,30 +284,28 @@ const CheckOutProgressBasket = (props) => {
 
     }
 
-    const deliveryTotal = () => {
-        console.log(active)
-        let totalVal = !active ? 39 : 0;
+    const saveDeliveryTotalToLocalStorage = (newActive) => {
+        let totalVal = newActive ? 39 : 0;
+
         for (let i = 0; i < items.length; i++) {
             totalVal += items[i].item.price;
-            
-
         }
-
 
         let totalDrink = 0;
        
         for (let i = 0; i < items.length; i++) {
             if (items[i].drink.price != null)
                 totalDrink += items[i].drink.price;
-
         }
-        setTotal(totalVal + totalDrink)
 
+        setTotal(totalVal + totalDrink)
     }
 
     const btnNext = () => {
+        
 
         history.push('/ShoppingCartAddres')
+        
     }
 
 

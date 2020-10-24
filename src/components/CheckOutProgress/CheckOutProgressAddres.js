@@ -4,6 +4,8 @@ import CheckOutProgressMain from '../../components/CheckOutProgress/CheckOutProg
 import NextBtn from '../../components/Buttons/NextBtn';
 import { useLocalState, useLocalStorage } from '../Hooks/UseLocalState';
 import { useHistory } from "react-router-dom";
+import TimeIcone from '../Icone/time';
+import MapPin from '../Icone/MapsPin';
 
 
 const MainWrapper = styled.div`
@@ -14,7 +16,7 @@ width:100%;
 `;
 
 const ContentContainer = styled.div`
-display:flex;
+display:${props => props.DeliveryType ? 'flex' : 'none'};
 flex-direction:column;
 width:100%;
 justify-content:center;
@@ -56,7 +58,7 @@ background-color:#dedede;
 
 const StyledH2 = styled.h2`
 font-size:1.6rem;
-font-weight:400;
+font-weight:700;
 color:#707070;
 margin-bottom:0rem;
 `;
@@ -67,11 +69,64 @@ margin-bottom:0rem;
 color:red;
 `;
 
+const ContentContainerPickup = styled.div`
+
+display:${props => !props.DeliveryType ? 'flex' : 'none'};
+
+justify-content:flex-start;
+align-items:flex-start;
+flex-direction:column;
+margin-left:4rem;
+width:80%;
+margin-bottom:10rem;
+margin-top:5rem;
+`;
+
+const TimeContainer = styled.div`
+padding-right:1rem;
+`;
+
+const Div = styled.div`
+flex-direction:row;
+display:flex;
+justify-content:center;
+text-align:center;
+`;
+
+const Styledh2 = styled.h2`
+margin-top:1rem;
+font-size:1.6rem;
+font-weight:400;
+color:#707070;
+margin-bottom:0rem;
+margin-left:3.8rem;
+`;
+
+
+const BorderUnderlinePickup = styled.div`
+margin-bottom:1rem;
+margin-top:1.5rem;
+width:100%;
+height:0.1rem;
+background-color:#dedede;
+`;
+
+
+const DivTime = styled.div`
+flex-direction:row;
+display:flex;
+justify-content:center;
+text-align:center;
+margin-top:2rem;
+`;
+
 const CheckOutProgressAddres = (props) => {
 
 
     const [longAddress, setLongAdress] = useLocalState('longAddress');
     const [localCreds, setLocalCreads] = useLocalStorage('creads');
+    const [localActive, setLocalActive] = useLocalStorage('delivery', true)
+    const [isDeliveryTrue, setIsDeliveryTrue] = useState(true);
 
     const [creds, setCreds] = useState({ firstName: localCreds ? localCreds.firstName : null, lastName: localCreds ? localCreds.lastName : null, address: longAddress, email: localCreds ? localCreds.email : localCreds });
     const [error, setError] = useState('');
@@ -86,6 +141,8 @@ const CheckOutProgressAddres = (props) => {
         email: 'Du behöver fylla i din mejl',
       
     }
+
+
 
 
     const handleSubmit = (e) => {
@@ -132,10 +189,9 @@ const CheckOutProgressAddres = (props) => {
         const { name, value } = e.target;
         setCreds({ ...creds, [name]: value })
 
-
-
-
     }
+
+
 
 
 
@@ -145,7 +201,7 @@ const CheckOutProgressAddres = (props) => {
             <CheckOutProgressMain page={2} />
 
 
-            <ContentContainer>
+            <ContentContainer  DeliveryType={localActive}>
 
 
 
@@ -182,6 +238,21 @@ const CheckOutProgressAddres = (props) => {
                 <StyledP>{error}</StyledP>
 
             </ContentContainer>
+
+
+
+            <ContentContainerPickup  DeliveryType={localActive}>
+                <StyledH2>Avhämtning</StyledH2>
+                <BorderUnderlinePickup/>
+            
+               <Div><MapPin/> <StyledH2>Eight Soups</StyledH2></Div>
+                <Styledh2>Odengatan 92</Styledh2>
+                <Styledh2>113 22 Stockholm</Styledh2>
+                <BorderUnderlinePickup/>
+
+<DivTime><TimeContainer><TimeIcone/></TimeContainer><StyledH2>Upphämtningstid: 15-20 min</StyledH2></DivTime>
+
+            </ContentContainerPickup>
 
 
 

@@ -37,7 +37,7 @@ const StyledH2 = styled.h2`
 margin-left:4.5rem;
 font-size:1.8rem;
 color:#656565;
-font-weight:400;
+font-weight:600;
 `;
 
 
@@ -139,7 +139,7 @@ font-size:1.5rem;
 color:#707070;
 margin-left:0.5rem;
 margin-bottom:0rem;
-font-weight:600;
+font-weight:700;
 `;
 
 const NameDiv = styled.div`
@@ -147,7 +147,7 @@ display:flex;
 justify-content:flex-start;
 align-items:flex-start;
 flex-direction:column;
-margin-right:7rem;
+margin-right:19rem;
 text-align:center;
 ;`
 
@@ -231,7 +231,7 @@ margin-bottom:0rem;
 `;
 
 const Div = styled.div`
-margin-top:1rem;
+margin-top:3rem;
 display:flex;
 justify-content:center;
 align-items:center;
@@ -247,7 +247,7 @@ align-items:center;
 justify-content:center;
 width:100%;
 background-color:#9ab54a;
-margin-top:1rem;
+margin-top:2rem;
  cursor: pointer;
 
 
@@ -386,17 +386,8 @@ const CheckOutProgressOrder = (props) => {
 
                 <Div>
 
-
-
-
-
-
-
                     <StyledPtag>Totalbelopp</StyledPtag>
                     <StyledTotal>{total} kr</StyledTotal>
-
-
-
 
                 </Div>
 

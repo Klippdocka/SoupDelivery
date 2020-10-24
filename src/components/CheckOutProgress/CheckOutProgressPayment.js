@@ -140,6 +140,9 @@ font-weight:300;
 color:white;
 `;
 
+const StyledPtag = styled.p`
+color:red;`;
+
 
 
 
@@ -151,13 +154,14 @@ const CheckOutProgressPayment = (props) => {
 
     let history = useHistory();
 
-    const [number, setNumber] = useLocalStorage('CreditNumber');
-    const [expiry, setExpiry] = useLocalStorage('CreditDate');
-    const [cvc, setCvc] = useLocalStorage('CreditCvc');
-   
+    const [number, setNumber] = useState('');
+    const [expiry, setExpiry] = useState('');
+    const [cvc, setCvc] = useState('');
+    const [error, setError] = useState('');
 
     
     const [cardOpen, setCardOpen] = useState(false);
+
 
     const openHandler = (event) => {
         event.preventDefault();
@@ -182,6 +186,23 @@ const CheckOutProgressPayment = (props) => {
 
         }
     }
+
+
+    const handleSubmit = () => {
+        let numbers = /^[0-9]+$/;
+        if (number && number.length === 0 || number.match(numbers) == null) { 
+            setError('Alla fält måste vara i fylda och får endast innehålla siffror')
+        }else if  (expiry && expiry.length === 0 || expiry.match(numbers) == null) {
+            setError(error)
+        }else if  (cvc && cvc.length === 0 || cvc.match(numbers) == null) {
+            setError(error)
+        }else {
+            history.push('/ShoppingCartOrder')
+        }
+       
+            
+    }
+
    
 
 
@@ -217,9 +238,10 @@ const CheckOutProgressPayment = (props) => {
                         <InputShort   maxLength={3} type="tel" name="cvc" value={cvc} placeholder="CVC" onChange={e => setCvc(e.target.value)} />
                     </InputContainer>
                 </InputShortContainer>
-                </IputWrapper>
+                        <StyledPtag>{error}</StyledPtag>
+                </IputWrapper>  
 
-                <BtnContainer whenOpen={OpenChanges} cardOpen={cardOpen} onClick={() =>  history.push('/ShoppingCartOrder')}>
+                <BtnContainer whenOpen={OpenChanges} cardOpen={cardOpen} onClick={() => handleSubmit()}>
                    
                    <BtnTitle>Gå till betalning</BtnTitle>
                 
