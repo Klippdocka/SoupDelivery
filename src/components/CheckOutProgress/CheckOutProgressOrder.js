@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { useLocalState, useLocalStorage } from '../Hooks/UseLocalState';
 import MasterCredit from '../../components/Icone/MasterCredit';
 import TimeIcone from '../../components/Icone/time';
+import { useHistory } from "react-router-dom";
+
 const MainWrapper = styled.div`
 
 height:100%;
@@ -291,6 +293,8 @@ const CheckOutProgressOrder = (props) => {
     const [total, setTotal] = useLocalStorage('total');
 
 
+    let history = useHistory();
+
     useEffect(() => {
         let shoppingCart;
 
@@ -394,7 +398,7 @@ const CheckOutProgressOrder = (props) => {
             </ContentContainer>
 
 
-            <BtnContainer>
+            <BtnContainer onClick={() => history.push('/confirmedorder')}>
 
                 <BtnTitle>Beställ</BtnTitle>
 

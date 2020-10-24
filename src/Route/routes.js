@@ -17,6 +17,7 @@ import AdminMain from '../components/Admin/AdminMain';
 import About from '../components/Home/AboutUs';
 import Contact from '../components/Home/Contact';
 import Terms from '../components/Home/Terms';
+import CheckOutProgressDone from '../components/CheckOutProgress/CheckOutProgressDone';
 
 
 const Routes = (props) => {
@@ -73,20 +74,26 @@ const Routes = (props) => {
                 <Route exact path="/ShoppingCartOrder">
 
                     <CheckOutMain pageTitle={4}>
-                       <CheckOutProgressOrder/>
+                        <CheckOutProgressOrder />
                     </CheckOutMain>
 
                 </Route>
+                <Route exact path="/confirmedorder">
 
+                  
+                        <CheckOutProgressDone />
+                
+
+                </Route>
 
                 <Route exact path="/AdminLogin">
-                    <AdminLogin/>
+                    <AdminLogin />
 
                 </Route>
 
 
                 <Route exact path="/AdminRegi">
-                    <AdminRegi/>
+                    <AdminRegi />
 
                 </Route>
 
@@ -94,37 +101,37 @@ const Routes = (props) => {
 
 
                 <Route exact path="/Admin">
-                <Admin/>
-                
+                    <Admin />
+
 
                 </Route>
 
 
 
                 <Route exact path="/Test">
-                   <SoupServiceFirebase/>
+                    <SoupServiceFirebase />
 
                 </Route>
 
                 <Route exact path="/About">
-                <Main showCart={false}>
-                    <About/>
-                </Main>
+                    <Main showCart={false}>
+                        <About />
+                    </Main>
 
                 </Route>
 
 
                 <Route exact path="/Contact">
-                <Main showCart={false}>
-                    <Contact/>
-                </Main>
+                    <Main showCart={false}>
+                        <Contact />
+                    </Main>
 
                 </Route>
 
                 <Route exact path="/villkor">
-                <Main showCart={false}>
-                    <Terms/>
-                </Main>
+                    <Main showCart={false}>
+                        <Terms />
+                    </Main>
 
                 </Route>
 
