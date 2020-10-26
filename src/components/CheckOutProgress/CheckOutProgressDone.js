@@ -6,7 +6,8 @@ import { useLocalStorage } from '../Hooks/UseLocalState';
 import Close from '../../components/Icone/Close';
 import { useHistory } from "react-router-dom";
 import CloseIcone from '../Icone/CloseIcone';
-
+import { ImgContainer } from '../Home/styledHome';
+import ProfileImg from '../Images/craig.jpg';
 
 const MainWrapper = styled.div`
 display:flex;
@@ -40,7 +41,7 @@ width:100%;
 justify-content:flex-end;
 align-items:flex-end;
 padding-top:1rem;
-margin-right:2rem;
+margin-right:3rem;
 
 `;
 
@@ -49,11 +50,8 @@ display:flex;
 justify-content:center;
 align-items:center;
 text-align:center;
-margin-top:5rem;
+margin-top:4rem;
 flex-direction:column;
-
-
-
 `;
 
 const Title = styled.h1`
@@ -98,6 +96,45 @@ font-size:6rem;
 font-weight:400;
 `;
 
+const ImageContainer = styled.div`
+height:6rem;
+width:6rem;
+`;
+
+const Img= styled.img`
+object-fit:cover;
+width:100%;
+height:100%;
+border-radius:50%;
+`;
+
+const DivContainer = styled.div`
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:row;
+width:100%;
+height:10rem;
+`;
+
+const PStyle = styled.p `
+color:#656565;
+font-weight:400;
+font-size:1.7rem;
+padding-left:1rem;
+`;
+
+const TextContainer = styled.div`
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+width:80%;
+height:10rem;
+margin-top:14rem;
+
+`;
+
 
 
 const CheckOutProgressDone = (props) => {
@@ -125,7 +162,14 @@ const CheckOutProgressDone = (props) => {
     
 
 <ContentContainer><BorderUnderline/></ContentContainer>
-
+<DivContainer>
+<ImageContainer>
+<Img src={ProfileImg}/>
+</ImageContainer>
+        <PStyle>David levererar din order</PStyle>
+        </DivContainer>
+<DivContainer>
+       <TextContainer><PStyle>Vid funderingar kontakta hos på resturangen tel: 08 111 111 11</PStyle></TextContainer></DivContainer>
         </MainWrapper>
 
     )
