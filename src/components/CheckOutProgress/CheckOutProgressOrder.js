@@ -4,6 +4,7 @@ import { useLocalState, useLocalStorage } from '../Hooks/UseLocalState';
 import MasterCredit from '../../components/Icone/MasterCredit';
 import TimeIcone from '../../components/Icone/time';
 import { useHistory } from "react-router-dom";
+import axios from '../../axios';
 
 const MainWrapper = styled.div`
 
@@ -316,6 +317,28 @@ const CheckOutProgressOrder = (props) => {
 
     }
 
+    const OrderSubmit = () => {
+
+        const order = {
+            soups: items.map((element) => element.item.title),
+            price: total,
+            customer: {
+                firstName: localCreds.firstName,
+                lastName: localCreds.lastName,
+                address: longAddress,
+                email: localCreds.email
+            }
+
+        }
+     
+        axios.setOrder(order)
+            .then(resp => {
+                history.push('/confirmedorder')
+            })
+            .catch(error => console.log(error))
+
+    }
+
 
 
 
@@ -364,16 +387,16 @@ const CheckOutProgressOrder = (props) => {
                 }
 
                 <TitleDiv>
-                    <StyledH2>Levereras till</StyledH2>    
+                    <StyledH2>Levereras till</StyledH2>
                     <IconeWrapper>
                         <TimeIcone />
-                    </IconeWrapper> 
+                    </IconeWrapper>
                     <StyledTime>10-20 min</StyledTime>
 
                 </TitleDiv>
                 <DeliveryDiv>
                     <NameDiv> <NameContainer><StyledName>{localCreds.firstName}</StyledName><StyledName>{localCreds.lastName} </StyledName></NameContainer>
-                     <StyledP>{longAddress}</StyledP></NameDiv>
+                        <StyledP>{longAddress}</StyledP></NameDiv>
 
 
                 </DeliveryDiv>
@@ -398,7 +421,7 @@ const CheckOutProgressOrder = (props) => {
             </ContentContainer>
 
 
-            <BtnContainer onClick={() => history.push('/confirmedorder')}>
+            <BtnContainer onClick={() => OrderSubmit()}>
 
                 <BtnTitle>Beställ</BtnTitle>
 

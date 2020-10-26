@@ -8,6 +8,7 @@ import { useHistory } from "react-router-dom";
 import CloseIcone from '../Icone/CloseIcone';
 import { ImgContainer } from '../Home/styledHome';
 import ProfileImg from '../Images/craig.jpg';
+import axios from '../../axios';
 
 const MainWrapper = styled.div`
 display:flex;
@@ -139,12 +140,12 @@ margin-top:14rem;
 
 const CheckOutProgressDone = (props) => {
 
-
+let History = useHistory();
 
 
     return (
         <MainWrapper>
-            <CloseIconeWrapper><CloseIcone/></CloseIconeWrapper>
+            <CloseIconeWrapper onClick={() => History.push('/')}><CloseIcone/></CloseIconeWrapper>
             <TitleContainer>
                 <Title>Beställning bekräftad</Title>
                 <Div><StyledP>Din order:</StyledP><StyledP>Nummer</StyledP></Div>

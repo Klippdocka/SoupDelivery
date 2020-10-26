@@ -24,6 +24,14 @@ class Axios {
         return this.instance.put(`/items.json`, soups);
         
     }
+
+    setOrder(order) {
+        return this.instance.post(`/orders.json`, order)
+    }
+
+    getOrder() {
+        return this.instance.get('/items.json')
+    }
 }
 
 
