@@ -30,7 +30,8 @@ margin-bottom:7rem;
 const NextBtnContainer = styled.div`
 display:flex;
 align-items:baseline;
-margin-top:4rem;
+margin-top:3rem;
+
 `;
 
 const InputContainer = styled.div`
@@ -78,7 +79,6 @@ align-items:flex-start;
 flex-direction:column;
 margin-left:4rem;
 width:80%;
-margin-bottom:10rem;
 margin-top:5rem;
 `;
 
@@ -120,6 +120,17 @@ text-align:center;
 margin-top:2rem;
 `;
 
+
+
+const StyledPickUpH2 = styled.h2`
+margin-top:2rem;
+font-size:1.7rem;
+font-weight:700;
+color:#707070;
+margin-bottom:0rem;
+`;
+
+
 const CheckOutProgressAddres = (props) => {
 
 
@@ -139,7 +150,7 @@ const CheckOutProgressAddres = (props) => {
     const errorMessage = {
         firstName: 'Du behöver fylla i alla fälten.',
         email: 'Du behöver fylla i din mejl',
-      
+
     }
 
 
@@ -166,11 +177,11 @@ const CheckOutProgressAddres = (props) => {
             console.log('address');
             setError(errorMessage.firstName)
 
-        }else if (email && email.length === 0) {
+        } else if (email && email.length === 0) {
 
             setError(errorMessage.firstName)
             console.log('email');
-        }  
+        }
         else {
             setError('')
             console.log("else")
@@ -201,7 +212,7 @@ const CheckOutProgressAddres = (props) => {
             <CheckOutProgressMain page={2} />
 
 
-            <ContentContainer  DeliveryType={localActive}>
+            <ContentContainer DeliveryType={localActive}>
 
 
 
@@ -241,16 +252,41 @@ const CheckOutProgressAddres = (props) => {
 
 
 
-            <ContentContainerPickup  DeliveryType={localActive}>
-                <StyledH2>Avhämtning</StyledH2>
-                <BorderUnderlinePickup/>
-            
-               <Div><MapPin/> <StyledH2>Eight Soups</StyledH2></Div>
+            <ContentContainerPickup DeliveryType={localActive}>
+
+
+                <InputContainer>
+                    <StyledH2>Förnamn</StyledH2>
+                    <Input type="firstName" name="firstName" placeholder={creds.firstName} onChange={onChangeInputHandler} />
+
+                    <BorderUnderline />
+
+                </InputContainer>
+
+                <InputContainer>
+                    <StyledH2>Efternamn</StyledH2>
+                    <Input type="lastName" name="lastName" placeholder={creds.lastName} onChange={onChangeInputHandler} />
+                    <BorderUnderline />
+
+                </InputContainer>
+
+                <InputContainer>
+                    <StyledH2>Mejladress</StyledH2>
+                    <Input type="email" name="email" placeholder={creds.email} onChange={onChangeInputHandler}></Input>
+                    <BorderUnderline />
+                </InputContainer>
+                <StyledP>{error}</StyledP>
+
+
+
+                <StyledPickUpH2>Avhämtning</StyledPickUpH2>
+                <BorderUnderlinePickup />
+                <Div><MapPin /> <StyledH2>Eight Soups</StyledH2></Div>
                 <Styledh2>Odengatan 92</Styledh2>
                 <Styledh2>113 22 Stockholm</Styledh2>
-                <BorderUnderlinePickup/>
+                <BorderUnderlinePickup />
 
-<DivTime><TimeContainer><TimeIcone/></TimeContainer><StyledH2>Upphämtningstid: 15-20 min</StyledH2></DivTime>
+                <DivTime><TimeContainer><TimeIcone /></TimeContainer><StyledH2>Upphämtningstid: 15-20 min</StyledH2></DivTime>
 
             </ContentContainerPickup>
 

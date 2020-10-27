@@ -5,9 +5,13 @@ import MasterCredit from '../../components/Icone/MasterCredit';
 import TimeIcone from '../../components/Icone/time';
 import { useHistory } from "react-router-dom";
 import axios from '../../axios';
+import theme from '../../theme';
 
 const MainWrapper = styled.div`
-
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
 height:100%;
 width:100%;
 `;
@@ -20,6 +24,13 @@ align-items:center;
 flex-direction:column;
 width:100%;
 margin-top:1.5rem;
+
+
+@media screen and (min-width: ${theme.screenSize.small}){
+  
+  width:60%;
+  }
+
 `;
 
 
@@ -252,6 +263,11 @@ width:100%;
 background-color:#9ab54a;
 margin-top:2rem;
  cursor: pointer;
+
+ @media screen and (min-width: ${theme.screenSize.small}){
+  
+  width:60%;
+  }
 
 
 `;

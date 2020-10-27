@@ -3,10 +3,13 @@ import styled from 'styled-components';
 import BasketIcone from '../../components/Icone/basketIcone';
 import PlacePin from '../../components/Icone/MapsPin';
 import CreditCard from '../../components/Icone/CreditCart';
-
+import theme from '../../theme';
 
 const MainWrapper = styled.div`
-
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
 height:100%;
 width:100%;
 `;
@@ -16,8 +19,13 @@ const ProgressBar = styled.div`
     display:flex;
     flex-direction:row;
     align-items:center;
-    
     height:10rem;
+    width:100%;
+
+    @media screen and (min-width: ${theme.screenSize.small}){
+ 
+  width:60%;
+  }
 `;
 
 
@@ -31,11 +39,16 @@ justify-content:space-around;
 
 
 
-const ProgressLineWrapper=styled.div`
+const ProgressLineWrapper = styled.div`
 display:flex;
 justify-content:center;
 align-items:center;
 width:100%;
+
+@media screen and (min-width: ${theme.screenSize.small}){
+  
+  width:60%;
+  }
 `;
 
 const ProgressLineContainer = styled.div`

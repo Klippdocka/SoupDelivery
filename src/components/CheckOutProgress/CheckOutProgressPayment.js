@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import CheckOutProgressMain from '../../components/CheckOutProgress/CheckOutProgressMain';
 import MasterCredit from '../../components/Icone/MasterCredit';
-import { useLocalStorage } from '../Hooks/UseLocalState';
 import { useHistory } from "react-router-dom";
+import theme from '../../theme';
+import { useLocalStorage } from '../Hooks/UseLocalState';
 
 const MainWrapper = styled.div`
 height:100%;
@@ -60,6 +61,11 @@ align-items:center;
 width:85%;
 margin-top:1rem;
 
+@media screen and (min-width: ${theme.screenSize.small}){
+  
+  width:60%;
+  }
+
 `;
 
 
@@ -98,6 +104,10 @@ flex-direction:column;
 width:80%;
 cursor: pointer;
 margin-bottom:4rem;
+@media screen and (min-width: ${theme.screenSize.small}){
+  
+  width:60%;
+  }
 
 `;
 
@@ -115,6 +125,10 @@ flex-direction:column;
 width:100%;
 display:${props => props.cardOpen ? 'flex' : 'none'};
 
+@media screen and (min-width: ${theme.screenSize.small}){
+  
+  width:60%;
+  }
 
 `;
 
@@ -127,7 +141,10 @@ background-color:#9ab54a;
 display:${props => props.cardOpen ? 'flex' : 'none'};
 margin-top:10rem;
  cursor: pointer;
-
+ @media screen and (min-width: ${theme.screenSize.small}){
+  
+  width:60%;
+  }
 
 `;
 
@@ -154,7 +171,7 @@ const CheckOutProgressPayment = (props) => {
 
     let history = useHistory();
 
-    const [number, setNumber] = useState('');
+    const [number, setNumber] = useLocalStorage('CreditNumber');
     const [expiry, setExpiry] = useState('');
     const [cvc, setCvc] = useState('');
     const [error, setError] = useState('');

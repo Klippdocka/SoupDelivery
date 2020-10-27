@@ -21,7 +21,10 @@ width:100%;
 background-color:#9ab54a;
 
  cursor: pointer;
-
+ @media screen and (min-width: ${theme.screenSize.small}){
+  
+  width:60%;
+  }
 
 `;
 

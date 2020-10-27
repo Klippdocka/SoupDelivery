@@ -140,16 +140,7 @@ const Drawer = (props) => {
               <StyledA href="/villkor">
                   <span>Villkor</span>
               </StyledA>
-              <BorderUnderline/>
-
-
-              <StyledA href="/Contact">
-                  <span>Hör av dig!</span>
-              </StyledA>
-              <BorderUnderline/>
-
-
-           
+              <BorderUnderline/>           
 
             </DrawerContent>
             

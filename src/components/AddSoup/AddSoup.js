@@ -1,4 +1,4 @@
-import React, { useState, useContext, Component } from 'react';
+import React, { useState, useContext, Component, useEffect } from 'react';
 import styled from 'styled-components';
 import theme from '../../theme';
 import CloseIcone from '../../components/Icone/CloseIcone';
@@ -246,20 +246,18 @@ flex-direction:row;
 const AddSoup = (props) => {
 
 
-    //const [soup, setSoup] = useLocalStorage('soup', []);
    let Item = props.openItem;
 
+   const initialState = () => Number(window.localStorage.getItem('count')) || 0
 
-
-
-
-
-
-
-    // const [soup, setSoup] = useState("");
-    //const dispatch = useContext(SoupsContext);
     const [count, setCount] = useState(1);
+    const [counter, setCounter] = useState(initialState);
 
+
+useEffect(() => {
+    window.localStorage.setItem('count', counter);
+}, [counter])
+    
     
     const [checkbox, setCheckbox] = useState({
         accesssory: {},
@@ -285,21 +283,12 @@ const AddSoup = (props) => {
         })
         
       
-        // för varje givet event (dvs nån har kryssat i eller ur en drink lr tillb)
-        // kolla vilket ID event.target 
-        // är detta ett ikryssat event? isf sätt value inuti tillbehör till true.
-        // annars, sätt value till false
-        //  let newAccessories = {[target.id]: target.checked}
-         // let newDrinks = {[target.id] : target.checked}
-        // setSoup({id: props.soup.id, accessories: [{ ...newAccessories }], drinks: [{ ...newDrinks }]}) 
-
+        
     }    
 
+
     const handleSubmit = (event) => {
-        //event.preventDefault();
-       //  dispatch(addAction(soup)); 
-        // setSoup(curr => [...curr, soup]);
-        //setSoup(soup);
+       
 
 
         let shoppingCart = [];
@@ -317,15 +306,22 @@ const AddSoup = (props) => {
         shoppingCart.push(item)
         localStorage.setItem('item', JSON.stringify(shoppingCart))
 
+
         setCheckbox({})
         setCheckboxDrinks({})
         setCount(1)
-
+      
+        console.log(counter)
         props.toggle();
 
     }    
 
+    function counterSoups() {
+        setCounter(counter + 1);
     
+    }
+
+
 
     const handleChangeDrinks = (element) => {
         setCheckboxDrinks({
@@ -339,9 +335,11 @@ const AddSoup = (props) => {
 
     return (
 
-        <ModalContainer modalOpen={props.openItem != null}>
 
+        <ModalContainer modalOpen={props.openItem != null}>
+          
             <AddSoupWrapper>
+ 
                 <AddSoupCard>
 
                     <ImgContainer image={props.openItem.image}>
@@ -420,7 +418,7 @@ const AddSoup = (props) => {
                                 setCount(count + 1)
                             }}><AddIcone /></IconeDiv>
                         </AddSoupContainer>
-                        <AddSoupButton onClick={() => handleSubmit()}>Lägg till i varukorg</AddSoupButton>
+                        <AddSoupButton onClick={() => {handleSubmit(); counterSoups();}}>Lägg till i varukorg</AddSoupButton>
                     </StyledDiv>
 
                 </AddSoupCard>

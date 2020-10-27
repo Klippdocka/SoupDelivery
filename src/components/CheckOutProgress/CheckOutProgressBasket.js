@@ -5,20 +5,25 @@ import NextBtn from '../../components/Buttons/NextBtn';
 import { useLocalStorage } from '../Hooks/UseLocalState';
 import Close from '../../components/Icone/Close';
 import { useHistory } from "react-router-dom";
+import theme from '../../theme';
 
 
 const MainWrapper = styled.div`
 display:flex;
 flex-direction:column;
+justify-content:center;
+align-items:center;
 width:100%;
 
 `;
 
 const NextBtnContainer = styled.div`
 display:flex;
-
-align-items:baseline;
+justify-content:center;
+align-items:center;
+width:100%;
 margin-top:4rem;
+
 `;
 
 const ContentContainer = styled.div`
@@ -27,6 +32,7 @@ flex-direction:column;
 width:100%;
 justify-content:center;
 align-items:center;
+
 
 `;
 
@@ -37,6 +43,10 @@ justify-content:space-around;
 align-items:center;
 width:100%;
 margin-top:4.5rem;
+@media screen and (min-width: ${theme.screenSize.small}){
+  
+  width:60%;
+  }
 `;
 
 const Delivery = styled.div`
@@ -76,6 +86,7 @@ height:4rem;
 width:12rem;
 border-radius:0.5rem;
 text-align:center;
+
 `;
 
 
@@ -87,6 +98,12 @@ align-items:center;
 flex-direction:column;
 width:100%;
 min-height:20rem;
+
+
+@media screen and (min-width: ${theme.screenSize.small}){
+  
+  width:60%;
+  }
 
 `;
 

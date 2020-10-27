@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import HamburgerIcone from '../Icone/hamburgerIcone';
 import styled from 'styled-components';
 import SoupIcon from '../../components/Icone/soupIcon';
@@ -16,9 +16,10 @@ cursor: pointer;
 `;
 
 const SoupIconWrapper = styled.div`
-display:${props => props.showCart ? 'block' : 'none'};
+display:${props => props.showCart ? 'flex' : 'none'};
 margin-right:1.5rem;
 cursor: pointer;
+
 
 `;
 
@@ -50,8 +51,18 @@ margin-left:0.5rem;
 `;
 
 
+const TotalSoup = styled.h3`
+color:#b7b7b7;
+font-size:1.8rem;
+
+
+`;
+
+
 
 const Navbar = (props) => {
+
+  const [counter, setCounter] = useState(0);
 
   let history = useHistory();
 
@@ -76,7 +87,7 @@ const HandleChange = () => {
       </TimeIconeWrapper>
            
         <SoupIconWrapper onClick={HandleChange} showCart={props.showCart}>
-                 <SoupIcon/>
+        <TotalSoup>{counter}</TotalSoup>  <SoupIcon/>
          </SoupIconWrapper>
 
         </NavbarWrapper>
