@@ -136,11 +136,33 @@ margin-top:14rem;
 
 `;
 
+const StyledOrderNum = styled.p`
+color:#656565;
+font-weight:400;
+font-size:1.7rem;
+padding-left:1rem;
+`;
+
 
 
 const CheckOutProgressDone = (props) => {
 
+    const [order, setOrder] = useLocalStorage('order');
+
 let History = useHistory();
+
+
+/*useEffect(() => {
+
+    axios.getOrder()
+    .then(resp => {
+    setOrder(resp.data)
+    })
+    .catch(error => console.log(error))
+
+  
+    }, []);*/
+
 
 
     return (
@@ -148,7 +170,7 @@ let History = useHistory();
             <CloseIconeWrapper onClick={() => History.push('/')}><CloseIcone/></CloseIconeWrapper>
             <TitleContainer>
                 <Title>Beställning bekräftad</Title>
-                <Div><StyledP>Din order:</StyledP><StyledP>Nummer</StyledP></Div>
+    <Div><StyledP>Din order:</StyledP><StyledOrderNum>{order.id}</StyledOrderNum></Div>
             </TitleContainer>
 
 <StyledDiv><P>Leveranstid</P></StyledDiv>
@@ -176,6 +198,7 @@ let History = useHistory();
     )
 
 
+    
 };
 
 

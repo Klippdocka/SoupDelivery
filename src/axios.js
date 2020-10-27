@@ -30,7 +30,7 @@ class Axios {
     }
 
     getOrder() {
-        return this.instance.get('/items.json')
+        return this.instance.get('/orders.json')
     }
 }
 

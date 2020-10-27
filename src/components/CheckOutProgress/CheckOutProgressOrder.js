@@ -292,6 +292,7 @@ const CheckOutProgressOrder = (props) => {
     const [localCreds, setLocalCreads] = useLocalStorage('creads');
     const [number, setNumber] = useLocalStorage('CreditNumber');
     const [total, setTotal] = useLocalStorage('total');
+    const [order, setOrder] = useLocalStorage('order');
 
 
     let history = useHistory();
@@ -316,10 +317,21 @@ const CheckOutProgressOrder = (props) => {
         len--; i++;
 
     }
+    function makeid(length) {
+        var result = '';
+        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var charactersLength = characters.length;
+        for (var i = 0; i < length; i++) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+        return result;
+    }
+
 
     const OrderSubmit = () => {
 
         const order = {
+            id: makeid(8),
             soups: items.map((element) => element.item.title),
             price: total,
             customer: {
@@ -333,6 +345,7 @@ const CheckOutProgressOrder = (props) => {
      
         axios.setOrder(order)
             .then(resp => {
+                setOrder(order)
                 history.push('/confirmedorder')
             })
             .catch(error => console.log(error))
