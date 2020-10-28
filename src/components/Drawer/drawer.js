@@ -70,7 +70,7 @@ text-decoration:none;
 color:#8b8b8b;
 font-size:2rem;
 margin-left:3rem;
-padding-bottom:1rem;
+padding-bottom:2rem;
 padding-top:2rem;
 
 
@@ -132,7 +132,7 @@ const Drawer = (props) => {
               <BorderUnderline/>
 
            
-            <StyledA href="/About">
+            <StyledA href="/omoss">
                   <span>Om oss</span>
               </StyledA>
               <BorderUnderline/>
@@ -140,7 +140,16 @@ const Drawer = (props) => {
               <StyledA href="/villkor">
                   <span>Villkor</span>
               </StyledA>
-              <BorderUnderline/>           
+              <BorderUnderline/>  
+
+
+              <StyledA href="/kontakt">
+                  <span>Hör av dig!</span>
+              </StyledA>
+              <BorderUnderline/>    
+
+
+
 
             </DrawerContent>
             

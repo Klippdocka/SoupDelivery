@@ -113,7 +113,7 @@ const Routes = (props) => {
 
                 </Route>
 
-                <Route exact path="/About">
+                <Route exact path="/omoss">
                     <Main showCart={false}>
                         <About />
                     </Main>
@@ -121,7 +121,7 @@ const Routes = (props) => {
                 </Route>
 
 
-                <Route exact path="/Contact">
+                <Route exact path="/kontakt">
                     <Main showCart={false}>
                         <Contact />
                     </Main>

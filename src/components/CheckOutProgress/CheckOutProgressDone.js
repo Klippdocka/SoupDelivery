@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import CheckOutProgressMain from '../../components/CheckOutProgress/CheckOutProgressMain';
-import NextBtn from '../../components/Buttons/NextBtn';
+
 import { useLocalStorage } from '../Hooks/UseLocalState';
-import Close from '../../components/Icone/Close';
+
 import { useHistory } from "react-router-dom";
 import CloseIcone from '../Icone/CloseIcone';
-import { ImgContainer } from '../Home/styledHome';
+
 import ProfileImg from '../Images/craig.jpg';
-import axios from '../../axios';
+
 import theme from '../../theme';
 
 const MainWrapper = styled.div`

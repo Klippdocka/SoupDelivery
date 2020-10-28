@@ -14,16 +14,6 @@ background-color:#f2f3f5;
 flex-direction:column;
 `;
 
-const SignInContainer = styled.div`
-display:flex;
-justify-content:center;
-align-items:center;
-height:40rem;
-width:30rem;
-background-color:white;
-box-shadow: 10px 11px 6px -6px rgba(0,0,0,0.18);
-`;
-
 const SignInWrapper = styled.div`
 display:flex;
 justify-content:center;

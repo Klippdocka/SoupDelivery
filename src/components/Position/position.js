@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import PlacePin from '../Icone/placePin';
 import { withRouter } from 'react-router-dom';
