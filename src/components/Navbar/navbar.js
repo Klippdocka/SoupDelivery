@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import HamburgerIcone from '../Icone/hamburgerIcone';
 import styled from 'styled-components';
 import SoupIcon from '../../components/Icone/soupIcon';
 import CloseIcone  from '../Icone/CloseIcone';
 import { useHistory } from "react-router-dom";
+import { useLocalStorage } from '../Hooks/UseLocalState';
 
 const HamburgerWrapper = styled.div`
 margin-left:1.5rem;
 position:absolute;
 cursor: pointer;
+
 
 
 
@@ -19,6 +21,8 @@ const SoupIconWrapper = styled.div`
 display:${props => props.showCart ? 'flex' : 'none'};
 margin-right:1.5rem;
 cursor: pointer;
+justify-content:center;
+align-items:center;
 
 
 `;
@@ -52,9 +56,10 @@ margin-left:0.5rem;
 
 
 const TotalSoup = styled.h3`
-color:#b7b7b7;
+color:#23591e;
 font-size:1.8rem;
-
+margin-right:0.5rem;
+margin-top:0.5rem;
 
 `;
 
@@ -62,13 +67,15 @@ font-size:1.8rem;
 
 const Navbar = (props) => {
 
-  const [counter, setCounter] = useState(0);
+  const [counter, setCounter] = useLocalStorage('count', 0)
 
   let history = useHistory();
 
 const HandleChange = () => {
 
   history.push('/ShoppingCart')
+
+
 
 }
 

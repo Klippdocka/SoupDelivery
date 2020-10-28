@@ -248,17 +248,13 @@ const AddSoup = (props) => {
 
    let Item = props.openItem;
 
-   const initialState = () => Number(window.localStorage.getItem('count')) || 0
+
 
     const [count, setCount] = useState(1);
-    const [counter, setCounter] = useState(initialState);
+    const [counter, setCounter] = useLocalStorage('count', 0)
 
 
-useEffect(() => {
-    window.localStorage.setItem('count', counter);
-}, [counter])
-    
-    
+
     const [checkbox, setCheckbox] = useState({
         accesssory: {},
         value: "",
@@ -313,11 +309,13 @@ useEffect(() => {
       
         console.log(counter)
         props.toggle();
+        window.location.reload(true)
 
     }    
 
     function counterSoups() {
         setCounter(counter + 1);
+        console.log('ddd')
     
     }
 

@@ -243,6 +243,7 @@ const CheckOutProgressBasket = (props) => {
     const [items, setItems] = useState([]);
     const [cartTotal, setCartTotal] = useState(0);
     const [total, setTotal] = useLocalStorage('total');
+    const [counter, setCounter] = useLocalStorage('count', 0)
 
     let history = useHistory();
 
@@ -279,6 +280,7 @@ const CheckOutProgressBasket = (props) => {
             localStorage.removeItem('item');
         }
         window.location.reload(false);
+        setCounter(counter - 1);
     };
 
 
