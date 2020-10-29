@@ -12,6 +12,7 @@ import {
   markAction,
   deleteAction
 } from "./soup";
+import { CartProvider } from './components/Hooks/CartContext';
 
 const StyledDiv = styled.div`
 height:100%;
@@ -52,6 +53,7 @@ const App = () => {
 
  
   return (
+    <CartProvider>
     <AuthProvider>
     <SoupsContext.Provider value={dispatch}>
     <StyledDiv>
@@ -60,6 +62,7 @@ const App = () => {
    </StyledDiv>
    </SoupsContext.Provider>
    </AuthProvider>
+   </CartProvider>
   );
 
 }

@@ -75,7 +75,7 @@ const About = (props) => {
 
         <StyledDiv>
             <TextContainer><H3>Allmänna villkor</H3>
-            <P>När du gör en  beställninga från Eight Soups godkänner du köpevillkoren. Beställningen är bindande och du som kund är ansvarig över att angivna uppgifter så som namn, e-postadress och postadress, stämmer.   
+            <P>När du gör en  beställning från Eight Soups godkänner du köpevillkoren. Beställningen är bindande och du som kund är ansvarig över att angivna uppgifter så som namn, e-postadress och postadress, stämmer.   
             </P>
             <BoldP>Priser och avgifter</BoldP>
             <P>Alla priser är i svneksa kronor(SEK), inklusive gällande moms. Det tillkommer en fraktavgift på 39 SEK när du gör beställning hem. </P>

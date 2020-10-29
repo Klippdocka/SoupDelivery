@@ -4,8 +4,8 @@ import { useLocalState } from '../Hooks/UseLocalState';
 import theme from '../../theme';
 import { MainWrapper } from '../Home/styledHome';
 import Soup from '../Soup/Soup';
-//import { Items } from '../../components/SoupService/SoupService'
 import axios from '../../axios';
+import Close from '../Icone/CloseIcone';
 
 
 const ContentContainer = styled.div`
@@ -51,6 +51,39 @@ width:100%;
 
 `;
 
+const DeliveryDiv = styled.div`
+display:${props => props.active ? 'none' : 'flex'};
+position:fixed;
+height:4rem;
+width:100%;
+background-color:#e4e8eb;
+
+justify-content:center;
+align-items:center;
+margin-top:6rem;
+box-shadow:5px 4px 15px 3px rgba(0,0,0,0.21);
+flex-direction:row;
+justify-content:space-around;
+
+
+`;
+
+const Ptag = styled.p`
+padding:0rem;
+margin:0rem;
+margin-left:5rem;
+`;
+
+const CloseContainer = styled.div`
+display:flex;
+justify-content:flex-end;
+align-items:flex-end;
+height:2rem;
+width:4rem;
+
+
+`;
+
 
 
 const SoupMenu = (props) => {
@@ -58,6 +91,7 @@ const SoupMenu = (props) => {
     const [address, setAddress] = useLocalState('address');
 
     const [items, setItems] = useState([]);
+
 
 
     useEffect(() => {
@@ -86,7 +120,10 @@ const SoupMenu = (props) => {
                 </NavbarContainer>
 
 
-
+            {   /* <DeliveryDiv>
+    <Ptag>Vid hemleverans tar vi en avgift på 39 kr</Ptag>
+    <CloseContainer><Close/></CloseContainer>
+            </DeliveryDiv>*/ }
 
                 <SoupMainContainer>
 

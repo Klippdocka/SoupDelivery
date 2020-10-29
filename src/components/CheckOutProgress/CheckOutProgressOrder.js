@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { useLocalState, useLocalStorage } from '../Hooks/UseLocalState';
 import MasterCredit from '../../components/Icone/MasterCredit';
@@ -6,6 +6,7 @@ import TimeIcone from '../../components/Icone/time';
 import { useHistory } from "react-router-dom";
 import axios from '../../axios';
 import theme from '../../theme';
+import { CartContext } from '../Hooks/CartContext';
 
 const MainWrapper = styled.div`
 display:flex;
@@ -303,25 +304,16 @@ margin-bottom:1rem;
 
 
 const CheckOutProgressOrder = (props) => {
-    const [items, setItems] = useState([]);
     const [longAddress, setLongAdress] = useLocalState('longAddress');
     const [localCreds, setLocalCreads] = useLocalStorage('creads');
     const [number, setNumber] = useLocalStorage('CreditNumber');
     const [total, setTotal] = useLocalStorage('total');
     const [order, setOrder] = useLocalStorage('order');
-
+    const [cart, setCart] = useContext(CartContext);
 
     let history = useHistory();
 
-    useEffect(() => {
-        let shoppingCart;
-
-        if (localStorage.getItem('item') != null) {
-            const item = JSON.parse(localStorage.getItem('item'));
-            setItems(item);
-        }
-    }, []);
-
+   
 
     let str = number;
     let len = str.length - 1,
@@ -348,7 +340,7 @@ const CheckOutProgressOrder = (props) => {
 
         const order = {
             id: makeid(8),
-            soups: items.map((element) => element.item.title),
+            soups: cart.map((element) => element.item.title),
             price: total,
             customer: {
                 firstName: localCreds.firstName,
@@ -386,7 +378,7 @@ const CheckOutProgressOrder = (props) => {
 
 
                 {
-                    items.map(({ item, accessory, drink, amount }, i) => {
+                    cart.map(({ item, accessory, drink, amount }, i) => {
 
                         return <React.Fragment key={i}>
                             <ItemContainer>

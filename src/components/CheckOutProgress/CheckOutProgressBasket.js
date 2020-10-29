@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import CheckOutProgressMain from '../../components/CheckOutProgress/CheckOutProgressMain';
 import NextBtn from '../../components/Buttons/NextBtn';
@@ -6,7 +6,7 @@ import { useLocalStorage } from '../Hooks/UseLocalState';
 import Close from '../../components/Icone/Close';
 import { useHistory } from "react-router-dom";
 import theme from '../../theme';
-
+import { CartContext } from '../Hooks/CartContext';
 
 const MainWrapper = styled.div`
 display:flex;
@@ -236,14 +236,14 @@ flex-direction:column;
 
 
 
+
 const CheckOutProgressBasket = (props) => {
 
     const [active, setActive] = useState(true);
     const [localActive, setLocalActive] = useLocalStorage('delivery')
-    const [items, setItems] = useState([]);
     const [cartTotal, setCartTotal] = useState(0);
     const [total, setTotal] = useLocalStorage('total');
-    const [counter, setCounter] = useLocalStorage('count', 0)
+    const [cart, setCart] = useContext(CartContext);
 
     let history = useHistory();
 
@@ -251,36 +251,20 @@ const CheckOutProgressBasket = (props) => {
 
     useEffect(() => {
         subTotal();
-    }, [items]);
+    }, [cart]);
 
     useEffect(() => {
         saveDeliveryTotalToLocalStorage(active);
-    }, [items]);
-
-
-    useEffect(() => {
-        let shoppingCart;
-
-        if (localStorage.getItem('item') != null) {
-            const item = JSON.parse(localStorage.getItem('item'));
-            setItems(item);
-        }
-    }, []);
-
+    }, [cart]);
 
 
 
     const handleRemoveItem = (index) => {
 
-
-        let item = JSON.parse(localStorage.getItem('item'));
-        item = item.filter((row, i) => i !== index);
-        localStorage.setItem('item', JSON.stringify(item));
-        if (item.lenght === 0) {
-            localStorage.removeItem('item');
-        }
-        window.location.reload(false);
-        setCounter(counter - 1);
+        let items = cart
+        items = items.filter((row, i) => i !== index);
+        setCart(items)
+    
     };
 
 
@@ -295,8 +279,8 @@ const CheckOutProgressBasket = (props) => {
     const subTotal = () => {
 
         let totalVal = 0;
-        for (let i = 0; i < items.length; i++) {
-            totalVal += items[i].item.price;
+        for (let i = 0; i <cart.length; i++) {
+            totalVal += cart[i].item.price;
     
         }
         setCartTotal(totalVal);
@@ -306,15 +290,15 @@ const CheckOutProgressBasket = (props) => {
     const saveDeliveryTotalToLocalStorage = (newActive) => {
         let totalVal = newActive ? 39 : 0;
 
-        for (let i = 0; i < items.length; i++) {
-            totalVal += items[i].item.price;
+        for (let i = 0; i <cart.length; i++) {
+            totalVal += cart[i].item.price;
         }
 
         let totalDrink = 0;
        
-        for (let i = 0; i < items.length; i++) {
-            if (items[i].drink.price != null)
-                totalDrink += items[i].drink.price;
+        for (let i = 0; i < cart.length; i++) {
+            if (cart[i].drink.price != null)
+                totalDrink += cart[i].drink.price;
         }
 
         setTotal(totalVal + totalDrink)
@@ -348,7 +332,7 @@ const CheckOutProgressBasket = (props) => {
 
 
                 {
-                    items.map(({ item, accessory, drink, amount }, i) => {
+                    cart.map(({ item, accessory, drink, amount }, i) => {
 
                         return <React.Fragment key={i}>
                             <ItemContainer>

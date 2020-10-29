@@ -67,7 +67,20 @@ width:${props => props.progress + "%"};
 background-color:#9ab54a;
 `;
 
+const Ptag = styled.p`
+font-size:1rem;
+font-weight:400;
+margin-left:0rem;
+color:#23591e;
+//color:#656565;
+`;
 
+const TextContiner = styled.div`
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+`;
 
 
 const CheckOutProgressMain = (props) => {
@@ -95,10 +108,15 @@ const progressFunction = (page) => {
 
         <ProgressBar>
         <BasketContiner>
-            <BasketIcone/>
-            <PlacePin/>
-            <CreditCard/>
-        </BasketContiner>
+        <TextContiner><BasketIcone/>
+            <Ptag>Varukorg</Ptag></TextContiner> 
+          <TextContiner> <PlacePin/>
+          <Ptag>Leveransdetaljer</Ptag></TextContiner> 
+          <TextContiner><CreditCard/><Ptag>Betalning</Ptag></TextContiner>
+            
+       </BasketContiner>
+
+       
         </ProgressBar>
         
 <ProgressLineWrapper>

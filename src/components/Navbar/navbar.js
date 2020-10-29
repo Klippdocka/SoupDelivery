@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import HamburgerIcone from '../Icone/hamburgerIcone';
 import styled from 'styled-components';
 import SoupIcon from '../../components/Icone/soupIcon';
-import CloseIcone  from '../Icone/CloseIcone';
 import { useHistory } from "react-router-dom";
 import { useLocalStorage } from '../Hooks/UseLocalState';
+import { CartContext } from '../Hooks/CartContext';
+
+
+
 
 const HamburgerWrapper = styled.div`
 margin-left:1.5rem;
@@ -67,7 +70,7 @@ margin-top:0.5rem;
 
 const Navbar = (props) => {
 
-  const [counter, setCounter] = useLocalStorage('count', 0)
+  const [cart, setCart] = useContext(CartContext);
 
   let history = useHistory();
 
@@ -94,7 +97,8 @@ const HandleChange = () => {
       </TimeIconeWrapper>
            
         <SoupIconWrapper onClick={HandleChange} showCart={props.showCart}>
-        <TotalSoup>{counter}</TotalSoup>  <SoupIcon/>
+      
+        <TotalSoup>{cart.length}</TotalSoup>  <SoupIcon/>
          </SoupIconWrapper>
 
         </NavbarWrapper>

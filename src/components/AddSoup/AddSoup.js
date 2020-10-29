@@ -1,4 +1,4 @@
-import React, { useState, useContext, Component, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import theme from '../../theme';
 import CloseIcone from '../../components/Icone/CloseIcone';
@@ -6,17 +6,9 @@ import { accesssories, drinks } from '../../components/SoupService/SoupService';
 import { useLocalStorage } from '../Hooks/UseLocalState';
 import AddIcone from '../../components/Icone/AddIcone';
 import RemoveIcone from '../../components/Icone/RemoveIcone';
-import { useHistory } from "react-router-dom";
+import { CartContext } from '../Hooks/CartContext';
 
-import { SoupsContext } from '../../App.js'
 
-import {
-    soupReducer,
-    initialState,
-    addAction,
-    markAction,
-    deleteAction
-} from "../../soup";
 
 
 const ModalContainer = styled.div`
@@ -251,7 +243,7 @@ const AddSoup = (props) => {
 
 
     const [count, setCount] = useState(1);
-    const [counter, setCounter] = useLocalStorage('count', 0)
+    const [cart, setCart] = useContext(CartContext);
 
 
 
@@ -285,13 +277,6 @@ const AddSoup = (props) => {
 
     const handleSubmit = (event) => {
        
-
-
-        let shoppingCart = [];
-
-       if (localStorage.getItem('item') != null) {
-           shoppingCart = JSON.parse(localStorage.getItem('item'));  
-        }    
         
         const item = {
             item: Item,
@@ -299,27 +284,15 @@ const AddSoup = (props) => {
             accessory: checkbox.accesssory,
             amount: count
         }
-        shoppingCart.push(item)
-        localStorage.setItem('item', JSON.stringify(shoppingCart))
+        setCart(currentState => [...currentState, item])
 
+   
 
         setCheckbox({})
         setCheckboxDrinks({})
         setCount(1)
-      
-        console.log(counter)
         props.toggle();
-        window.location.reload(true)
-
     }    
-
-    function counterSoups() {
-        setCounter(counter + 1);
-        console.log('ddd')
-    
-    }
-
-
 
     const handleChangeDrinks = (element) => {
         setCheckboxDrinks({
@@ -416,7 +389,7 @@ const AddSoup = (props) => {
                                 setCount(count + 1)
                             }}><AddIcone /></IconeDiv>
                         </AddSoupContainer>
-                        <AddSoupButton onClick={() => {handleSubmit(); counterSoups();}}>Lägg till i varukorg</AddSoupButton>
+                        <AddSoupButton onClick={() => handleSubmit()}>Lägg till i varukorg</AddSoupButton>
                     </StyledDiv>
 
                 </AddSoupCard>
