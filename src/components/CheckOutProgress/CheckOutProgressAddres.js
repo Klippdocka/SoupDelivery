@@ -143,7 +143,6 @@ const CheckOutProgressAddres = (props) => {
     const [error, setError] = useState('');
 
 
-    //firstName.match(letters));
 
     let history = useHistory();
 

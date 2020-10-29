@@ -49,6 +49,7 @@ margin-top:2rem;
 `;
 
 const StyledH2 = styled.h2`
+display:${props => props.DeliveryType ? 'block' : 'none'};
 margin-left:4.5rem;
 font-size:1.8rem;
 color:#656565;
@@ -145,8 +146,10 @@ color:#707070;
 const StyledP = styled.p`
 font-size:1.5rem;
 color:#707070;
-margin-left:0.5rem;
+margin-left:3.5rem;
 margin-bottom:0rem;
+margin-block-start: 0rem;
+text-align:start;
 `;
 
 const StyledName = styled.p`
@@ -155,10 +158,11 @@ color:#707070;
 margin-left:0.5rem;
 margin-bottom:0rem;
 font-weight:700;
+margin-top:0rem;
 `;
 
 const NameDiv = styled.div`
-display:flex;
+display:${props => props.DeliveryType ? 'flex' : 'none'};
 justify-content:flex-start;
 align-items:flex-start;
 flex-direction:column;
@@ -172,6 +176,9 @@ justify-content:flex-start;
 align-items:flex-start;
 flex-direction:row;
 text-align:center;
+margin-left:3rem;
+margin-top:1rem;
+margin-bottom:0rem;
 `;
 
 
@@ -300,6 +307,29 @@ margin-left:0.5rem;
 margin-bottom:1rem;
 `;
 
+const Ptext = styled.p`
+margin:0rem;
+font-size:1.5rem;
+color:#707070;
+font-weight:400;
+`;
+
+const DivPickup = styled.div`
+display:${props => !props.DeliveryType ? 'flex' : 'none'};
+flex-direction:column;
+justify-content:flex-start;
+align-items:flex-start;
+margin-right:18rem;
+text-align:center;
+`;
+
+const PickUpH2 = styled.h2`
+display:${props => !props.DeliveryType ? 'block' : 'none'};
+margin-left:4.5rem;
+font-size:1.8rem;
+color:#656565;
+font-weight:600;
+`;
 
 
 
@@ -310,6 +340,7 @@ const CheckOutProgressOrder = (props) => {
     const [total, setTotal] = useLocalStorage('total');
     const [order, setOrder] = useLocalStorage('order');
     const [cart, setCart] = useContext(CartContext);
+    const [localActive, setLocalActive] = useLocalStorage('delivery')
 
     let history = useHistory();
 
@@ -408,16 +439,24 @@ const CheckOutProgressOrder = (props) => {
                 }
 
                 <TitleDiv>
-                    <StyledH2>Levereras till</StyledH2>
+                    <StyledH2 DeliveryType={localActive}>Levereras till</StyledH2>
+                    <PickUpH2 DeliveryType={localActive}>Avhämtning</PickUpH2>
                     <IconeWrapper>
                         <TimeIcone />
                     </IconeWrapper>
-                    <StyledTime>10-20 min</StyledTime>
+                    <StyledTime>15-20 min</StyledTime>
 
                 </TitleDiv>
                 <DeliveryDiv>
-                    <NameDiv> <NameContainer><StyledName>{localCreds.firstName}</StyledName><StyledName>{localCreds.lastName} </StyledName></NameContainer>
+                    <NameDiv DeliveryType={localActive}> <NameContainer><StyledName>{localCreds.firstName}</StyledName><StyledName>{localCreds.lastName} </StyledName></NameContainer>
                         <StyledP>{longAddress}</StyledP></NameDiv>
+
+
+            
+                <DivPickup DeliveryType={localActive}><Ptext>Eight Soups</Ptext>
+                <Ptext>Odengatan 92</Ptext>
+                <Ptext>113 22 Stockholm</Ptext></DivPickup>
+         
 
 
                 </DeliveryDiv>
