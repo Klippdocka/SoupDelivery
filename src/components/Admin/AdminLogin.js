@@ -113,7 +113,7 @@ const AdminLogin = (props) => {
         
               <Input  autoComplete="off" placeholder="Email" autoFocus value={email} onChange={e => setEmail(e.target.value)}/>
               <Input type="password" autoComplete="off" placeholder="Lösenord"  autoFocus value={password} onChange={e => setPassword(e.target.value)}/>
-              <PasswordForget onClick={() => props.history.push('AdminRegi')}> <StyledP>Ny användare? Skapa konto här</StyledP></PasswordForget>    <PasswordForget> <StyledP>Glömt lösenord?</StyledP></PasswordForget>
+              <PasswordForget onClick={() => props.history.push('AdminRegi')}> <StyledP>Ny användare? Skapa konto här</StyledP></PasswordForget><PasswordForget><StyledP>Glömt lösenord?</StyledP></PasswordForget>
               <SignInBtn onClick={() => login()}>Logga in</SignInBtn>
           
 

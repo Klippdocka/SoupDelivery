@@ -1,7 +1,6 @@
 import React from 'react';
-import { MainWrapper, ImgContainer, HomeImg, PositionContainer } from './styledHome';
+import { MainWrapper, ImgContainer, HomeImg } from './styledHome';
 import Soup5 from '../Images/Soup5.jpg';
-import Position from '../Position/position'
 import Logo from '../../components/Icone/Loggo';
 import styled from 'styled-components';
 

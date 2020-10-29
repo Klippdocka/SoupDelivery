@@ -107,12 +107,6 @@ const Routes = (props) => {
                 </Route>
 
 
-
-                <Route exact path="/Test">
-                    <SoupServiceFirebase />
-
-                </Route>
-
                 <Route exact path="/omoss">
                     <Main showCart={false}>
                         <About />

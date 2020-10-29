@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import CheckOutProgressMain from '../../components/CheckOutProgress/CheckOutProgressMain';
 import NextBtn from '../../components/Buttons/NextBtn';
@@ -137,7 +137,7 @@ const CheckOutProgressAddres = (props) => {
     const [longAddress, setLongAdress] = useLocalState('longAddress');
     const [localCreds, setLocalCreads] = useLocalStorage('creads');
     const [localActive, setLocalActive] = useLocalStorage('delivery', true)
-    const [isDeliveryTrue, setIsDeliveryTrue] = useState(true);
+   
 
     const [creds, setCreds] = useState({ firstName: localCreds ? localCreds.firstName : null, lastName: localCreds ? localCreds.lastName : null, address: longAddress, email: localCreds ? localCreds.email : localCreds });
     const [error, setError] = useState('');
@@ -155,7 +155,7 @@ const CheckOutProgressAddres = (props) => {
 
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e) => { 
         e.preventDefault();
         let letters = /^[A-Za-z]+$/;
 
@@ -164,11 +164,11 @@ const CheckOutProgressAddres = (props) => {
         const address = creds.address
         const email = creds.email
 
-        if (firstName && firstName.length === 0 || firstName.match(letters) == null) {
+        if ((firstName && firstName.length === 0) || firstName.match(letters) == null) {
             setError(errorMessage.firstName)
             console.log('firstname')
 
-        } else if (lastName && lastName.length === 0 || lastName.match(letters) == null) {
+        } else if ((lastName && lastName.length === 0) || lastName.match(letters) == null) {
 
             setError(errorMessage.firstName)
             console.log('lastName');

@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import CloseIcone from '../Icone/CloseIcone';
 import ProfileImg from '../Images/craig.jpg';
 import theme from '../../theme';
-import Logo from '../Icone/Loggo';
+
 
 const MainWrapper = styled.div`
 display:flex;

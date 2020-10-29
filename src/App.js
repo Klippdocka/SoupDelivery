@@ -1,17 +1,10 @@
-import React, { useState, useReducer, useContext } from 'react';
+import React from 'react';
 import { createGlobalStyle } from 'styled-components';
-import firebase from './firebase';
 
 import Routes from './Route/routes';
 import styled from 'styled-components';
 import { AuthProvider } from '../src/Auth';
-import {
-  soupReducer,
-  initialState,
-  addAction,
-  markAction,
-  deleteAction
-} from "./soup";
+
 import { CartProvider } from './components/Hooks/CartContext';
 
 const StyledDiv = styled.div`
@@ -42,25 +35,20 @@ const GlobalStyle = createGlobalStyle`
   }
 
  
-
- 
 `
-export const SoupsContext = React.createContext(null);
 
 
 const App = () => {
-  const [soupList, dispatch] = useReducer(soupReducer, initialState);
-
  
   return (
     <CartProvider>
     <AuthProvider>
-    <SoupsContext.Provider value={dispatch}>
+    
     <StyledDiv>
       <GlobalStyle />
       <Routes/>
    </StyledDiv>
-   </SoupsContext.Provider>
+
    </AuthProvider>
    </CartProvider>
   );

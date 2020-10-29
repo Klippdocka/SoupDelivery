@@ -342,11 +342,11 @@ const CheckOutProgressBasket = (props) => {
                                         <AccesssoriesWrapper> <Accesssories>
                                             {accessory.title + ', ' + drink.title + ' (' + drink.price + 'kr)'}
                                         </Accesssories> </AccesssoriesWrapper>
-                                        : accessory.title && drink.title == undefined ?
+                                        : accessory.title && drink.title === undefined ?
                                             <AccesssoriesWrapper><Accesssories>
                                                 {accessory.title}
                                             </Accesssories></AccesssoriesWrapper>
-                                            : accessory.title == undefined && drink.title ?
+                                            : accessory.title === undefined && drink.title ?
                                                 <AccesssoriesWrapper>  <Accesssories>
                                                     {drink.title + ' (' + drink.price + 'kr)'}
                                                 </Accesssories></AccesssoriesWrapper>

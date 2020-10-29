@@ -207,11 +207,11 @@ const CheckOutProgressPayment = (props) => {
 
     const handleSubmit = () => {
         let numbers = /^[0-9]+$/;
-        if (number && number.length === 0 || number.match(numbers) == null) { 
+        if ((number && number.length === 0 ) || number.match(numbers) == null) { 
             setError('Alla fält måste vara i fylda och får endast innehålla siffror')
-        }else if  (expiry && expiry.length === 0 || expiry.match(numbers) == null) {
+        }else if  ((expiry && expiry.length === 0 ) || expiry.match(numbers) == null) {
             setError(error)
-        }else if  (cvc && cvc.length === 0 || cvc.match(numbers) == null) {
+        }else if  ((cvc && cvc.length === 0 ) || cvc.match(numbers) == null) {
             setError(error)
         }else {
             history.push('/ShoppingCartOrder')
