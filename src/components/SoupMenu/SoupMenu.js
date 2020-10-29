@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import styled, { isStyledComponent } from 'styled-components';
+import styled from 'styled-components';
 import { useLocalState } from '../Hooks/UseLocalState';
 import theme from '../../theme';
 import { MainWrapper } from '../Home/styledHome';
 import Soup from '../Soup/Soup';
 import axios from '../../axios';
 import Close from '../Icone/CloseIcone';
+import { useLocalStorage } from '../Hooks/UseLocalState';
 
 
 const ContentContainer = styled.div`
@@ -92,6 +93,8 @@ const SoupMenu = (props) => {
 
     const [items, setItems] = useState([]);
 
+    const [showDiv, setShowDiv] = useLocalStorage('show', true)
+
 
 
     useEffect(() => {
@@ -105,6 +108,14 @@ const SoupMenu = (props) => {
 
     }, []);
 
+
+    /*const ShowDivHandler = () => {
+        if(showDiv === false)
+        { setShowDiv(showDiv)
+        }else {
+            
+        }
+    }*/
 
 
 
@@ -120,10 +131,10 @@ const SoupMenu = (props) => {
                 </NavbarContainer>
 
 
-            {   /* <DeliveryDiv>
+        { /*  <DeliveryDiv>
     <Ptag>Vid hemleverans tar vi en avgift på 39 kr</Ptag>
     <CloseContainer><Close/></CloseContainer>
-            </DeliveryDiv>*/ }
+            </DeliveryDiv> */}
 
                 <SoupMainContainer>
 
