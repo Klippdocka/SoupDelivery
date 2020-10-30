@@ -109,14 +109,7 @@ const SoupMenu = (props) => {
     }, []);
 
 
-    /*const ShowDivHandler = () => {
-        if(showDiv === false)
-        { setShowDiv(showDiv)
-        }else {
-            
-        }
-    }*/
-
+ 
 
 
     return (
@@ -130,11 +123,6 @@ const SoupMenu = (props) => {
                     <StyledP>{address}</StyledP>
                 </NavbarContainer>
 
-
-        { /*  <DeliveryDiv>
-    <Ptag>Vid hemleverans tar vi en avgift på 39 kr</Ptag>
-    <CloseContainer><Close/></CloseContainer>
-            </DeliveryDiv> */}
 
                 <SoupMainContainer>
 

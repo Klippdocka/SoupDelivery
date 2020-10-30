@@ -510,7 +510,7 @@ const Admin = (props) => {
 
 
             <SoupList>
-                {console.log(items)}
+              
                 {items.map((element, index) => {
                     return (<SoupWrapper key={index} item={element} id={element.id} value={element.title} image={element.image}>
 

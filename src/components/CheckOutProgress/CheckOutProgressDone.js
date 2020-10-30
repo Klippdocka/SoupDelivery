@@ -223,6 +223,7 @@ const CheckOutProgressDone = (props) => {
 
     const [localActive, setLocalActive] = useLocalStorage('delivery')
     const [order, setOrder] = useLocalStorage('order');
+    
 
     let History = useHistory();
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import { createGlobalStyle } from 'styled-components';
-
 import Routes from './Route/routes';
 import styled from 'styled-components';
 import { AuthProvider } from '../src/Auth';

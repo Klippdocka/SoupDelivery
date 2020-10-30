@@ -166,24 +166,24 @@ const CheckOutProgressAddres = (props) => {
 
         if ((firstName && firstName.length === 0) || firstName.match(letters) == null) {
             setError(errorMessage.firstName)
-            console.log('firstname')
+         
 
         } else if ((lastName && lastName.length === 0) || lastName.match(letters) == null) {
 
             setError(errorMessage.firstName)
-            console.log('lastName');
+        
         } else if (address && address.length === 0) {
-            console.log('address');
+       
             setError(errorMessage.firstName)
 
         } else if (email && email.length === 0) {
 
             setError(errorMessage.firstName)
-            console.log('email');
+      
         }
         else {
             setError('')
-            console.log("else")
+        
             let Cre = creds;
             setLocalCreads(Cre);
             history.push('/ShoppingCartPayment')

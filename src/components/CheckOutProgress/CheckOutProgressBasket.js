@@ -233,14 +233,9 @@ justify-content:flex-start;
 flex-direction:column;
 `;
 
-
-
-
-
 const CheckOutProgressBasket = (props) => {
-
-    const [active, setActive] = useState(true);
     const [localActive, setLocalActive] = useLocalStorage('delivery')
+    const [active, setActive] = useState(localActive);
     const [cartTotal, setCartTotal] = useState(0);
     const [total, setTotal] = useLocalStorage('total');
     const [cart, setCart] = useContext(CartContext);

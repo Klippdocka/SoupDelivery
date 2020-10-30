@@ -115,16 +115,16 @@ const Position = () => {
 
         let fullAddress = value;
         setLongAdress(fullAddress);
-        
 
-        
+
+
         let splitted = value.split(",")
-        
+
         let result;
 
         if (splitted.length > 0) {
             result = splitted[0]
-        } else { 
+        } else {
             result = value
         }
 
@@ -159,19 +159,19 @@ const Position = () => {
                             <div>
                                 {loading ? <div>...Laddar</div> : null}
 
-                                {suggestions.map(suggestion => {
+                                {suggestions.map((suggestion, index) => {
                                     const style = {
                                         backgroundColor: suggestion.active ? "#41b6e6" : "#fff"
                                     };
 
-
-
                                     return (
-                                        <DropDownStyle  {...getSuggestionItemProps(suggestion, { style })}>
-                                            {suggestion.description}
+                                        <div key={index}>
+                                            <DropDownStyle {...getSuggestionItemProps(suggestion, { style })}>
+                                                {suggestion.description}
 
 
-                                        </DropDownStyle>
+                                            </DropDownStyle>
+                                        </div>
                                     );
 
                                 })}

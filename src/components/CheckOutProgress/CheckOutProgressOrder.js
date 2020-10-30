@@ -341,6 +341,7 @@ const CheckOutProgressOrder = (props) => {
     const [order, setOrder] = useLocalStorage('order');
     const [cart, setCart] = useContext(CartContext);
     const [localActive, setLocalActive] = useLocalStorage('delivery')
+ 
 
     let history = useHistory();
 
@@ -385,7 +386,9 @@ const CheckOutProgressOrder = (props) => {
         axios.setOrder(order)
             .then(resp => {
                 setOrder(order)
+                setCart([]);
                 history.push('/confirmedorder')
+                
             })
             .catch(error => console.log(error))
 
