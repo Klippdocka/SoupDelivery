@@ -9,6 +9,7 @@ import axios from '../../axios';
 import theme from '../../theme';
 import CloseIcone from '../../components/Icone/CloseIcone';
 import Delite from '../../components/Icone/Delite';
+import { useHistory } from "react-router-dom";
 
 const MainWrapper = styled.div`
 height:100%;
@@ -76,6 +77,7 @@ padding-top:2.2rem;
 text-align:center;
 margin-top:5rem;
 cursor: pointer;
+z-index:10;
 
 `;
 
@@ -328,6 +330,47 @@ cursor: pointer;
 const DeleteWrapper = styled.div`
 `;
 
+const OrderWrapper = styled.div`
+display: ${props => props.menuOpenOrder ? 'flex' : 'none'};
+position:fixed;
+justify-content:center;
+align-items:center;
+top:5rem;
+width:100%;
+height:100%;
+background:rgba(79,79,79,0.4);
+
+`;
+
+const OrderContext = styled.div`
+width:30rem;
+height:50rem;
+background-color:white;
+
+`;
+
+const H1Order = styled.h1`
+text-align:center;
+`;
+
+const OrderDiv = styled.div`
+display:flex;
+justify-content:space-around;
+flex-direction:row;
+align-items:center;
+height:4rem;
+`;
+
+const OrderP = styled.p`
+margin-bottom:1rem;
+font-size:1.5rem;
+font-weight:500;
+`;
+
+const DivTitle = styled.div`
+display:flex;
+justify-content:space-around;
+`;
 
 
 const Admin = (props) => {
@@ -343,17 +386,32 @@ const Admin = (props) => {
     const [image, setImage] = useState(null);
     const [error, setError] = useState('');
     const [progress, setProgress] = useState(0);
+    const [isModalOpenOrder, setIsModalOpenOrder] = useState('');
+    const [menuOrder, setMenuOrder] = useState(false);
+    const [orders, setOrders] = useState([]);
 
+    let history = useHistory();
 
     useEffect(() => {
 
         axios.getSoups()
             .then(response => {
                 setItems(response.data)
-            
+
             })
 
     }, []);
+
+    useEffect(() => {
+        axios.getOrder()
+            .then(resp => {
+                setOrders(Object.values(resp.data))
+            })
+            .catch(error => console.log(error))
+    }, [])
+
+
+
 
 
     function makeid(length) {
@@ -368,18 +426,20 @@ const Admin = (props) => {
 
 
 
+
+
     const HandleChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-        const fileType = file['type']
-        const validImageTypes = ['image/gif', 'image/jpeg','image/png']
-        if(validImageTypes.includes(fileType)) {
-            setError('');
-            setImage(file);
-        }else {
-            setError('Du behöver välja en bild i rätt format , gif,jpeg eller png.')
+        const file = e.target.files[0];
+        if (file) {
+            const fileType = file['type']
+            const validImageTypes = ['image/gif', 'image/jpeg', 'image/png']
+            if (validImageTypes.includes(fileType)) {
+                setError('');
+                setImage(file);
+            } else {
+                setError('Du behöver välja en bild i rätt format , gif,jpeg eller png.')
+            }
         }
-    }
     };
 
     const HandleUpdate = () => {
@@ -390,7 +450,7 @@ const Admin = (props) => {
                 "state_changed",
                 snapshot => {
                     const progress = Math.round(
-                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                        (snapshot.bytesTransferred / snapshot.totalBytes) * 100
                     );
                     setProgress(progress);
                 },
@@ -403,14 +463,14 @@ const Admin = (props) => {
                         setProgress(0);
                     });
                 }
-                );
+            );
         } else {
             setError('välj en bild för att ladda upp');
         }
     };
 
     const DeleteHandler = (id) => {
-    
+
         let soups = items
 
         soups = soups.filter(soup => soup.id != id)
@@ -421,6 +481,21 @@ const Admin = (props) => {
                 alert("Soppa borttagen!")
             })
             .catch(error => console.log(error))
+    }
+
+
+
+
+    const AddOrdrarHandler = () => {
+
+        if (!isModalOpenOrder) {
+            setIsModalOpenOrder(true)
+        } else {
+            setIsModalOpenOrder(false)
+        }
+        setIsMenuOpen(false);
+
+
     }
 
 
@@ -440,7 +515,7 @@ const Admin = (props) => {
         let soup = {
             description: description,
             id: makeid(5),
-            image:urlImage,
+            image: urlImage,
             title: title,
             price: price,
 
@@ -462,6 +537,11 @@ const Admin = (props) => {
 
     const ModalCloseHandler = () => {
         setIsModalOpen(false);
+    }
+
+    const ModalCloseHandlerOrder = () => {
+        setIsModalOpenOrder(false);
+        
     }
 
     const LogOut = () => {
@@ -491,6 +571,11 @@ const Admin = (props) => {
                 <DrawerContent>
 
 
+                    <StyledATag onClick={() => AddOrdrarHandler()}>
+                        <span>Ordrar</span>
+                    </StyledATag>
+                    <BorderUnderline />
+
                     <StyledATag onClick={() => AddSoupHandler()}>
                         <span>Lägg till soppa</span>
                     </StyledATag>
@@ -510,7 +595,7 @@ const Admin = (props) => {
 
 
             <SoupList>
-              
+
                 {items.map((element, index) => {
                     return (<SoupWrapper key={index} item={element} id={element.id} value={element.title} image={element.image}>
 
@@ -540,6 +625,32 @@ const Admin = (props) => {
                 })}
             </SoupList>
 
+
+
+            <OrderWrapper menuOpenOrder={isModalOpenOrder}>
+                <OrderContext>
+                <CloseIconeContainer onClick={() => ModalCloseHandlerOrder()}><CloseIcone /></CloseIconeContainer>
+                    <H1Order>Ordrar</H1Order>
+                    <DivTitle> <OrderP>Ordernummer</OrderP> <OrderP>Totaltvärde</OrderP></DivTitle>
+                    <BorderUnderline/>
+                    {orders.map((element, index) => {
+                        return (
+                            <div key={index}>
+                                
+                                <OrderDiv>
+                              
+                                    <p>{element.id}</p>
+                        <p>{element.price} SEK</p>
+                      
+                        </OrderDiv>
+                        <BorderUnderline/>
+                            </div>
+                        );
+                    })}
+               
+                </OrderContext>
+            </OrderWrapper>
+
             <AddSoupWrapper menuOpen={isModalOpen}>
 
                 <AddSoupContent>
@@ -551,16 +662,24 @@ const Admin = (props) => {
                     <InputBig type="text" placeholder="Beskrivning" name="description" value={description} onChange={e => setDescription(e.target.value)}></InputBig>
                     <Input type="number" placeholder="Pris" name="price" value={price} onChange={e => setPrice(parseInt(e.target.value))}></Input>
                     <Input type="file" onChange={HandleChange}></Input>
-            <div>{error}{progress > 0? <progress value={progress} max="100" />: ""}</div>
-                       <button onClick={() => HandleUpdate()}>Ladda upp bild</button>
-                        
-                
+                    <div>{error}{progress > 0 ? <progress value={progress} max="100" /> : ""}</div>
+                    <button onClick={() => HandleUpdate()}>Ladda upp bild</button>
+
+
                     <AddSoupBtn onClick={() => PostNewSoupHandler()}>Lägg till</AddSoupBtn>
                 </AddSoupContent>
             </AddSoupWrapper>
 
 
+
+
+
         </MainWrapper>
+
+
+
+
+
     }
     return <MainWrapper>
 

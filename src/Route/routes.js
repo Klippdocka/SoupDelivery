@@ -20,6 +20,7 @@ import Terms from '../components/Home/Terms';
 import CheckOutProgressDone from '../components/CheckOutProgress/CheckOutProgressDone';
 
 
+
 const Routes = (props) => {
     return (
         <BrowserRouter>
@@ -96,6 +97,9 @@ const Routes = (props) => {
                     <AdminRegi />
 
                 </Route>
+
+
+              
 
 
 

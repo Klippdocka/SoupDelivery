@@ -123,8 +123,13 @@ if (currentUser != null) {
             <DrawerContent>
 
 
+            <StyledATag>
+                    <span>Ordrar</span>
+                </StyledATag>
+                <BorderUnderline />
+
                 <StyledATag>
-                    <span>Lägg till soppa</span>
+                    <span>Lägg till so</span>
                 </StyledATag>
                 <BorderUnderline />
 
