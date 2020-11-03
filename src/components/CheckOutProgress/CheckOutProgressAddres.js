@@ -164,19 +164,19 @@ const CheckOutProgressAddres = (props) => {
         const address = creds.address
         const email = creds.email
 
-        if ((firstName && firstName.length === 0) || firstName.match(letters) == null) {
+        if (!firstName || (firstName && firstName.length === 0) || firstName.match(letters) == null) {
             setError(errorMessage.firstName)
          
 
-        } else if ((lastName && lastName.length === 0) || lastName.match(letters) == null) {
+        } else if (!lastName || (lastName && lastName.length === 0) || lastName.match(letters) == null) {
 
             setError(errorMessage.firstName)
         
-        } else if (address && address.length === 0) {
+        } else if (!address || address && address.length === 0) {
        
             setError(errorMessage.firstName)
 
-        } else if (email && email.length === 0) {
+        } else if (!email || email && email.length === 0) {
 
             setError(errorMessage.firstName)
       

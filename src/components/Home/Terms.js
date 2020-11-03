@@ -30,7 +30,7 @@ flex-direction:row;
 background-color:white;
 max-width:35rem;
 min-height:30rem;
-margin-top:20rem;
+margin-top:6rem;
 opacity:0.9;
 border-radius:0.5rem;
 `;

@@ -8,12 +8,8 @@ height:100%;
 display:flex;
 flex-direction:column;
 align-items:center;
-
-
-
+justify-content: center;
 `;
-
-
 
 
 const ImgContainer = styled.div`
@@ -47,14 +43,9 @@ position:absolute;
 justify-content:center;
 height:5rem;
 width:100%;
-margin-top:55rem;
-
 
 
 @media screen and (max-width: ${theme.screenSize.xsmall}){
-margin-top:65rem;
-
- 
 
 }
 

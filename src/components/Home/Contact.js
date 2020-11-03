@@ -27,11 +27,11 @@ position: absolute;
 display:flex;
 justify-content:center;
 align-items:start;
-flex-direction:row;
+flex-direction:column;
 background-color:white;
-max-width:40rem;
+margin-top:6rem;
+max-width:33rem;
 min-height:30rem;
-margin-top:20rem;
 opacity:0.99;
 border-radius:0.5rem;
 `;
@@ -39,7 +39,6 @@ border-radius:0.5rem;
 const H3 = styled.h3`
 font-size:1.5rem;
 margin-bottom:0rem;
-margin-left:1rem;
 `;
 
 const P = styled.p`
@@ -47,7 +46,8 @@ font-size:1.2rem;
 `;
 
 const TextContainer = styled.div`
-padding:2rem 2rem 3rem 2rem;
+padding-left:1rem;
+padding-right:1rem;
 display:flex;
 justify-content:center;
 align-items:flex-start;
@@ -129,7 +129,7 @@ const [message, setMessage] = useState('');
 
         <StyledDiv>
             <TextContainer><H3>Komma i kontakt</H3>
-            <P> du hittar oss Eight Soups i central Stockholm på adressen Odengatan 92, 113 22 Stockholm. 
+            <P>Du hittar oss Eight Soups i central Stockholm på adressen Odengatan 92, 113 22 Stockholm. 
             </P>
             <P>För tidsbokning och annan information vänligen kontakta oss på <PhoneDiv><Phone/><H4>08-111 111 11</H4></PhoneDiv> </P>
             </TextContainer>

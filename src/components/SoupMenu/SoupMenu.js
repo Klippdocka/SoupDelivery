@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components/macro';
 import { useLocalState } from '../Hooks/UseLocalState';
 import theme from '../../theme';
-import { MainWrapper } from '../Home/styledHome';
 import Soup from '../Soup/Soup';
 import axios from '../../axios';
 import Close from '../Icone/CloseIcone';
@@ -11,25 +10,22 @@ import { useLocalStorage } from '../Hooks/UseLocalState';
 
 const ContentContainer = styled.div`
 display:flex;
-justify-content:center;
-align-items:center;
-width:1000%;
+flex-direction: column;
+width:100%;
 height:100%;
 `;
 
 const NavbarContainer = styled.div`
-display:flex;
-justify-content:center;
-align-items:center;
+position: fixed;
 margin-top:0rem;
-width:100%;
+align-self: center;
 `;
 
 const StyledP = styled.p`
-    margin-top:7.5rem;
+    
     font-size:1.6rem;
     color:#242425;
-    position:fixed;
+
     
 
 
@@ -52,22 +48,6 @@ width:100%;
 
 `;
 
-const DeliveryDiv = styled.div`
-display:${props => props.active ? 'none' : 'flex'};
-position:fixed;
-height:4rem;
-width:100%;
-background-color:#e4e8eb;
-
-justify-content:center;
-align-items:center;
-margin-top:6rem;
-box-shadow:5px 4px 15px 3px rgba(0,0,0,0.21);
-flex-direction:row;
-justify-content:space-around;
-
-
-`;
 
 const Ptag = styled.p`
 padding:0rem;
@@ -109,33 +89,30 @@ const SoupMenu = (props) => {
     }, []);
 
 
- 
+
 
 
     return (
 
 
-        <MainWrapper>
-          
+        <ContentContainer>
 
+            <SoupMainContainer>
 
-                <NavbarContainer>
-                    <StyledP>{address}</StyledP>
-                </NavbarContainer>
-
-
-                <SoupMainContainer>
-
-                    {items.map((element, index) => {
-                        return (<Soup key={index} item={element} />)
-                    })}
+                {items.map((element, index) => {
+                    return (<Soup key={index} item={element} />)
+                })}
 
 
 
-                </SoupMainContainer>
+            </SoupMainContainer>
+
+            <NavbarContainer>
+                <StyledP>{address}</StyledP>
+            </NavbarContainer>
 
 
-        </MainWrapper>
+        </ContentContainer>
 
 
     )

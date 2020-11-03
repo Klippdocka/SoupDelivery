@@ -303,7 +303,7 @@ margin-left:11.5rem;
 const StyledTime = styled.p`
 font-size:1.4rem;
 color:#707070;
-margin-left:0.5rem;
+
 margin-bottom:1rem;
 `;
 

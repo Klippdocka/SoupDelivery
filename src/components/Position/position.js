@@ -15,7 +15,7 @@ display:flex;
 justify-content:center;
 align-items:center;
 width:55%;
-height:6rem;
+
 opacity:0.8;
 border-radius:2.5rem;
 background-color:white;
@@ -24,7 +24,7 @@ background-color:white;
 
 @media screen and (max-width: ${theme.screenSize.small}){
    width:95%;
-   height:5rem;
+   
 }
 
 `;
@@ -42,11 +42,9 @@ text-align:center;
 const AddressContainer = styled.div`
 flex:4;
 width:50rem;
-height:5rem;
+height:100%;
 border-radius:2.5rem;
 position:relative;
-justify-content:start;
-align-items:center;
 @media screen and (max-width: ${theme.screenSize.small}){
 
    width:70%;
@@ -58,9 +56,8 @@ align-items:center;
 
 const InputAddress = styled.input`
 width:90%;
-height:5rem;
+height: 4rem;
 font-size:2rem;
-border-radius:2.5rem;
 border:none;
 
 align-items:center;
@@ -68,15 +65,17 @@ justify-content:center;
 
 cursor: pointer;
 
+-webkit-appearance: none;
+border-radius: 0;
+
 
 &::placeholder{
     color:#6c6c6c;
 
 }
 @media screen and (max-width: ${theme.screenSize.small}){
-   height:4rem;
+
    width:80%;
-   margin-top:0.4rem;
 }
 
 `;
@@ -85,7 +84,7 @@ const DropDownStyle = styled.div`
 width:auto;
 opacity:1;
 width:40rem;
-font-size:2rem;
+font-size:1.2rem;
 
 
 @media screen and (max-width: ${theme.screenSize.small}){
@@ -95,8 +94,9 @@ font-size:2rem;
 `;
 
 
-const InputWrapper = styled.div` 
+const InputWrapper = styled.div`
     cursor: pointer; 
+    height: 100%;
 `;
 
 
