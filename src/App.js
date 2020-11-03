@@ -1,7 +1,7 @@
 import React from 'react';
 import { createGlobalStyle } from 'styled-components';
 import Routes from './Route/routes';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import { AuthProvider } from '../src/Auth';
 
 import { CartProvider } from './components/Hooks/CartContext';

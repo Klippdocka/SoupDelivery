@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import theme from '../../theme';
 import AddSoup from '../../components/AddSoup/AddSoup';
 

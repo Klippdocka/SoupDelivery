@@ -1,5 +1,5 @@
 import React, {useContext, useState } from 'react-dom';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import Firebase from '../../firebase';
 import { AuthContext } from '../../Auth';
 import HamburgerIcone from '../../components/Icone/hamburgerIcone';

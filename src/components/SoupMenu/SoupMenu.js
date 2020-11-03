@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import { useLocalState } from '../Hooks/UseLocalState';
 import theme from '../../theme';
 import { MainWrapper } from '../Home/styledHome';

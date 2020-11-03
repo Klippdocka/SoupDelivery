@@ -2,7 +2,7 @@ import React from 'react';
 import { MainWrapper, ImgContainer, HomeImg } from './styledHome';
 import Soup5 from '../Images/Soup5.jpg';
 import Logo from '../../components/Icone/Loggo';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 
 
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import CheckOutProgressMain from '../../components/CheckOutProgress/CheckOutProgressMain';
 import NextBtn from '../../components/Buttons/NextBtn';
 import { useLocalState, useLocalStorage } from '../Hooks/UseLocalState';

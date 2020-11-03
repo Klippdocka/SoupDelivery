@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import { useLocalStorage } from '../Hooks/UseLocalState';
 import { useHistory } from "react-router-dom";
 import CloseIcone from '../Icone/CloseIcone';

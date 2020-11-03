@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import HamburgerIcone from '../Icone/hamburgerIcone';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import SoupIcon from '../../components/Icone/soupIcon';
 import { useHistory } from "react-router-dom";
 import { useLocalStorage } from '../Hooks/UseLocalState';

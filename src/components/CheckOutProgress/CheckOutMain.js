@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import BackPin from '../../components/Icone/BackIcon';
 import { withRouter } from 'react-router-dom';
 

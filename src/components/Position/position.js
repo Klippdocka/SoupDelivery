@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import PlacePin from '../Icone/placePin';
 import { withRouter } from 'react-router-dom';
 import theme from '../../theme';

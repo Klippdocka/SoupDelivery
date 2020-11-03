@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import theme from '../../theme';
 import CloseIcone from '../../components/Icone/CloseIcone';
 import { accesssories, drinks } from '../../components/SoupService/SoupService';

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import { useLocalState, useLocalStorage } from '../Hooks/UseLocalState';
 import MasterCredit from '../../components/Icone/MasterCredit';
 import TimeIcone from '../../components/Icone/time';

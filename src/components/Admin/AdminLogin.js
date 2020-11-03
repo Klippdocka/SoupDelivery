@@ -1,5 +1,5 @@
 import React, { useState }from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import Loggo from '../Icone/Loggo';
 import { withRouter } from 'react-router';
 import firebase from '../../firebase';

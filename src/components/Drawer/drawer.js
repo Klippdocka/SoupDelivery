@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import CloseIcone  from '../Icone/CloseIcone';
 import Logo from '../../components/Icone/Loggo';
 import theme from '../../theme';

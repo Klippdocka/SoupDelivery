@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import BasketIcone from '../../components/Icone/basketIcone';
 import PlacePin from '../../components/Icone/MapsPin';
 import CreditCard from '../../components/Icone/CreditCart';
